@@ -21,20 +21,17 @@ authRoutes.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
+authRoutes.post("/signup", (req, res, next) => {
+  const {username, password} = req.body;
 
-authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
-  const { username, password } = req.body;
-  const pictureUrl = req.file.url;
-
-  
   if (username === "" || password === "") {
-    res.status(500).json({ message: "Indicate username and password" });
+    res.status(500).json({ message: 'Provide username and password' });
     return;
   }
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
-      res.status(500).json({ message: "The username already exists" })
+      res.status(500).json({ message: 'Username taken. Choose another one.' });
       return;
     }
 
@@ -43,27 +40,69 @@ authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass,
-      pictureUrl
+      password: hashPass
     });
 
-    newUser.save((err, user) => {
-      if (err) {
-        res.status(500).json({ message: "Something went wrong" });
-      } else {
-        req.login(user, (err) => {
-
-          if (err) {
-              res.status(500).json({ message: 'Login after signup went bad.' });
-              return;
-          }
-
-          res.status(200).json(user);
-      });
-      }
-    });
+    newUser.save()
+    .then((theUser) => {
+      req.login(theUser, (err) => {
+        if (err) {
+            res.status(500).json({ message: 'Session save went bad.' });
+            return;
+        }
+        res.status(200).json(theUser);
+   });
+    })
+    .catch(err => {
+      res.status(400)({ message: 'Username taken. Choose another one.' });
+    })
   });
 });
+
+//SIGNUP IMAGE PROFILE (CDN)
+
+// authRoutes.post("/signup", uploadCload.single("photo"), (req, res, next) => {
+//   const { username, password } = req.body;
+//   const pictureUrl = req.file.url;
+
+  
+//   if (username === "" || password === "") {
+//     res.status(500).json({ message: "Indicate username and password" });
+//     return;
+//   }
+
+//   User.findOne({ username }, "username", (err, user) => {
+//     if (user !== null) {
+//       res.status(500).json({ message: "The username already exists" })
+//       return;
+//     }
+
+//     const salt = bcrypt.genSaltSync(bcryptSalt);
+//     const hashPass = bcrypt.hashSync(password, salt);
+
+//     const newUser = new User({
+//       username,
+//       password: hashPass,
+//       pictureUrl
+//     });
+
+//     newUser.save((err, user) => {
+//       if (err) {
+//         res.status(500).json({ message: "Something went wrong" });
+//       } else {
+//         req.login(user, (err) => {
+
+//           if (err) {
+//               res.status(500).json({ message: 'Login after signup went bad.' });
+//               return;
+//           }
+
+//           res.status(200).json(user);
+//       });
+//       }
+//     });
+//   });
+// });
 
 authRoutes.get("/logout", (req, res) => {
   req.logout();

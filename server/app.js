@@ -14,7 +14,7 @@ const MongoStore = require('connect-mongo')(session);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(process.env.DBURL, {useMongoClient: true})
+  .connect('mongodb://localhost/server', {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -49,8 +49,5 @@ app.use(cors({
 
 app.use('/', require('./routes/index'));
 
-app.use((req, res) => {
-  res.sendFile(`${__dirname}/public/index.html`);
-});
 
 module.exports = app;
