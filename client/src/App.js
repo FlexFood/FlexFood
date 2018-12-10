@@ -52,18 +52,14 @@ class App extends Component {
           logout={this.logout}
           getUser={this.getUser}
         />
-        <Search handleChange={this.handleChange} />
         <Switch>
-          {/* <Route
+          <Route
             exact path="/"
-            component={Search}
-            handleChange={this.handleChange}
-            search={this.state.search}
-          /> */}
+            render={()=><Search handleChange={this.handleChange} search={this.state.search} />}
+          />
           <Route
             exact path="/recipes"
-            searchPet={this.state.search}
-            component={Recipes}
+            render={() => <Recipes search={this.state.search}/>}
           />
           <Route
             path="/signup"
