@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-    owner: { type: ObjectId, ref: 'User' },
-    recipe: { type: ObjectId, ref: 'Recipe' },
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    recipe: { type: Schema.Types.ObjectId, ref: 'Recipe' },
     ratio: Number,
     title: String,
     content: String
