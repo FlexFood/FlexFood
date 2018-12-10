@@ -6,8 +6,9 @@ export default class Navbar extends Component {
   render() {
     const navBarUserControl = this.props.user?
     <React.Fragment>
-      <li><p>Hola {this.props.user.username}</p></li>
+      <li><p>{this.props.user.username}</p></li>
       <li><button onClick={this.props.logout}>Logout</button></li>
+      <li><img src={this.props.user.pictureUrl} alt="userImg" /></li>
     </React.Fragment>
     :
     <React.Fragment>
