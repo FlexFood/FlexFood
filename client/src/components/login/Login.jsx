@@ -34,6 +34,7 @@ export default class Login extends Component {
   };
 
   render() {
+    
     if (this.state && this.state.redirect) {
       return <Redirect to="/" />;
     }
