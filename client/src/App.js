@@ -6,6 +6,7 @@ import "./App.css";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import Navbar from "./components/navbar";
+import Userbar from "./components/userbar";
 import Login from "./components/login";
 import Signup from "./components/signup";
 
@@ -42,12 +43,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar
+        <Navbar/>
+        <Userbar
           className="navbar"
           user={this.state.user}
           logout={this.logout}
           getUser={this.getUser}
         />
+
         <Switch>
           <Route
             exact path="/"
