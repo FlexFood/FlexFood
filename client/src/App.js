@@ -15,7 +15,6 @@ class App extends Component {
 
     this.state = {
       user: null,
-      search: ""
     };
 
     this.authService = new AuthService();
@@ -39,10 +38,6 @@ class App extends Component {
       .then(() => this.setState({ ...this.state, user: null }));
   };
 
-  handleChange = e => {
-    const { value } = e.target;
-    this.setState({ ...this.state, search: value });
-  };
 
   render() {
     return (
@@ -55,11 +50,11 @@ class App extends Component {
         <Switch>
           <Route
             exact path="/"
-            render={()=><Search handleChange={this.handleChange} search={this.state.search} />}
+            render={()=><Search />}
           />
           <Route
             exact path="/recipes"
-            render={() => <Recipes search={this.state.search}/>}
+            render={() => <Recipes />}
           />
           <Route
             path="/signup"
