@@ -18,7 +18,6 @@ export default class Signup extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-
     const {username, password, photo} = this.state;
 
     this.authService.signup({username, password, photo})
