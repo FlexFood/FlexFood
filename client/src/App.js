@@ -20,7 +20,7 @@ class App extends Component {
       user: null,
       recipes:null,
       search: "",
-      redirectToRecipes: false
+      redirectToRecipes: false,
     };
 
     this.authService = new AuthService();
@@ -49,7 +49,7 @@ class App extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-
+    
     const search = this.state.search;
 
     this.edamamService.getByLabel(search)
