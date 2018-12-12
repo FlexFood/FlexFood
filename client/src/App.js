@@ -44,18 +44,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar/>
         <Userbar
           className="navbar"
           user={this.state.user}
           logout={this.logout}
           getUser={this.getUser}
         />
-
+        <Navbar />
         <Switch>
           <Route
             exact path="/"
-            render={()=><Search />}
+            render={() => <Search />}
           />
           <Route
             exact path="/recipes"
@@ -63,7 +62,7 @@ class App extends Component {
           />
           <Route
             exact path="/advancedSearch"
-            render={()=><AdvancedSearch />}
+            render={() => <AdvancedSearch />}
           />
           <Route
             path="/signup"
