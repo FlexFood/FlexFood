@@ -1,16 +1,32 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
+import Recipe from "../recipe";
 
 export default class Recipes extends Component {
   constructor() {
     super();
     this.state = {
-      listOfRecipes: null
+      recipe: null,
+      showRecipe: false
     };
   }
 
+  handleRecipeSelect = i => {
+    console.log(i);
+    this.setState({
+      ...this.state,
+      showRecipe: true,
+      recipe: this.props.recipes[i]
+    });
+  };
+
   render() {
- 
+    var recipe = this.state.showRecipe ? (
+      <Recipe recipe={this.state.recipe} />
+      ) : (
+        ""
+      );
+
     return (
       <div>
         <h1>Recetas de {this.props.search}</h1>
@@ -18,7 +34,11 @@ export default class Recipes extends Component {
         {this.props.recipes &&
           this.props.recipes.map((recipe, i) => {
             return (
-              <div className="card" key={i}>
+              <div
+                className="card"
+                key={i}
+                onClick={() => this.handleRecipeSelect(i)}
+              >
                 <p>{recipe.recipe.label}</p>
                 <img src={recipe.recipe.image} alt={recipe.recipe.label} />
                 <div className="card-text">
@@ -36,6 +56,7 @@ export default class Recipes extends Component {
               </div>
             );
           })}
+        {recipe}
       </div>
     );
   }

@@ -8,6 +8,7 @@ import Search from "./components/search";
 import Navbar from "./components/navbar";
 import Login from "./components/login";
 import Signup from "./components/signup";
+import Recipe from "./components/recipe"
 
 class App extends Component {
   constructor() {
@@ -61,6 +62,9 @@ class App extends Component {
     this.setState({ ...this.state, search: value });
   };
 
+  handleCange = e =>{
+
+  }
 
 
   render() {
@@ -81,7 +85,7 @@ class App extends Component {
               />}
           />
           <Route
-            exact path="/recipes"
+            path="/recipes"
             render={() => <Recipes 
               search={this.state.search}
               recipes={this.state.recipes}/>}
