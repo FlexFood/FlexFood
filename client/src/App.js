@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
+import AdvancedSearch from "./components/advancedSearch";
 import Navbar from "./components/navbar";
 import Userbar from "./components/userbar";
 import Login from "./components/login";
@@ -59,6 +60,10 @@ class App extends Component {
           <Route
             exact path="/recipes"
             render={() => <Recipes />}
+          />
+          <Route
+            exact path="/advancedSearch"
+            render={()=><AdvancedSearch />}
           />
           <Route
             path="/signup"
