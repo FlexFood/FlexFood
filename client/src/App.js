@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
 import { Route, Switch } from "react-router-dom";
-
 import "./App.css";
+import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -10,6 +10,7 @@ import Navbar from "./components/navbar";
 import Userbar from "./components/userbar";
 import Login from "./components/login";
 import Signup from "./components/signup";
+import Recipe from "./components/recipe"
 
 class App extends Component {
   constructor() {
@@ -17,9 +18,14 @@ class App extends Component {
 
     this.state = {
       user: null,
+      recipes:null,
+      search: "",
+      redirectToRecipes: false
     };
 
     this.authService = new AuthService();
+
+    this.edamamService = new EdamamService();
 
     this.fetchUser();
   }
@@ -41,6 +47,28 @@ class App extends Component {
   };
 
 
+  handleFormSubmit = e => {
+    e.preventDefault();
+
+    const search = this.state.search;
+
+    this.edamamService.getByLabel(search)
+    .then(recipes => {
+      this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
+    });
+  };
+
+
+  handleChange = e => {
+    const { value } = e.target;
+    this.setState({ ...this.state, search: value });
+  };
+
+  handleCange = e =>{
+
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -54,11 +82,17 @@ class App extends Component {
         <Switch>
           <Route
             exact path="/"
-            render={() => <Search />}
+            render={()=><Search
+              handleFormSubmit={this.handleFormSubmit}
+              handleChange={this.handleChange}
+              redirectToRecipes={this.state.redirectToRecipes}
+              />}
           />
           <Route
-            exact path="/recipes"
-            render={() => <Recipes />}
+            path="/recipes"
+            render={() => <Recipes 
+              search={this.state.search}
+              recipes={this.state.recipes}/>}
           />
           <Route
             exact path="/advancedSearch"

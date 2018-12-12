@@ -21,7 +21,8 @@ export default class Login extends Component {
 
     const { username, password } = this.state;
 
-    this.authService.login({ username, password }).then(user => {
+    this.authService.login({ username, password })
+    .then(user => {
       this.props.getUser(user);
       this.setState({...this.state, redirect: true });
     });
@@ -34,6 +35,7 @@ export default class Login extends Component {
   };
 
   render() {
+    
     if (this.state && this.state.redirect) {
       return <Redirect to="/" />;
     }

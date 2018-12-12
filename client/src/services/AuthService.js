@@ -7,7 +7,7 @@ class AuthService {
       withCredentials: true
     })
   }
-
+  
   signup = (user) => {
     // axios.post("http://localhost:5000/api/auth/signup", {user}, {withCredentials: true})
     const formData = new FormData();
