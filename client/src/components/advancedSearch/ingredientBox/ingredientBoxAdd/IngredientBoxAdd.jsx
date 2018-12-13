@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import "./IngredientBox.css";
 
-export default class IngredientBox extends Component {
+export default class IngredientBoxAdd extends Component {
 //   constructor() {
 //     super();
 //     this.key = this.props.key

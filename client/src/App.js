@@ -21,6 +21,7 @@ class App extends Component {
       recipes:null,
       search: "",
       redirectToRecipes: false,
+      advancedSearch: []
     };
 
     this.authService = new AuthService();
@@ -57,6 +58,20 @@ class App extends Component {
       this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
     });
   };
+
+//REFACTORIZAR MÁS TARDE
+handleFormAdvancedSubmit = e => {
+  e.preventDefault();
+
+  console.log(e);
+
+  // const search = this.state.search;
+
+  // this.edamamService.getByLabel(search)
+  // .then(recipes => {
+  //   this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
+  // });
+};
 
 
   handleChange = e => {
@@ -96,7 +111,8 @@ class App extends Component {
           />
           <Route
             exact path="/advancedSearch"
-            render={() => <AdvancedSearch />}
+            render={() => <AdvancedSearch 
+              handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}/>}
           />
           <Route
             path="/signup"
