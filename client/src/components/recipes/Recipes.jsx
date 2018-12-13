@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import Recipe from "../recipe";
+import Recipe from "./recipe";
 
 export default class Recipes extends Component {
   constructor() {

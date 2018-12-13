@@ -36,6 +36,12 @@ class AuthService {
     return this.service.get('/logout')
     .then(response => response.data);
   }
+
+  edit = (update) => {
+    return this.service.post('/edit', update)
+    .then(response => response.data);
+  }
+
 }
 
 export default AuthService;

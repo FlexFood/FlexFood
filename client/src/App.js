@@ -10,7 +10,8 @@ import Navbar from "./components/navbar";
 import Userbar from "./components/userbar";
 import Login from "./components/login";
 import Signup from "./components/signup";
-import Recipe from "./components/recipe"
+import Meal from "./components/meal";
+import EditUser from "./components/editUser";
 
 class App extends Component {
   constructor() {
@@ -18,7 +19,7 @@ class App extends Component {
 
     this.state = {
       user: null,
-      recipes:null,
+      recipes: null,
       search: "",
       redirectToRecipes: false,
       advancedSearch: []
@@ -47,15 +48,17 @@ class App extends Component {
       .then(() => this.setState({ ...this.state, user: null }));
   };
 
-
   handleFormSubmit = e => {
     e.preventDefault();
     
     const search = this.state.search;
 
-    this.edamamService.getByLabel(search)
-    .then(recipes => {
-      this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
+    this.edamamService.getByLabel(search).then(recipes => {
+      this.setState({
+        ...this.state,
+        recipes: recipes.data,
+        redirectToRecipes: true
+      });
     });
   };
 
@@ -73,16 +76,28 @@ handleFormAdvancedSubmit = e => {
   // });
 };
 
+  // handleAdvancedSearch = () => {
+  //   // e.preventDefault(); HAY QUE PONER LA E ENTRE PARENTESIS sss
+
+  //   const search = this.state.ingredientsSelected;
+
+  //   this.edamamService.getByLabel(search)
+  //   .then(recipes => {
+  //     this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
+  //   });
+  // };
+
+  // componentDidMount(){
+  //   this.handleAdvancedSearch();
+
+  // }
 
   handleChange = e => {
     const { value } = e.target;
     this.setState({ ...this.state, search: value });
   };
 
-  handleCange = e =>{
-
-  }
-
+  handleCange = e => {};
 
   render() {
     return (
@@ -96,18 +111,24 @@ handleFormAdvancedSubmit = e => {
         <Navbar />
         <Switch>
           <Route
-            exact path="/"
-            render={()=><Search
-              handleFormSubmit={this.handleFormSubmit}
-              handleChange={this.handleChange}
-              redirectToRecipes={this.state.redirectToRecipes}
-              />}
+            exact
+            path="/"
+            render={() => (
+              <Search
+                handleFormSubmit={this.handleFormSubmit}
+                handleChange={this.handleChange}
+                redirectToRecipes={this.state.redirectToRecipes}
+              />
+            )}
           />
           <Route
             path="/recipes"
-            render={() => <Recipes 
-              search={this.state.search}
-              recipes={this.state.recipes}/>}
+            render={() => (
+              <Recipes
+                search={this.state.search}
+                recipes={this.state.recipes}
+              />
+            )}
           />
           <Route
             exact path="/advancedSearch"
@@ -121,6 +142,10 @@ handleFormAdvancedSubmit = e => {
           <Route
             path="/login"
             render={() => <Login getUser={this.getUser} />}
+          />
+          <Route
+            path="/editUser"
+            render={() => <EditUser user={this.state.user} getUser={this.getUser} />}
           />
         </Switch>
       </div>

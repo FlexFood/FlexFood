@@ -81,4 +81,11 @@ authRoutes.get("/loggedin", (req, res) => {
   }
 });
 
+authRoutes.put("/edit", (req, res) => {
+  let update = {healthLabels,dietLabels} = req.body
+  consol
+  User.findByIdAndUpdate({}, update,)
+});
+
+
 module.exports = authRoutes;

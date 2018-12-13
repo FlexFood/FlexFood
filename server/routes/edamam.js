@@ -4,7 +4,8 @@ const axios = require("axios");
 
 edamamRoutes.post("/recipes", (req, res) => {
   const { label } = req.body;
-
+// label = label.join(" ")
+// console.log(label)
   axios
     .get(
       `https://test-es.edamam.com/search?q=${label}&app_id=${
@@ -14,7 +15,7 @@ edamamRoutes.post("/recipes", (req, res) => {
     .then(response => {
       res.status(200).json(response.data.hits);
     })
-    .catch(err=>console.log('ERROR EN PETICION A API EDAMAM',err))
+    .catch(err => console.log("ERROR EN PETICION A API EDAMAM", err));
 });
 
 module.exports = edamamRoutes;
