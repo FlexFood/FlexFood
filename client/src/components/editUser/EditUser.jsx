@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
-import DietLabels from "../dietLabels";
+//import DietLabels from "../dietLabels";
 import AuthService from "../../services/AuthService";
 
 export default class EditUser extends Component {
@@ -20,7 +20,7 @@ export default class EditUser extends Component {
     const { healthLabels, dietLabels } = this.state;
     this.authService.edit({ healthLabels, dietLabels })
     .then(user => {
-      console.log(user)
+      this.props.getUser(user)
       this.setState({ ...this.state, user: user.data },()=>console.log("estado",this.state,"user",user));
     });
   };
@@ -56,7 +56,9 @@ export default class EditUser extends Component {
           <img src={this.state.user.pictureUrl} alt="userImg"/>
         </div>
         <form onSubmit={this.handleFormSubmit}>
-          <HealthLabels handleChange={this.handleChange} user={this.state.user} />
+          <HealthLabels handleChange={this.handleChange} user={this.state.user}
+          healthLabels={this.healthLabels}
+          />
           <input type="submit" value="Enviar" />
         </form>
       </div>

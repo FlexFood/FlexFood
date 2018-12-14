@@ -25,7 +25,6 @@ class App extends Component {
       ingredientsSelected: [],
       healthLabels: []
       //advancedSearch: []
-
     };
 
     this.authService = new AuthService();
@@ -56,15 +55,17 @@ class App extends Component {
 
     const search = this.state.search;
 
-    this.edamamService.getByLabel(search)
-      .then(recipes => {
-        this.setState({
-          ...this.state,
-          recipes: recipes.data,
-          redirectToRecipes: true
-        });
+    this.edamamService.getByLabel(search).then(recipes => {
+      this.setState({
+        ...this.state,
+        recipes: recipes.data,
+        redirectToRecipes: true
       });
+    });
   };
+
+ 
+
 
   //PARA SETEAR LOS FILTROS
   // setAdvancedSearch = state => {
@@ -76,53 +77,59 @@ class App extends Component {
     let ingredientsSelected = this.state.ingredientsSelected;
 
     //La idea es que solo pushee si no hay otro igual en seleccionados
-    if (!this.state.ingredientsSelected.find(ingredient => ingredient === event))
-        ingredientsSelected.push(event);
-        //QUE ACTUALICE EN APP
+    if (
+      !this.state.ingredientsSelected.find(ingredient => ingredient === event)
+    )
+      ingredientsSelected.push(event);
+    //QUE ACTUALICE EN APP
     this.setState({
-        ingredientsSelected
-    })
-}
+      ingredientsSelected
+    });
+  };
 
-handleChangeChecked = e => {
-  const { name, value } = e.target;
-  let array = [...this.state[name]];
 
-  if (e.target.checked) {
+  handleChangeChecked = e => {
+    const { name, value } = e.target;
+    let array = [...this.state[name]];
+
+    if (e.target.checked) {
       array.push(value);
       this.setState({ ...this.state, [name]: array });
-  } else {
+    } else {
       array.splice(array.indexOf(value), 1);
       this.setState({ ...this.state, [name]: array });
-  }
-};
+    }
+  };
 
-deleteIngredient = event => {
-  console.log(event, this.state.ingredientsSelected)
-  var ingredientsSelected = this.state.ingredientsSelected;
-  ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
- 
-  //QUE ACTUALICE EN APP
- 
-  this.setState({
+  deleteIngredient = event => {
+    console.log(event, this.state.ingredientsSelected);
+    var ingredientsSelected = this.state.ingredientsSelected;
+    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+
+    //QUE ACTUALICE EN APP
+
+    this.setState({
       ingredientsSelected
-  })
-}
+    });
+  };
 
   handleFormAdvancedSubmit = e => {
     e.preventDefault();
 
-
     let { ingredientsSelected, healthLabels } = this.state;
 
-    if (Object.values({ ingredientsSelected, healthLabels })
-      .every(element => !element.length)) {
-      console.log('No pudesn estar todos vacios!!!!!!!!!!!!!')
+    if (
+      Object.values({ ingredientsSelected, healthLabels }).every(
+        element => !element.length
+      )
+    ) {
+      console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
       //SACAR MENSAJE Y REDIRIGIR A LA MISMA URL
-      return
+      return;
     }
 
-    this.edamamService.advancedSearch({ ingredientsSelected, healthLabels })
+    this.edamamService
+      .advancedSearch({ ingredientsSelected, healthLabels })
       .then(recipes => {
         this.setState({
           ...this.state,
@@ -132,13 +139,10 @@ deleteIngredient = event => {
       });
   };
 
-
-
   handleChange = e => {
     const { value } = e.target;
     this.setState({ ...this.state, search: value });
   };
-
 
   render() {
     return (
@@ -160,7 +164,6 @@ deleteIngredient = event => {
                 handleChange={this.handleChange}
                 redirectToRecipes={this.state.redirectToRecipes}
               />
-
             )}
           />
           <Route
@@ -173,20 +176,20 @@ deleteIngredient = event => {
             )}
           />
           <Route
-            exact path="/advancedSearch"
-            render={() => <AdvancedSearch
-              handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
-              ingredientsSelected={this.state.ingredientsSelected}
-              deleteIngredient={this.deleteIngredient}
-              handleChangeChecked={this.handleChangeChecked}
-              addIngredient={this.addIngredient}
-              user={this.state.user}
-            />}
+            exact
+            path="/advancedSearch"
+            render={() => (
+              <AdvancedSearch
+                handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
+                ingredientsSelected={this.state.ingredientsSelected}
+                deleteIngredient={this.deleteIngredient}
+                handleChangeChecked={this.handleChangeChecked}
+                addIngredient={this.addIngredient}
+                user={this.state.user}
+              />
+            )}
           />
-          <Route
-            exact path="/meal"
-            render={() => <Meal />}
-          />
+          <Route exact path="/meal" render={() => <Meal />} />
           <Route
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
@@ -195,9 +198,16 @@ deleteIngredient = event => {
             path="/login"
             render={() => <Login getUser={this.getUser} />}
           />
+
           <Route
             path="/editUser"
-            render={() => <EditUser user={this.state.user} getUser={this.getUser} />}
+            render={() => (
+              
+              <EditUser
+                user={this.state.user}
+                getUser={this.getUser}
+              />
+            )}
           />
         </Switch>
       </div>
