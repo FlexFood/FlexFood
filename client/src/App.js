@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
@@ -113,6 +113,20 @@ class App extends Component {
     });
   };
 
+  // handleFormSubmit = e => {
+  //   e.preventDefault();
+
+  //   const search = this.state.search;
+
+  //   this.edamamService.getByLabel(search).then(recipes => {
+  //     this.setState({
+  //       ...this.state,
+  //       recipes: recipes.data,
+  //       redirectToRecipes: true
+  //     });
+  //   });
+  // };
+
   handleFormAdvancedSubmit = e => {
     e.preventDefault();
 
@@ -131,6 +145,9 @@ class App extends Component {
     this.edamamService
       .advancedSearch({ ingredientsSelected, healthLabels })
       .then(recipes => {
+        console.log('Respuesta en front')
+        console.log(recipes)
+        
         this.setState({
           ...this.state,
           recipes: recipes.data,
@@ -145,6 +162,11 @@ class App extends Component {
   };
 
   render() {
+
+    if(this.props.redirectToRecipes) {
+      return <Redirect to="/recipes" />
+    }
+
     return (
       <div className="App">
         <Userbar
@@ -186,6 +208,7 @@ class App extends Component {
                 handleChangeChecked={this.handleChangeChecked}
                 addIngredient={this.addIngredient}
                 user={this.state.user}
+                recipes={this.state.recipes}
               />
             )}
           />
