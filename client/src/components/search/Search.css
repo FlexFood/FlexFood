@@ -1,0 +1,9 @@
+#search {
+    padding: 10vh;
+    height: 80vh;
+    background-image: url('../../images/backgroungSearch.png');
+    background-size: cover;
+}
+#search form{
+    text-align: center;
+}

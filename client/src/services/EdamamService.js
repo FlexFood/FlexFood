@@ -9,8 +9,17 @@ class EdamamService {
   }
 
   getByLabel = (label) => {
-    return this.service.post('/recipes', {label})
-    .then(response => response)
+    return this.service.post('/recipes', { label })
+      .then(response => response)
+  }
+
+  advancedSearch = (objectSearch) => {
+    console.log(objectSearch, 'Ya en edamService')
+    objectSearch.ingredientsSelected = objectSearch.ingredientsSelected.join("+");
+    // console.log(objectSearch, 'Ya en edamService,despues del join')
+
+    return this.service.post('/recipesAdvanced', objectSearch)
+      .then(response => response)
   }
 
 }

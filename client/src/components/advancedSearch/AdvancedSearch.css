@@ -1,0 +1,9 @@
+#advancedSearch {
+    display: flex;
+    margin: 0 auto;
+    width: 85vw;
+}
+
+#advancedSearchBox {
+    width: 30vw; 
+}

@@ -1,0 +1,18 @@
+#navbar {
+    background-color: azure;
+}
+#navbar ul {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10vh;
+    margin: 0;
+    padding: 0;
+}
+#navbar ul li{
+    padding-right: 3vh;
+}
+#navbar h1{
+    margin: 0;
+}

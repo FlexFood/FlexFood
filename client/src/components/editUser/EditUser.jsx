@@ -16,11 +16,6 @@ export default class EditUser extends Component {
     this.setState({ ...this.state, user: this.props.user });
   }
 
-  addLabelsToUser = () => {
-    let { healthLabels, dietLabels, user } = this.state;
-    // this.setState(...this.state, user.healthLabels: healthLabels, (user.dietLabels): dietLabels)
-  };
-
   handleFormSubmit = e => {
     e.preventDefault();
     this.authService.edit(this.state);

@@ -1,54 +1,54 @@
 [
     {
-      "name": "manzana", 
+      "name": "apple", 
       "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
     },
     {
-        "name": "tomates", 
+        "name": "tomato", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "judias", 
+        "name": "beans", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "pepinos", 
+        "name": "cucumber", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "arroz", 
+        "name": "rize", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "patatas", 
+        "name": "potatoes", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "chocolate", 
+        "name": "chocolat", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "espárragos", 
+        "name": "lettuce", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "lechuga", 
+        "name": "carrot", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "atun", 
+        "name": "tuna", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "aguacate", 
+        "name": "chiken", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "cerveza", 
+        "name": "beer", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       },
       {
-        "name": "calabaza", 
+        "name": "honey", 
         "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
       }
 ]

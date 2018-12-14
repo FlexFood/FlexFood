@@ -62,35 +62,6 @@ class App extends Component {
     });
   };
 
-//REFACTORIZAR MÁS TARDE
-handleFormAdvancedSubmit = e => {
-  e.preventDefault();
-
-  console.log(e);
-
-  // const search = this.state.search;
-
-  // this.edamamService.getByLabel(search)
-  // .then(recipes => {
-  //   this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
-  // });
-};
-
-  // handleAdvancedSearch = () => {
-  //   // e.preventDefault(); HAY QUE PONER LA E ENTRE PARENTESIS sss
-
-  //   const search = this.state.ingredientsSelected;
-
-  //   this.edamamService.getByLabel(search)
-  //   .then(recipes => {
-  //     this.setState({ ...this.state, recipes: recipes.data, redirectToRecipes: true });
-  //   });
-  // };
-
-  // componentDidMount(){
-  //   this.handleAdvancedSearch();
-
-  // }
 
   handleChange = e => {
     const { value } = e.target;
@@ -108,7 +79,7 @@ handleFormAdvancedSubmit = e => {
           logout={this.logout}
           getUser={this.getUser}
         />
-        <Navbar />
+        <Navbar user={this.state.user}/>
         <Switch>
           <Route
             exact
@@ -119,6 +90,7 @@ handleFormAdvancedSubmit = e => {
                 handleChange={this.handleChange}
                 redirectToRecipes={this.state.redirectToRecipes}
               />
+              
             )}
           />
           <Route
@@ -132,8 +104,11 @@ handleFormAdvancedSubmit = e => {
           />
           <Route
             exact path="/advancedSearch"
-            render={() => <AdvancedSearch 
-              handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}/>}
+            render={() => <AdvancedSearch />}
+          />
+          <Route
+            exact path="/meal"
+            render={() => <Meal />}
           />
           <Route
             path="/signup"

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import "./Search.css";
 
 export default class Search extends Component {
 
@@ -10,7 +11,7 @@ export default class Search extends Component {
     }
 
     return (
-      <div id="search-bar">
+      <div id="search">
         <form onSubmit={this.props.handleFormSubmit}>
           <input
             type="text"

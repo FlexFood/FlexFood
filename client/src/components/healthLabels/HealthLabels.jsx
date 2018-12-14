@@ -109,7 +109,7 @@ export default class HealthLabels extends Component {
           <input
             type="checkbox"
             name="healthLabels"
-            value="penaut-free"
+            value="peanut-free"
             onChange={e => this.props.handleChange(e)}
           />
           Sin cacahuete
