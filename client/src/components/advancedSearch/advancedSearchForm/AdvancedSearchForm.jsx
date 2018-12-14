@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import './AdvancedSearchForm.css'
+import React, { Component } from 'react';
+import './AdvancedSearchForm.css';
+import { Link } from "react-router-dom";
 import HealthLabels from "../../healthLabels";
 import DietLabels from "../../dietLabels";
 import IngredientBoxDelete from "../ingredientBox/ingredientBoxDelete";
@@ -12,6 +13,7 @@ export default class AdvancedSearchForm extends Component {
     console.log(this.props)
     var ingredientsSelected = this.props.ingredientsSelected;
     return (
+      <Link to='/recipes'>
       <form id="advancedSearchForm" onSubmit={this.props.handleFormAdvancedSubmit}>
         <div id="ingredientsSelected">
           {(ingredientsSelected
@@ -28,6 +30,7 @@ export default class AdvancedSearchForm extends Component {
         <DietLabels handleChange={this.props.handleChange} />
         <input type="submit" value="Buscar" />
       </form>
+      </Link>
     )
   }
 }

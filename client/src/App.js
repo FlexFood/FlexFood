@@ -64,7 +64,7 @@ class App extends Component {
     });
   };
 
- 
+
 
 
   //PARA SETEAR LOS FILTROS
@@ -147,12 +147,14 @@ class App extends Component {
       .then(recipes => {
         console.log('Respuesta en front')
         console.log(recipes)
-        
+
         this.setState({
           ...this.state,
           recipes: recipes.data,
           redirectToRecipes: true
         });
+
+
       });
   };
 
@@ -161,9 +163,11 @@ class App extends Component {
     this.setState({ ...this.state, search: value });
   };
 
+
   render() {
 
-    if(this.props.redirectToRecipes) {
+    if(this.state.redirectToRecipes) {
+      console.log('Pasaaaa')
       return <Redirect to="/recipes" />
     }
 
@@ -225,7 +229,7 @@ class App extends Component {
           <Route
             path="/editUser"
             render={() => (
-              
+
               <EditUser
                 user={this.state.user}
                 getUser={this.getUser}
