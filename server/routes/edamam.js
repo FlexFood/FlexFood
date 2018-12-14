@@ -44,6 +44,8 @@ edamamRoutes.post("/recipesAdvanced", (req, res) => {
         urlCommun += `&health=${label}`
       })
     }
+
+    console.log(urlCommun, 'url vompletaaaaaa')
     
     //console.log(urlCommun,'url con ingrs q added')
   //meter aqui la seguridad

@@ -22,7 +22,10 @@ class App extends Component {
       recipes: null,
       search: "",
       redirectToRecipes: false,
-      advancedSearch: []
+      ingredientsSelected: [],
+      healthLabels: []
+      //advancedSearch: []
+
     };
 
     this.authService = new AuthService();
@@ -50,18 +53,85 @@ class App extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    
+
     const search = this.state.search;
 
     this.edamamService.getByLabel(search)
-    .then(recipes => {
-      this.setState({
-        ...this.state,
-        recipes: recipes.data,
-        redirectToRecipes: true
+      .then(recipes => {
+        this.setState({
+          ...this.state,
+          recipes: recipes.data,
+          redirectToRecipes: true
+        });
       });
-    });
   };
+
+  //PARA SETEAR LOS FILTROS
+  // setAdvancedSearch = state => {
+  //   console.log(state, 'Intentando pasar ingrs and healt to App')
+  //   // const { ingredientsSelected, healthLabels } = e.target;
+  //   // this.setState({ ...this.state,  ingredientsSelected, healthLabels});
+  // }
+  addIngredient = event => {
+    let ingredientsSelected = this.state.ingredientsSelected;
+
+    //La idea es que solo pushee si no hay otro igual en seleccionados
+    if (!this.state.ingredientsSelected.find(ingredient => ingredient === event))
+        ingredientsSelected.push(event);
+        //QUE ACTUALICE EN APP
+    this.setState({
+        ingredientsSelected
+    })
+}
+
+handleChangeChecked = e => {
+  const { name, value } = e.target;
+  let array = [...this.state[name]];
+
+  if (e.target.checked) {
+      array.push(value);
+      this.setState({ ...this.state, [name]: array });
+  } else {
+      array.splice(array.indexOf(value), 1);
+      this.setState({ ...this.state, [name]: array });
+  }
+};
+
+deleteIngredient = event => {
+  console.log(event, this.state.ingredientsSelected)
+  var ingredientsSelected = this.state.ingredientsSelected;
+  ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+ 
+  //QUE ACTUALICE EN APP
+ 
+  this.setState({
+      ingredientsSelected
+  })
+}
+
+  handleFormAdvancedSubmit = e => {
+    e.preventDefault();
+
+
+    let { ingredientsSelected, healthLabels } = this.state;
+
+    if (Object.values({ ingredientsSelected, healthLabels })
+      .every(element => !element.length)) {
+      console.log('No pudesn estar todos vacios!!!!!!!!!!!!!')
+      //SACAR MENSAJE Y REDIRIGIR A LA MISMA URL
+      return
+    }
+
+    this.edamamService.advancedSearch({ ingredientsSelected, healthLabels })
+      .then(recipes => {
+        this.setState({
+          ...this.state,
+          recipes: recipes.data,
+          redirectToRecipes: true
+        });
+      });
+  };
+
 
 
   handleChange = e => {
@@ -69,7 +139,6 @@ class App extends Component {
     this.setState({ ...this.state, search: value });
   };
 
-  handleCange = e => {};
 
   render() {
     return (
@@ -80,7 +149,7 @@ class App extends Component {
           logout={this.logout}
           getUser={this.getUser}
         />
-        <Navbar user={this.state.user}/>
+        <Navbar user={this.state.user} />
         <Switch>
           <Route
             exact
@@ -91,7 +160,7 @@ class App extends Component {
                 handleChange={this.handleChange}
                 redirectToRecipes={this.state.redirectToRecipes}
               />
-              
+
             )}
           />
           <Route
@@ -105,7 +174,13 @@ class App extends Component {
           />
           <Route
             exact path="/advancedSearch"
-            render={() => <AdvancedSearch />}
+            render={() => <AdvancedSearch
+              handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
+              ingredientsSelected={this.state.ingredientsSelected}
+              deleteIngredient={this.deleteIngredient}
+              handleChangeChecked={this.handleChangeChecked}
+              addIngredient={this.addIngredient}
+            />}
           />
           <Route
             exact path="/meal"

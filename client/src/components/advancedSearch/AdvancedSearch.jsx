@@ -33,16 +33,7 @@ export default class AdvancedSearch extends Component {
             search: event.target.value
         })
     }
-    addIngredient = event => {
-        let ingredientsSelected = this.state.ingredientsSelected;
-
-        //La idea es que solo pushee si no hay otro igual en seleccionados
-        if (!this.state.ingredientsSelected.find(ingredient => ingredient === event))
-            ingredientsSelected.push(event);
-        this.setState({
-            ingredientsSelected
-        })
-    }
+    
     addIngredientFormSubmit = event => {
         event.preventDefault();
         let ingredt = this.state.search;
@@ -55,46 +46,7 @@ export default class AdvancedSearch extends Component {
         };
     }
 
-    deleteIngredient = event => {
-        console.log(event, this.state.ingredientsSelected)
-        var ingredientsSelected = this.state.ingredientsSelected;
-        ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-        this.setState({
-            ingredientsSelected
-        })
-    }
-
-    handleChange = e => {
-        const { name, value } = e.target;
-        let array = [...this.state[name]];
-
-        if (e.target.checked) {
-            array.push(value);
-            this.setState({ ...this.state, [name]: array });
-        } else {
-            array.splice(array.indexOf(value), 1);
-            this.setState({ ...this.state, [name]: array });
-        }
-    };
-
-    handleFormAdvancedSubmit = e => {
-        e.preventDefault();
-
-        let { ingredientsSelected, healthLabels} = this.state;
-
-        if (Object.values({ ingredientsSelected, healthLabels })
-            .every(element => !element.length)) {
-            console.log('No pudesn estar todos vacios!!!!!!!!!!!!!')
-            //SACAR MENSAJE Y REDIRIGIR A LA MISMA URL
-            return
-        }
-
-        this.edamamService.advancedSearch({ ingredientsSelected, healthLabels})
-            // .then(recipes => {
-            //     console.log(recipes)
-            // })
-    };
-
+  
     render() {
         return (
             <div id="advancedSearch">
@@ -105,7 +57,7 @@ export default class AdvancedSearch extends Component {
                 <div className="advancedSearchBox">
                     <h2>¿Qué tienes en la nevera?</h2>
 
-                    <form onSubmit={this.addIngredientFormSubmit} autocomplete="off">
+                    <form onSubmit={this.props.addIngredientFormSubmit} autocomplete="off">
                         <input
                             id="advancedSearch-bar"
                             type="text"
@@ -120,15 +72,15 @@ export default class AdvancedSearch extends Component {
                         && this.state.searchArray.map((ingredient, index) => {
                             return (<IngredientBoxAdd name={ingredient.name}
                                 img={ingredient.image} keys={index}
-                                addIngredient={this.addIngredient} />)
+                                addIngredient={this.props.addIngredient} />)
                         }))}
                 </div>
 
                 <AdvancedSearchForm
-                    ingredientsSelected={this.state.ingredientsSelected}
-                    handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
-                    deleteIngredient={this.deleteIngredient}
-                    handleChange={this.handleChange}
+                    ingredientsSelected={this.props.ingredientsSelected}
+                    handleFormAdvancedSubmit={this.props.handleFormAdvancedSubmit}
+                    deleteIngredient={this.props.deleteIngredient}
+                    handleChangeChecked={this.props.handleChangeChecked}
                 />
 
             </div>
