@@ -53,7 +53,8 @@ class App extends Component {
     
     const search = this.state.search;
 
-    this.edamamService.getByLabel(search).then(recipes => {
+    this.edamamService.getByLabel(search)
+    .then(recipes => {
       this.setState({
         ...this.state,
         recipes: recipes.data,

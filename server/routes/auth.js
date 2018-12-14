@@ -81,10 +81,15 @@ authRoutes.get("/loggedin", (req, res) => {
   }
 });
 
-authRoutes.put("/edit", (req, res) => {
+authRoutes.post("/edit", (req, res) => {
   let update = {healthLabels,dietLabels} = req.body
-  consol
-  User.findByIdAndUpdate({}, update,)
+
+  User.findByIdAndUpdate(req.user._id, update,{new:true})
+  .then(user=>{
+    res.status(200).json(user);
+  })
+  .catch(err => console.log("ERROR AL ATUALZAR EL USUARIO", err));
+
 });
 
 
