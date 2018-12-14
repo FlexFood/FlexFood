@@ -129,6 +129,7 @@ export default class AdvancedSearch extends Component {
                     handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
                     deleteIngredient={this.deleteIngredient}
                     handleChange={this.handleChange}
+                    user={this.props.user}
                 />
 
             </div>

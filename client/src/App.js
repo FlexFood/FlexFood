@@ -105,7 +105,7 @@ class App extends Component {
           />
           <Route
             exact path="/advancedSearch"
-            render={() => <AdvancedSearch />}
+            render={() => <AdvancedSearch user={this.state.user}/>}
           />
           <Route
             exact path="/meal"

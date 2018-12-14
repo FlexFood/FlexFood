@@ -6,6 +6,7 @@ export default class HealthLabels extends Component {
     this.state = {
       user: this.props.user
     };
+
   }
 
   checkedLabels = () => {
@@ -16,11 +17,11 @@ export default class HealthLabels extends Component {
   };
 
 
+
   componentWillMount() {
     this.checkedLabels();
   }
 
-  
   render() {
     console.log();
 
@@ -32,7 +33,10 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="alcohol-free"
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
             checked={this.state["alcohol-free"]}
           />
           Sin alcohol
@@ -43,7 +47,10 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="crustacean-free"
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
             checked={this.state["crustacean-free"]}
           />
           Sin crustaceos
@@ -54,7 +61,10 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="dairy-free"
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
             checked={this.state["dairy-free"]}
           />
           Sin lactosa
@@ -65,7 +75,10 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="egg-free"
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
             checked={this.state["egg-free"]}
           />
           Sin huevo
@@ -77,7 +90,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="fish-free"
             checked={this.state["fish-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin pescado
         </label>
@@ -88,7 +104,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="gluten-free"
             checked={this.state["gluten-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin gluten
         </label>
@@ -99,7 +118,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="kosher"
             checked={this.state["kosher"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Kosher
         </label>
@@ -110,7 +132,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="low-potassium"
             checked={this.state["low-potassium"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Bajo en potasio
         </label>
@@ -121,7 +146,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="low-sugar"
             checked={this.state["low-sugar"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Bajo en azucar
         </label>
@@ -132,7 +160,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="paleo"
             checked={this.state["paleo"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Paleo
         </label>
@@ -143,7 +174,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="peanut-free"
             checked={this.state["peanut-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin cacahuete
         </label>
@@ -154,7 +188,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="pescatarian"
             checked={this.state["pescatarian"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Pescateriano
         </label>
@@ -165,7 +202,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="pork-free"
             checked={this.state["pork-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin cerdo
         </label>
@@ -176,7 +216,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="soy-free"
             checked={this.state["soy-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin soja
         </label>
@@ -187,7 +230,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="sugar-conscisious"
             checked={this.state["sugar-conscisious"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Muy bajo contenido en azucar
         </label>
@@ -198,7 +244,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="tree-nut-free"
             checked={this.state["tree-nut-free"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Sin nueces
         </label>
@@ -209,7 +258,10 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="vegetarian"
             checked={this.state["vegetarian"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Vagetariana
         </label>
@@ -220,11 +272,16 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="vegan"
             checked={this.state["vegan"]}
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => {
+              this.props.handleChange(e);
+              this.checkedLabels();
+            }}
           />
           Vegana
         </label>
       </div>
-    ): "";
+    ) : (
+      ""
+    );
   }
 }
