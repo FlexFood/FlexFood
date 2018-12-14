@@ -1,17 +1,19 @@
 #userbar {
-    background-color: blanchedalmond;
+    background-color: rgb(47, 47, 47);
 }
 #userbar ul{
     display: flex;
     list-style: none;
     justify-content: flex-end;
     align-items: center;
-    height: 10vh;
+    height: 6vh;
     margin: 0;
     padding: 0;
 }
 #userbar ul li{
     padding-right: 5vh;
+    color: wheat;
+    text-decoration: none;
 }
 #imgProfile {
     height: 7vh;
