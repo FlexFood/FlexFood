@@ -8,7 +8,6 @@ export default class HealthLabels extends Component {
     };
   }
 
-
   checkedLabels = () => {
     this.state.user.healthLabels.map(label => {
       label = `${label}`;

@@ -24,7 +24,7 @@ export default class AdvancedSearchForm extends Component {
               )
             }))}
         </div>
-        <HealthLabels handleChange={this.props.handleChange} />
+        {/* <HealthLabels handleChange={this.props.handleChange} /> */}
         <DietLabels handleChange={this.props.handleChange} />
         <input type="submit" value="Buscar" />
       </form>
