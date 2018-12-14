@@ -1,8 +1,31 @@
 import React, { Component } from "react";
 
 export default class HealthLabels extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.user
+    };
+  }
+
+
+  checkedLabels = () => {
+    this.state.user.healthLabels.map(label => {
+      label = `${label}`;
+      this.setState({ ...this.state, [label]: "checked" });
+    });
+  };
+
+
+  componentWillMount() {
+    this.checkedLabels();
+  }
+
+  
   render() {
-    return (
+    console.log();
+
+    return this.state ? (
       <div>
         <h3>Alergenos</h3>
         <label>
@@ -11,6 +34,7 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="alcohol-free"
             onChange={e => this.props.handleChange(e)}
+            checked={this.state["alcohol-free"]}
           />
           Sin alcohol
         </label>
@@ -21,6 +45,7 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="crustacean-free"
             onChange={e => this.props.handleChange(e)}
+            checked={this.state["crustacean-free"]}
           />
           Sin crustaceos
         </label>
@@ -31,6 +56,7 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="dairy-free"
             onChange={e => this.props.handleChange(e)}
+            checked={this.state["dairy-free"]}
           />
           Sin lactosa
         </label>
@@ -41,6 +67,7 @@ export default class HealthLabels extends Component {
             name="healthLabels"
             value="egg-free"
             onChange={e => this.props.handleChange(e)}
+            checked={this.state["egg-free"]}
           />
           Sin huevo
         </label>
@@ -50,6 +77,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="fish-free"
+            checked={this.state["fish-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin pescado
@@ -60,6 +88,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="gluten-free"
+            checked={this.state["gluten-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin gluten
@@ -70,6 +99,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="kosher"
+            checked={this.state["kosher"]}
             onChange={e => this.props.handleChange(e)}
           />
           Kosher
@@ -80,6 +110,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="low-potassium"
+            checked={this.state["low-potassium"]}
             onChange={e => this.props.handleChange(e)}
           />
           Bajo en potasio
@@ -90,6 +121,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="low-sugar"
+            checked={this.state["low-sugar"]}
             onChange={e => this.props.handleChange(e)}
           />
           Bajo en azucar
@@ -100,6 +132,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="paleo"
+            checked={this.state["paleo"]}
             onChange={e => this.props.handleChange(e)}
           />
           Paleo
@@ -110,6 +143,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="penaut-free"
+            checked={this.state["penaut-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin cacahuete
@@ -120,6 +154,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="pescatarian"
+            checked={this.state["pescatarian"]}
             onChange={e => this.props.handleChange(e)}
           />
           Pescateriano
@@ -130,6 +165,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="pork-free"
+            checked={this.state["pork-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin cerdo
@@ -140,6 +176,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="soy-free"
+            checked={this.state["soy-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin soja
@@ -150,6 +187,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="sugar-conscisious"
+            checked={this.state["sugar-conscisious"]}
             onChange={e => this.props.handleChange(e)}
           />
           Muy bajo contenido en azucar
@@ -160,6 +198,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="tree-nut-free"
+            checked={this.state["tree-nut-free"]}
             onChange={e => this.props.handleChange(e)}
           />
           Sin nueces
@@ -170,6 +209,7 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="vegetarian"
+            checked={this.state["vegetarian"]}
             onChange={e => this.props.handleChange(e)}
           />
           Vagetariana
@@ -180,11 +220,12 @@ export default class HealthLabels extends Component {
             type="checkbox"
             name="healthLabels"
             value="vegan"
+            checked={this.state["vegan"]}
             onChange={e => this.props.handleChange(e)}
           />
           Vegana
         </label>
       </div>
-    );
+    ): "";
   }
 }
