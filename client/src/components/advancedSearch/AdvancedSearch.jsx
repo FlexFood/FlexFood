@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './AdvancedSearch.css'
+import { Redirect } from "react-router-dom";
 import IngredientBoxAdd from "./ingredientBox/ingredientBoxAdd";
 import AdvancedSearchForm from "./advancedSearchForm";
 import ingredients from '../../ingredients.json';
@@ -48,6 +49,9 @@ export default class AdvancedSearch extends Component {
 
   
     render() {
+        if(this.props.redirectToRecipes) {
+            return <Redirect to="/recipes" />
+          }
         return (
             <div id="advancedSearch">
 
@@ -57,7 +61,7 @@ export default class AdvancedSearch extends Component {
                 <div className="advancedSearchBox">
                     <h2>¿Qué tienes en la nevera?</h2>
 
-                    <form onSubmit={this.props.addIngredientFormSubmit} autocomplete="off">
+                    <form onSubmit={this.addIngredientFormSubmit} autocomplete="off">
                         <input
                             id="advancedSearch-bar"
                             type="text"

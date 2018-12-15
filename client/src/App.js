@@ -59,6 +59,7 @@ class App extends Component {
     const search = this.state.search;
 
     this.edamamService.getByLabel(search).then(recipes => {
+      console.log(recipes)
       this.setState({
         ...this.state,
         recipes: recipes.data,
@@ -112,8 +113,25 @@ class App extends Component {
     });
   };
 
+  // handleFormSubmit = e => {
+  //   e.preventDefault();
+
+  //   const search = this.state.search;
+
+  //   this.edamamService.getByLabel(search).then(recipes => {
+  //     this.setState({
+  //       ...this.state,
+  //       recipes: recipes.data,
+  //       redirectToRecipes: true
+  //     });
+  //   });
+  // };
+
   handleFormAdvancedSubmit = e => {
     e.preventDefault();
+
+    console.log('Pasa por handleFormAdvSubm en App')
+    console.log(this.state)
 
     let { ingredientsSelected, healthLabels } = this.state;
 
@@ -123,18 +141,21 @@ class App extends Component {
       )
     ) {
       console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-      //SACAR MENSAJE Y REDIRIGIR A LA MISMA URL
       return;
     }
 
     this.edamamService
       .advancedSearch({ ingredientsSelected, healthLabels })
       .then(recipes => {
+        console.log('Respuesta en front')
+        console.log(recipes)
+
         this.setState({
           ...this.state,
           recipes: recipes.data,
           redirectToRecipes: true
         });
+
       });
   };
 
@@ -142,6 +163,7 @@ class App extends Component {
     const { value } = e.target;
     this.setState({ ...this.state, search: value });
   };
+
 
   render() {
     if (this.state && this.state.redirectToHome) {
@@ -189,9 +211,12 @@ class App extends Component {
                 handleChangeChecked={this.handleChangeChecked}
                 addIngredient={this.addIngredient}
                 user={this.state.user}
+                recipes={this.state.recipes}
+                redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />
+          <Route exact path="/meal" render={() => <Meal user={this.state.user}/>} />
           <Route
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
@@ -204,9 +229,7 @@ class App extends Component {
           <Route
             exact
             path="/editUser"
-            render={() => (
-              <EditUser user={this.state.user} getUser={this.getUser} />
-            )}
+            render={() => (<EditUser user={this.state.user} getUser={this.getUser}/> )}
           />
           <Route path="/meal" render={() => <Meal user={this.state.user} />} />
         </Switch>
