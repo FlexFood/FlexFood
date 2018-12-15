@@ -1,0 +1,24 @@
+#recipes{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#recipes h1 span{
+  color: rgb(255, 154, 154);
+}
+#recipes-container{
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#recipes-card{
+  width: 26vw;
+  height: 50vh;
+}
+#recipes-card img{
+width: 20vw;
+}
