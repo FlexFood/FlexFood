@@ -11,7 +11,7 @@ export default class Meal extends Component {
             placeholder="Nombre del menú..."
             onChange={e => this.props.handleChange(e)}
           />
-          {/* <HealthLabels /> */}
+          <HealthLabels user={this.props.user} />
           <input type="submit" value="Buscar" />
       </form>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
@@ -22,6 +22,7 @@ class App extends Component {
       recipes: null,
       search: "",
       redirectToRecipes: false,
+      redirectToHome: false,
       ingredientsSelected: [],
       healthLabels: []
       //advancedSearch: []
@@ -47,7 +48,9 @@ class App extends Component {
   logout = () => {
     this.authService
       .logout()
-      .then(() => this.setState({ ...this.state, user: null }));
+      .then(() =>
+        this.setState({ ...this.state, user: null, redirectToHome: true })
+      );
   };
 
   handleFormSubmit = e => {
@@ -63,9 +66,6 @@ class App extends Component {
       });
     });
   };
-
- 
-
 
   //PARA SETEAR LOS FILTROS
   // setAdvancedSearch = state => {
@@ -86,7 +86,6 @@ class App extends Component {
       ingredientsSelected
     });
   };
-
 
   handleChangeChecked = e => {
     const { name, value } = e.target;
@@ -145,6 +144,10 @@ class App extends Component {
   };
 
   render() {
+    if (this.state && this.state.redirectToHome) {
+      return <Redirect exact to="/" />;
+    }
+
     return (
       <div className="App">
         <Userbar
@@ -189,7 +192,6 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/meal" render={() => <Meal />} />
           <Route
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
@@ -200,15 +202,13 @@ class App extends Component {
           />
 
           <Route
+            exact
             path="/editUser"
             render={() => (
-              
-              <EditUser
-                user={this.state.user}
-                getUser={this.getUser}
-              />
+              <EditUser user={this.state.user} getUser={this.getUser} />
             )}
           />
+          <Route path="/meal" render={() => <Meal user={this.state.user} />} />
         </Switch>
       </div>
     );
