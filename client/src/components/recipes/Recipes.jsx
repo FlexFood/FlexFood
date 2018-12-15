@@ -37,14 +37,11 @@ export default class Recipes extends Component {
               <div
                 className="card"
                 key={i}
-                onClick={() => this.handleRecipeSelect(i)}
-              >
-                <p>{recipe.recipe.label}</p>
+                onClick={() => this.handleRecipeSelect(i)}>
+              >{recipe.recipe.label} 
                 <img src={recipe.recipe.image} alt={recipe.recipe.label} />
                 <div className="card-text">
-                  <h3>
-                    <Link to="/">{recipe.recipe.label}</Link>
-                  </h3>
+                  <h3>{recipe.recipe.label}</h3>
                   <p>Personas: {recipe.recipe.yield}</p>
                   <p>Ingredientes:</p>
                   <ul>

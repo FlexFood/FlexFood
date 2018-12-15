@@ -213,7 +213,7 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/meal" render={() => <Meal />} />
+          <Route exact path="/meal" render={() => <Meal user={this.state.user}/>} />
           <Route
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
