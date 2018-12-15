@@ -1,18 +1,38 @@
 #navbar {
-    background-color: azure;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 3vw;
+  background-color: white;
+  height: 8.9vh;
 }
 #navbar ul {
-    display: flex;
-    list-style: none;
-    justify-content: flex-end;
-    align-items: center;
-    height: 10vh;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
-#navbar ul li{
-    padding-right: 3vh;
+#navbar ul li {
+  padding-left: 1.2vh;
 }
-#navbar h1{
-    margin: 0;
+#navbar h1 {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Rock Salt", cursive;
+  font-size: 4vh;
+}
+#navbar a {
+  text-decoration: none;
+  color: #272727;
+}
+
+#label-composition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

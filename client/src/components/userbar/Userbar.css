@@ -1,18 +1,32 @@
 #userbar {
-    background-color: blanchedalmond;
+    background-color: #272727;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 #userbar ul{
     display: flex;
     list-style: none;
     justify-content: flex-end;
     align-items: center;
-    height: 10vh;
+    height: 6vh;
     margin: 0;
     padding: 0;
+    padding-right: 2vw;
 }
 #userbar ul li{
-    padding-right: 5vh;
+    padding-right: 1vw;
+    color: #d3d3d3;
+
 }
 #imgProfile {
-    height: 7vh;
+    height: 4vh;
+    border-radius: 2vh
+}
+#off-img{
+    height: 3vh
+}
+#userbar ul li a {
+    color: #62b3ff;
+    text-decoration: none;
 }
