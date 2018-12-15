@@ -9,11 +9,11 @@ export default class AdvancedSearchForm extends Component {
 
 
   render() {
-    console.log('Estoy en Form y me llega la fn deleteIngredient')
-    console.log(this.props)
+    // console.log('Estoy en Form y me llega la fn deleteIngredient')
+    // console.log(this.props)
     var ingredientsSelected = this.props.ingredientsSelected;
     return (
-      <Link to='/recipes'>
+      
       <form id="advancedSearchForm" onSubmit={this.props.handleFormAdvancedSubmit}>
         <div id="ingredientsSelected">
           {(ingredientsSelected
@@ -30,7 +30,6 @@ export default class AdvancedSearchForm extends Component {
         <DietLabels handleChange={this.props.handleChange} />
         <input type="submit" value="Buscar" />
       </form>
-      </Link>
     )
   }
 }

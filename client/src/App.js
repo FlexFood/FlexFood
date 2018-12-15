@@ -56,6 +56,7 @@ class App extends Component {
     const search = this.state.search;
 
     this.edamamService.getByLabel(search).then(recipes => {
+      console.log(recipes)
       this.setState({
         ...this.state,
         recipes: recipes.data,
@@ -130,6 +131,9 @@ class App extends Component {
   handleFormAdvancedSubmit = e => {
     e.preventDefault();
 
+    console.log('Pasa por handleFormAdvSubm en App')
+    console.log(this.state)
+
     let { ingredientsSelected, healthLabels } = this.state;
 
     if (
@@ -138,7 +142,6 @@ class App extends Component {
       )
     ) {
       console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-      //SACAR MENSAJE Y REDIRIGIR A LA MISMA URL
       return;
     }
 
@@ -154,7 +157,6 @@ class App extends Component {
           redirectToRecipes: true
         });
 
-
       });
   };
 
@@ -165,12 +167,6 @@ class App extends Component {
 
 
   render() {
-
-    if(this.state.redirectToRecipes) {
-      console.log('Pasaaaa')
-      return <Redirect to="/recipes" />
-    }
-
     return (
       <div className="App">
         <Userbar
@@ -213,6 +209,7 @@ class App extends Component {
                 addIngredient={this.addIngredient}
                 user={this.state.user}
                 recipes={this.state.recipes}
+                redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />

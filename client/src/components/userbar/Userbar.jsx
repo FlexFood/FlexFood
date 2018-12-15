@@ -9,7 +9,7 @@ export default class Userbar extends Component {
       <li><p>{this.props.user.username}</p></li>
       <li><Link to="/editUser">Editar perfil</Link></li>
       <li><img id="imgProfile" src={this.props.user.pictureUrl} alt="userImg" /></li>
-      <li><button onClick={this.props.logout}>Logout</button></li>
+      <li><Link to="/"><button onClick={this.props.logout}>Logout</button></Link></li>
     </React.Fragment>
     :
     <React.Fragment>

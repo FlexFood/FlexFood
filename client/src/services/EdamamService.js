@@ -20,6 +20,7 @@ class EdamamService {
 
     return this.service.post('/recipesAdvanced', objectSearch)
       .then(response => {
+        console.log('Respuesta en fronnnnt')
         console.log(response)
         return response
       })

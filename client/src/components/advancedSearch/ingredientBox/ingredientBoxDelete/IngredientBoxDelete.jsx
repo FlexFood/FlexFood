@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 export default class IngredientBoxDelete extends Component {
   render() {
-    console.log('Estoy en delete Box y me llega fn delete')
-    console.log(this.props)
+    // console.log('Estoy en delete Box y me llega fn delete')
+    // console.log(this.props)
     return (
       <div id="ingredient">
         <p>{this.props.ing}</p>
