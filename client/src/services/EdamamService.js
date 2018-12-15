@@ -19,7 +19,11 @@ class EdamamService {
     // console.log(objectSearch, 'Ya en edamService,despues del join')
 
     return this.service.post('/recipesAdvanced', objectSearch)
-      .then(response => response)
+      .then(response => {
+        console.log('Respuesta en fronnnnt')
+        console.log(response)
+        return response
+      })
   }
 
 }
