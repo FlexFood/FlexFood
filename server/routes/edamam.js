@@ -8,7 +8,7 @@ edamamRoutes.post("/recipes", (req, res) => {
 // console.log(label)
   axios
     .get(
-      `https://api.edamam.com/search?q=${label}&app_id=${
+      `https://api.edamam.com/search?q=${label}&to=12&app_id=${
         process.env.APP_ID
       }&app_key=${process.env.APP_KEY}`
     )
