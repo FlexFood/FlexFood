@@ -12,6 +12,7 @@ export default class Meal extends Component {
     super();
     this.state = {
       name: Date.now(),
+      days: 5,
       //API
       ingredientsSelected: [],  //ingredientForm component
       healthLabels: [] //labelInitUser // Por defecto lo del user 
@@ -56,46 +57,46 @@ export default class Meal extends Component {
 
   //LÓGICA DEL --INGRSIENT-SELECTED--
 
-  addIngredientSelected = inputLabel => {
-    console.log(inputLabel, 'Pasa por añadir ingrSeleccionado')
-    let ingredientsSelected = this.state.ingredientsSelected;
+  // addIngredientSelected = inputLabel => {
+  //   console.log(inputLabel, 'Pasa por añadir ingrSeleccionado')
+  //   let ingredientsSelected = this.state.ingredientsSelected;
 
-    //La idea es que solo pushee si no hay otro igual en seleccionados
-    if (!this.state.ingredientsSelected
-      .find(ingredient => ingredient === inputLabel))
-      ingredientsSelected.push(inputLabel);
-    this.setState({
-      ingredientsSelected
-    });
-  };
+  //   //La idea es que solo pushee si no hay otro igual en seleccionados
+  //   if (!this.state.ingredientsSelected
+  //     .find(ingredient => ingredient === inputLabel))
+  //     ingredientsSelected.push(inputLabel);
+  //   this.setState({
+  //     ingredientsSelected
+  //   });
+  // };
 
-  deleteIngredientSelected = event => {
-    console.log(event, this.state.ingredientsSelected);
-    var ingredientsSelected = this.state.ingredientsSelected;
-    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+  // deleteIngredientSelected = event => {
+  //   console.log(event, this.state.ingredientsSelected);
+  //   var ingredientsSelected = this.state.ingredientsSelected;
+  //   ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
 
-    //QUE ACTUALICE EN APP
+  //   //QUE ACTUALICE EN APP
 
-    this.setState({
-      ingredientsSelected
-    });
-  };
+  //   this.setState({
+  //     ingredientsSelected
+  //   });
+  // };
 
 
 
-///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO 
-// handleChangeChecked = e => {
-//   const { name, value } = e.target;
-//   let array = [...this.state[name]];
+  ///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO 
+  // handleChangeChecked = e => {
+  //   const { name, value } = e.target;
+  //   let array = [...this.state[name]];
 
-//   if (e.target.checked) {
-//     array.push(value);
-//     this.setState({ ...this.state, [name]: array });
-//   } else {
-//     array.splice(array.indexOf(value), 1);
-//     this.setState({ ...this.state, [name]: array });
-//   }
-// };
+  //   if (e.target.checked) {
+  //     array.push(value);
+  //     this.setState({ ...this.state, [name]: array });
+  //   } else {
+  //     array.splice(array.indexOf(value), 1);
+  //     this.setState({ ...this.state, [name]: array });
+  //   }
+  // };
 
 
 
@@ -143,6 +144,10 @@ export default class Meal extends Component {
     const { value } = e.target;
     this.setState({ ...this.state, name: value });
   };
+  handleChangeName = e => {
+    const { value } = e.target;
+    this.setState({ ...this.state, days: value });
+  };
 
   render() {
     // if(this.props) {
@@ -156,16 +161,26 @@ export default class Meal extends Component {
 
 
         <form id="form-menu" onSubmit={this.props.handleFormAdvancedSubmit}>
+
           <section className="left">
             <input id="name-menu"
               type="text"
               placeholder="Menu's name..."
               onChange={e => this.handleChangeName(e)}
             />
-            <IngredientFormAdd addIngredientSelected={this.addIngredientSelected}/>
+            <select id="days-menu"
+            placeholder="Menu's days [1-7]"
+            onChange={e => this.handleChangeDay(e)}
+            >
+              <option type="number" value="1">1</option>
+              <option type="number" value="2">2</option>
+              <option type="number" value="3">3</option>
+              <option type="number" value="4">4</option>
+            </select>
+            <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
           </section>
           <section className="center">
-          <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected}/>
+            <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} />
             <p>calories/range || excluded</p>
           </section>
           <section className="rigth">
