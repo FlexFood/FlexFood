@@ -14,16 +14,15 @@ class EdamamService {
   }
 
   advancedSearch = (objectSearch) => {
-    console.log(objectSearch, 'Ya en edamService')
     objectSearch.ingredientsSelected = objectSearch.ingredientsSelected.join("+");
-    // console.log(objectSearch, 'Ya en edamService,despues del join')
-
     return this.service.post('/recipesAdvanced', objectSearch)
       .then(response => {
-        console.log('Respuesta en fronnnnt')
-        console.log(response)
         return response
       })
+  }
+
+  menuSearch = (objectSearch) => {
+
   }
 
 }
