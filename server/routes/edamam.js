@@ -19,13 +19,6 @@ edamamRoutes.post("/recipes", (req, res) => {
 });
 
 
-https://test-es.edamam.com/search?
-// calories=591-722
-// &health=peanut-free%26health=tree-nut-free
-// &q=tomate
-// &app_id=71685624
-// &app_key=40cc36ad5a53b6207a187b1579302729
-
 edamamRoutes.post("/recipesAdvanced", (req, res) => {
 
   const { ingredientsSelected, healthLabels } = req.body;
@@ -35,84 +28,48 @@ edamamRoutes.post("/recipesAdvanced", (req, res) => {
     `&app_key=${process.env.APP_KEY}`
 
     if(ingredientsSelected!=="") {
-      console.log(ingredientsSelected)
       urlCommun += `&q=${ingredientsSelected}`
     }  
     if(healthLabels.length) {
       healthLabels.forEach(label => {
-        console.log(label)
         urlCommun += `&health=${label}`
       })
     }
 
     console.log(urlCommun, 'url vompletaaaaaa')
     
-    //console.log(urlCommun,'url con ingrs q added')
-  //meter aqui la seguridad
-  //Contemplar q lleguen vacios
-
-  // https://api.edamam.com/search?app_id=71685624
-  // &app_key=40cc36ad5a53b6207a187b1579302729
-  // &q=tomato+tuna&health=peanut-free
-  // &health=alcohol-free&health=vegan
-
-  // https://api.edamam.com/search?app_id=71685624
-  // &app_key=40cc36ad5a53b6207a187b1579302729
-  // &q=tomato+tuna&health=alcohol-free
-  // &health=vegan&health=penaut-free
- 
   axios
     .get(urlCommun)
     .then(response => {
-      console.log(response)
       res.status(200).json(response.data.hits);
     })
     .catch(err => console.log("ERROR EN PETICION A API EDAMAM", err));
 });
 
 edamamRoutes.post("/menu", (req, res) => {
-
-  const { healthLabels, days } = req.body;
-  const calories = [10, 300]
-  //Al menos llega uno lleno
-  let urlCommun = `https://api.edamam.com/search?` +
+  const { healthLabels, days, calories } = req.body;
+  let urlCommun = `https://api.edamam.com/search?q=&` +
     `app_id=${process.env.APP_ID}` +
     `&app_key=${process.env.APP_KEY}`
 
-    if(ingredientsSelected!=="") {
-      console.log(ingredientsSelected)
-      urlCommun += `&q=${ingredientsSelected}`
+    if(days !== 0) {
+      urlCommun += `&from=0&to=${days}`
     }  
     if(healthLabels.length) {
       healthLabels.forEach(label => {
-        console.log(label)
         urlCommun += `&health=${label}`
       })
     }
-
-    console.log(urlCommun, 'url vompletaaaaaa')
-    
-    //console.log(urlCommun,'url con ingrs q added')
-  //meter aqui la seguridad
-  //Contemplar q lleguen vacios
-
-  // https://api.edamam.com/search?app_id=71685624
-  // &app_key=40cc36ad5a53b6207a187b1579302729
-  // &q=tomato+tuna&health=peanut-free
-  // &health=alcohol-free&health=vegan
-
-  // https://api.edamam.com/search?app_id=71685624
-  // &app_key=40cc36ad5a53b6207a187b1579302729
-  // &q=tomato+tuna&health=alcohol-free
-  // &health=vegan&health=penaut-free
- 
+    if(calories.length === 2){
+      urlCommun += `&calories=${calories[0]}-${calories[1]}`
+    }
   axios
     .get(urlCommun)
     .then(response => {
-      // axios().get
-      console.log(response)
       res.status(200).json(response.data.hits);
+
     })
-    .catch(err => console.log("ERROR EN PETICION A API EDAMAM", err));
+    .catch(err => console.log("ERROR EN PETICION A API MENU EDAMAM", err));
 });
+
 module.exports = edamamRoutes;

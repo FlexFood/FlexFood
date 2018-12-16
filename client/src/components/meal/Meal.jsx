@@ -20,7 +20,16 @@ export default class Meal extends Component {
   }
 
   componentDidMount() {
-    this.userDefault()
+    this.userDefault();
+    this.edamamService.menuLunchSearch()
+    .then(recipes =>{
+      console.log(recipes,"recipes for LUNCH")
+      this.edamamService.menuDinnerSearch()
+      .then(recipes =>{
+        console.log(recipes,"recipes for DINNER")
+      })
+
+    });
   }
 
   userDefault = healthLabels => {

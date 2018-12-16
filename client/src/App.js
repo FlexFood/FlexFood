@@ -12,6 +12,7 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Meal from "./components/meal";
 import EditUser from "./components/editUser";
+import Converter from "./components/converter"
 
 class App extends Component {
   constructor() {
@@ -236,6 +237,7 @@ class App extends Component {
             render={() => (<EditUser user={this.state.user} getUser={this.getUser}/> )}
           />
           <Route path="/meal" render={() => <Meal user={this.state.user} />} />
+          <Route path="/converter" render={() => <Converter />} />
         </Switch>
       </div>
     );
