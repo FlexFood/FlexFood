@@ -3,41 +3,78 @@ import React, { Component } from "react";
 export default class Converter extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      originNumber: "",
+      finalNumber: "",
+      recipe: [],
+      qty: "",
+      ingredient: ""
+    };
   }
 
-  handleFormSubmit = (e) => {
+  handleFormSubmit = e => {
     e.preventDefault();
-    const {username, password, photo} = this.state;
+    let { qty, ingredient } = this.state;
 
-    // this.authService.signup({username, password, photo})
-    // .then(user => {
-    //   this.props.getUser(user)
-    //   this.setState({username: '', password: '', photo: '', redirect: true})
-    // });
-  }
+    qty = qty / this.state.originNumber;
 
-  // handleChange = (e) => {
-  //   const {name, value} = e.target;
+    this.state.recipe.push({ qty, ingredient });
+    this.setState({ qty: "", ingredient: "" });
+  };
 
-  //   if(name === "photo") {
-  //     this.setState({...this.state, photo: e.target.files[0]})
-  //   } else {
-  //     this.setState({...this.state, [name]: value});
-  //   }
-  // }
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ ...this.state, [name]: value });
+  };
+
+  resetCnverter = e => {
+    this.setState({
+      ...this.state,
+      originNumber: "",
+      finalNumber: "",
+      recipe: [],
+      qty: "",
+      ingredient: ""
+    });
+  };
 
   render() {
     return (
       <div id="converter">
         <div id="original-recipe">
-          <form>
+          <label>Original Number</label>
+          <input
+            type="text"
+            name="originNumber"
+            onChange={e => this.handleChange(e)}
+            value={this.state.originNumber}
+          />
+          <label>Final Number</label>
+          <input
+            type="text"
+            name="finalNumber"
+            onChange={e => this.handleChange(e)}
+            value={this.state.finalNumber}
+          />
+          <form onSubmit={this.handleFormSubmit}>
             <label>Quantity</label>
-            <input type="text" name="qty" />
+            <input
+              type="text"
+              name="qty"
+              onChange={e => this.handleChange(e)}
+              value={this.state.qty}
+            />
             <label>Ingredient</label>
-            <input type="text" name="ingredient" />
+            <input
+              type="text"
+              name="ingredient"
+              onChange={e => this.handleChange(e)}
+              value={this.state.ingredient}
+            />
+            <input type="submit" value="Converter" />
           </form>
           <table>
+            <caption>Original recipe</caption>
             <thead>
               <tr>
                 <td>QTY</td>
@@ -45,11 +82,37 @@ export default class Converter extends Component {
               </tr>
             </thead>
             <tbody>
-              <td>{this.state.qty}</td>
-              <td>{this.state.ingredient}</td>
+              {this.state.recipe.map(line => {
+                return (
+                  <div>
+                    <td>{(line.qty * this.state.originNumber).toFixed(1)}</td>
+                    <td>{line.ingredient}</td>
+                  </div>
+                );
+              })}
+            </tbody>
+          </table>
+          <table>
+            <caption>Converted recipe</caption>
+            <thead>
+              <tr>
+                <td>QTY</td>
+                <td>Ingrdient</td>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.recipe.map(line => {
+                return (
+                  <div>
+                    <td>{(line.qty * this.state.finalNumber).toFixed(1)}</td>
+                    <td>{line.ingredient}</td>
+                  </div>
+                );
+              })}
             </tbody>
           </table>
         </div>
+        <button onClick={this.resetCnverter}>Clear</button>
       </div>
     );
   }
