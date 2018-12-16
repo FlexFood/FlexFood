@@ -5,27 +5,40 @@ class EdamamService {
     this.service = axios.create({
       baseURL: "http://localhost:5000/api/edamam",
       withCredentials: true
-    })
+    });
   }
 
-  getByLabel = (label) => {
-    return this.service.post('/recipes', { label })
-      .then(response => response)
-  }
+  getByLabel = label => {
+    return this.service.post("/recipes", { label }).then(response => response);
+  };
 
-  advancedSearch = (objectSearch) => {
-    console.log(objectSearch, 'Ya en edamService')
+  advancedSearch = objectSearch => {
     objectSearch.ingredientsSelected = objectSearch.ingredientsSelected.join("+");
-    // console.log(objectSearch, 'Ya en edamService,despues del join')
-
-    return this.service.post('/recipesAdvanced', objectSearch)
+    return this.service
+      .post("/recipesAdvanced", objectSearch)
       .then(response => {
-        console.log('Respuesta en fronnnnt')
-        console.log(response)
-        return response
-      })
-  }
+        return response;
+      });
+  };
 
+  menuLunchSearch = () => {
+   const menuSearchObj = {healthLabels:["peanut-free", "vegetarian"], days: 3, calories:[301,600]}
+    return this.service.post("/menu", menuSearchObj)
+    .then(response => {
+      console.log(response)
+       return response;
+    })
+  };
+
+  menuDinnerSearch = () => {
+    const menuSearchObj = {healthLabels:["peanut-free", "vegetarian"], days: 3, calories:[0,300]}
+     return this.service.post("/menu", menuSearchObj)
+     .then(response => {
+       console.log(response)
+       // return response;
+     })
+   };
+  
 }
 
 export default EdamamService;

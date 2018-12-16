@@ -13,7 +13,6 @@ export default class Recipes extends Component {
   }
 
   handleRecipeSelect = i => {
-    console.log(i);
     this.setState({
       ...this.state,
       showRecipe: true,
