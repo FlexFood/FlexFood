@@ -1,0 +1,39 @@
+#recipe {
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(202, 202, 202, 0.8);
+  padding: 5vh 3vh;
+  margin:10vh;
+}
+#recipe img {
+  margin-left: 1vw;
+  width: 30vw;
+  height: 30vw;
+}
+#ingrdient-table {
+  margin-left: 3vw;
+  width: 40vw;
+}
+#qty-column {
+  margin-right: vw;
+  width: 10vw;
+}
+#left-container {
+  display: flex;
+  flex-direction: column;
+}
+#howtodo{
+  text-align: center;
+}
+#left-container a{
+  color: grey;
+  margin-top: 2vh;
+  text-decoration: none;
+}
+#ingrdient-table hr{
+  border: 0.5px solid rgb(173, 173, 173);
+}
+#left-vontainer{
+  
+}
