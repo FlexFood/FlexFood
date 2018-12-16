@@ -3,14 +3,14 @@ import './AdvancedSearch.css'
 import { Redirect } from "react-router-dom";
 import IngredientBoxAdd from "./ingredientBox/ingredientBoxAdd";
 import AdvancedSearchForm from "./advancedSearchForm";
-import ingredients from '../../ingredients.json';
+//import ingredients from '../../ingredients.json';
 import EdamamService from '../../services/EdamamService';
 
 export default class AdvancedSearch extends Component {
     constructor() {
         super();
         this.state = {
-            ingredients,
+            //ingredients,
             searchArray: null,
             ingredientsSelected: [],
             search: "",
@@ -23,6 +23,7 @@ export default class AdvancedSearch extends Component {
 
     }
 
+    //EN EL INGREDFORMADD
     findIngredients = event => {
         event.preventDefault();
 
@@ -35,6 +36,8 @@ export default class AdvancedSearch extends Component {
         })
     }
     
+
+    //COPIADO EN MEAL TB// LO NECESITA INGRSBOXADD
     addIngredientFormSubmit = event => {
         event.preventDefault();
         let ingredt = this.state.search;
@@ -58,6 +61,7 @@ export default class AdvancedSearch extends Component {
                 <div className="quickSearch"></div>
 
 
+                {/* nuevo componente IngredientFormAdd.jsx */}
                 <div className="advancedSearchBox">
                     <h2>¿Qué tienes en la nevera?</h2>
 

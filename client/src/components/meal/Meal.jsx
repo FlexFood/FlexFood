@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+
+import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
+import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
 import HealthLabels from '../healthLabels';
 
-//import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
 
 import EdamamService from "../../services/EdamamService";
 
@@ -29,8 +31,11 @@ export default class Meal extends Component {
   }
 
 
+  //LÓGICA DE --HEALTHLABEL-- 
+  //PARA MANDAR AL SERVICE
   //en app  handleChangeChecked
   //toggle en el array helathlabels
+
   handleChange = e => {
 
     let inputLabel = e.target.value;
@@ -49,21 +54,54 @@ export default class Meal extends Component {
     this.setState({ ...this.state, healthLabels });
   };
 
+  //LÓGICA DEL --INGRSIENT-SELECTED--
 
-  handleChangeChecked = e => {
-    const { name, value } = e.target;
-    let array = [...this.state[name]];
+  addIngredientSelected = inputLabel => {
+    console.log(inputLabel, 'Pasa por añadir ingrSeleccionado')
+    let ingredientsSelected = this.state.ingredientsSelected;
 
-
-
-    if (e.target.checked) {
-      array.push(value);
-      this.setState({ ...this.state, [name]: array });
-    } else {
-      array.splice(array.indexOf(value), 1);
-      this.setState({ ...this.state, [name]: array });
-    }
+    //La idea es que solo pushee si no hay otro igual en seleccionados
+    if (!this.state.ingredientsSelected
+      .find(ingredient => ingredient === inputLabel))
+      ingredientsSelected.push(inputLabel);
+    this.setState({
+      ingredientsSelected
+    });
   };
+
+  deleteIngredientSelected = event => {
+    console.log(event, this.state.ingredientsSelected);
+    var ingredientsSelected = this.state.ingredientsSelected;
+    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+
+    //QUE ACTUALICE EN APP
+
+    this.setState({
+      ingredientsSelected
+    });
+  };
+
+
+
+///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO 
+// handleChangeChecked = e => {
+//   const { name, value } = e.target;
+//   let array = [...this.state[name]];
+
+//   if (e.target.checked) {
+//     array.push(value);
+//     this.setState({ ...this.state, [name]: array });
+//   } else {
+//     array.splice(array.indexOf(value), 1);
+//     this.setState({ ...this.state, [name]: array });
+//   }
+// };
+
+
+
+
+
+
 
 
   //API
@@ -112,22 +150,23 @@ export default class Meal extends Component {
     //   this.handleChange(this.props.user.healthLabels)
     // }
     return (
-      <div id="meal">
+      <div id="menu">
 
         <h2>Menu {this.state.name}</h2>
 
 
-        <form id="form-meal" onSubmit={this.props.handleFormAdvancedSubmit}>
+        <form id="form-menu" onSubmit={this.props.handleFormAdvancedSubmit}>
           <section className="left">
-            <input id="name-meal"
+            <input id="name-menu"
               type="text"
               placeholder="Menu's name..."
               onChange={e => this.handleChangeName(e)}
             />
+            <IngredientFormAdd addIngredientSelected={this.addIngredientSelected}/>
           </section>
           <section className="center">
-            <p>Componente:ingredientFormDelete</p>
-            <p>Radio Buton economic/variado</p>
+          <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected}/>
+            <p>calories/range || excluded</p>
           </section>
           <section className="rigth">
             <HealthLabels handleChange={this.handleChange} user={this.props.user} />

@@ -74,6 +74,10 @@ class App extends Component {
   //   // const { ingredientsSelected, healthLabels } = e.target;
   //   // this.setState({ ...this.state,  ingredientsSelected, healthLabels});
   // }
+
+
+  
+  //ESTAS 3 FUERS ESTAN EN FORMS DE INGRS y meal
   addIngredient = event => {
     let ingredientsSelected = this.state.ingredientsSelected;
 

@@ -1,2 +1,2 @@
-import IngredientBoxDelete from "./IngredientBoxDelete.jsx";
+import IngredientBoxDelete from "../../../ingredientForm/ingredientFormDelete/ingredientBoxDelete/IngredientBoxDelete.jsx";
 export default IngredientBoxDelete;

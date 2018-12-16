@@ -17,6 +17,9 @@ export default class HealthLabels extends Component {
     });
   };
 
+  //LO HE CAMBIADO PARA MEAL Y ESTAÄ
+  //SIN COMPROBAR EN ADVANCEDSEARCH
+
   checkedLabels = (e) => {
     console.log(e)
     let inputLabel = e.target.value;
@@ -36,7 +39,7 @@ export default class HealthLabels extends Component {
     });
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.checkedLabelsInit();
   }
 
