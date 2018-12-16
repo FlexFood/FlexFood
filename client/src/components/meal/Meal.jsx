@@ -10,14 +10,60 @@ export default class Meal extends Component {
     super();
     this.state = {
       name: Date.now(),
-
       //API
       ingredientsSelected: [],  //ingredientForm component
       healthLabels: [] //labelInitUser // Por defecto lo del user 
     }
-
     this.edamamService = new EdamamService();
   }
+
+  componentDidMount() {
+    this.userDefault()
+  }
+
+  userDefault = healthLabels => {
+    healthLabels = this.props.user.healthLabels;
+    this.setState({
+      healthLabels
+    });
+  }
+
+
+  //en app  handleChangeChecked
+  //toggle en el array helathlabels
+  handleChange = e => {
+
+    let inputLabel = e.target.value;
+    let healthLabels = this.state.healthLabels;
+
+    if (!healthLabels.some(label => label === inputLabel)) {
+      console.log('No hay etiqueta, la añado')
+      healthLabels.push(inputLabel);
+    }
+    else {
+      console.log('Hay etiqueta, la quito')
+      healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
+    }
+
+    //const { value } = e.target;
+    this.setState({ ...this.state, healthLabels });
+  };
+
+
+  handleChangeChecked = e => {
+    const { name, value } = e.target;
+    let array = [...this.state[name]];
+
+
+
+    if (e.target.checked) {
+      array.push(value);
+      this.setState({ ...this.state, [name]: array });
+    } else {
+      array.splice(array.indexOf(value), 1);
+      this.setState({ ...this.state, [name]: array });
+    }
+  };
 
 
   //API
@@ -55,12 +101,16 @@ export default class Meal extends Component {
   // };
 
 
-  handleChange = e => {
+  handleChangeName = e => {
     const { value } = e.target;
     this.setState({ ...this.state, name: value });
   };
 
   render() {
+    // if(this.props) {
+    //   debugger
+    //   this.handleChange(this.props.user.healthLabels)
+    // }
     return (
       <div id="meal">
 
@@ -72,7 +122,7 @@ export default class Meal extends Component {
             <input id="name-meal"
               type="text"
               placeholder="Menu's name..."
-              onChange={e => this.handleChange(e)}
+              onChange={e => this.handleChangeName(e)}
             />
           </section>
           <section className="center">
