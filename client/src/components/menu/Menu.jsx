@@ -1,36 +1,29 @@
 import React, { Component } from 'react'
 
-import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
-import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
+//import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
+//import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
 import HealthLabels from '../healthLabels';
+import MenuSave from './menuSave'
 
 
 import EdamamService from "../../services/EdamamService";
 
-export default class Meal extends Component {
+export default class Menu extends Component {
   constructor() {
     super();
     this.state = {
       name: Date.now(),
-      days: 5,
       //API
-      ingredientsSelected: [],  //ingredientForm component
-      healthLabels: [] //labelInitUser // Por defecto lo del user 
+      days: 5,
+      //ingredientsSelected: [],  //ingredientForm component
+      healthLabels: [], //labelInitUser // Por defecto lo del user 
+      menuSave: false
     }
     this.edamamService = new EdamamService();
   }
 
   componentDidMount() {
     this.userDefault();
-    this.edamamService.menuLunchSearch()
-    .then(recipes =>{
-      console.log(recipes,"recipes for LUNCH")
-      this.edamamService.menuDinnerSearch()
-      .then(recipes =>{
-        console.log(recipes,"recipes for DINNER")
-      })
-
-    });
   }
 
   userDefault = healthLabels => {
@@ -115,61 +108,63 @@ export default class Meal extends Component {
 
 
   //API
+  
+  handleFormMealSubmit = e => {
+    e.preventDefault();
+    
+    let { days, healthLabels } = this.state;
+    
+    this.edamamService
+    .menuLunchSearch({ days, healthLabels })
+    .then(recipesLunch => {
+      console.log(recipesLunch, "recipes for LUNCH")
+      this.setState({
+        ...this.state,
+        recipesLunch: recipesLunch.data
+      });
+      this.edamamService
+      .menuDinnerSearch({ days, healthLabels })
+        .then(recipesDinner => {
+          console.log(recipesDinner, "recipes for DINNER")
+          this.setState({
+            ...this.state,
+            recipesDinner: recipesDinner.data,
+            menuSave: true
+          });
+        })
 
-  // handleFormAdvancedSubmit = e => {
-  //   e.preventDefault();
-
-  //   console.log('Pasa por handleFormAdvSubm en App')
-  //   console.log(this.state)
-
-  //   let { ingredientsSelected, healthLabels } = this.state;
-
-  //   if (
-  //     Object.values({ ingredientsSelected, healthLabels }).every(
-  //       element => !element.length
-  //     )
-  //   ) {
-  //     console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-  //     return;
-  //   }
-
-  //   this.edamamService
-  //     .advancedSearch({ ingredientsSelected, healthLabels })
-  //     .then(recipes => {
-  //       console.log('Respuesta en front')
-  //       console.log(recipes)
-
-  //       this.setState({
-  //         ...this.state,
-  //         recipes: recipes.data,
-  //         redirectToRecipes: true
-  //       });
-
-  //     });
-  // };
+    });
+  };
 
 
   handleChangeName = e => {
     const { value } = e.target;
     this.setState({ ...this.state, name: value });
   };
-  handleChangeName = e => {
+  handleChangeDays = e => {
     const { value } = e.target;
     this.setState({ ...this.state, days: value });
   };
 
   render() {
-    // if(this.props) {
-    //   debugger
-    //   this.handleChange(this.props.user.healthLabels)
-    // }
+
+    var menuSave = this.state.menuSave ? (
+      <MenuSave 
+      recipesLunch={this.state.recipesLunch}
+      recipesDinner={this.state.recipesDinner} />
+    ) : (
+      ""
+    );
+
     return (
       <div id="menu">
+
+      {menuSave}
 
         <h2>Menu {this.state.name}</h2>
 
 
-        <form id="form-menu" onSubmit={this.props.handleFormAdvancedSubmit}>
+        <form id="form-menu" onSubmit={this.handleFormMealSubmit}>
 
           <section className="left">
             <input id="name-menu"
@@ -177,25 +172,25 @@ export default class Meal extends Component {
               placeholder="Menu's name..."
               onChange={e => this.handleChangeName(e)}
             />
+            <p>Number of days</p>
             <select id="days-menu"
-            placeholder="Menu's days [1-7]"
-            onChange={e => this.handleChangeDay(e)}
+              // placeholder="Menu's days [1-7]"
+              onChange={e => this.handleChangeDays(e)}
             >
               <option type="number" value="1">1</option>
               <option type="number" value="2">2</option>
               <option type="number" value="3">3</option>
               <option type="number" value="4">4</option>
             </select>
-            <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
           </section>
           <section className="center">
-            <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} />
+            {/* <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
+            <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} /> */}
             <p>calories/range || excluded</p>
           </section>
           <section className="rigth">
             <HealthLabels handleChange={this.handleChange} user={this.props.user} />
           </section>
-          {/* <HealthLabels /> */}
           <input type="submit" value="Search yours weekly menu!!" />
         </form>
 

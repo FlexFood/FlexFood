@@ -6,7 +6,7 @@ export default class Navbar extends Component {
   render() {
     const navBarUserControl = this.props.user ? (
       <li>
-        <Link to="/meal">Menu Generator</Link>
+        <Link to="/menu">Menu Generator</Link>
       </li>
     ) : (
       <li>
