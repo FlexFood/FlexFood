@@ -30,28 +30,29 @@ export default class Recipes extends Component {
 
     return (
       <div id="recipes">
-        <h1>Recipes of <span>{this.props.search}</span></h1>
+        <h1>
+          Recipes of <span>{this.props.search}</span>
+        </h1>
         <div id="recipes-container">
           {this.props.recipes &&
             this.props.recipes.map((recipe, i) => {
               return (
                 <div
+                  to="#recipe"
                   id="recipes-card"
                   key={i}
                   onClick={() => this.handleRecipeSelect(i)}
                 >
                   <img src={recipe.recipe.image} alt={recipe.recipe.label} />
-                  <div className="card-text">
-                    <h3>
-                      <Link to="/">{recipe.recipe.label}</Link>
-                    </h3>
-                    <p>Personas: {recipe.recipe.yield}</p>
-                    <p>Ingredientes:</p>
-                    <ul>
-                      {recipe.recipe.ingredientLines.map((ingredient, i) => {
+                  <div id="card-text">
+                    <h3>{recipe.recipe.label}</h3>
+                    <hr />
+                    <p>Yield: {recipe.recipe.yield}</p>
+                    {/* <ul>
+                      {recipe.recipe.healthLabels.map((ingredient, i) => {
                         return <li key={i}>{ingredient}</li>;
                       })}
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
               );

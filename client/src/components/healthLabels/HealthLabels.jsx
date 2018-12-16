@@ -285,6 +285,79 @@ export default class HealthLabels extends Component {
           />
           Vegana
         </label>
+        <br />
+        <h3>Tipo de dieta</h3>
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="low-sodium"
+            checked={this.state["low-sodium"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["low-sodium"]}
+          />
+          Bajo en sodio
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="low-fat"
+            checked={this.state["low-fat"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["low-fat"]}
+          />
+          Bajo en grasa
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="low-carb"
+            checked={this.state["low-carb"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["low-carb"]}
+          />
+          Bajo en H. de carbono
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="high-protein"
+            checked={this.state["high-protein"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["high-protein"]}
+          />
+          Alto en proteina
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="high-fiber"
+            checked={this.state["high-fiber"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["high-fiber"]}
+          />
+          Alto en fibra
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="dietLabels"
+            value="balanced"
+            checked={this.state["balanced"]}
+            onChange={e => this.props.handleChange(e)}
+            // checked={this.state["balanced"]}
+          />
+          Equilibrada
+        </label>
       </div>
     ) : (
       ""
