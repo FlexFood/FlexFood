@@ -10,7 +10,7 @@ import Navbar from "./components/navbar";
 import Userbar from "./components/userbar";
 import Login from "./components/login";
 import Signup from "./components/signup";
-import Meal from "./components/meal";
+import Menu from "./components/menu";
 import EditUser from "./components/editUser";
 import Converter from "./components/converter"
 
@@ -221,7 +221,7 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/meal" render={() => <Meal user={this.state.user}/>} />
+          {/* <Route exact path="/menu" render={() => <Menu user={this.state.user}/>} /> */}
           <Route
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
@@ -236,7 +236,7 @@ class App extends Component {
             path="/editUser"
             render={() => (<EditUser user={this.state.user} getUser={this.getUser}/> )}
           />
-          <Route path="/meal" render={() => <Meal user={this.state.user} />} />
+          <Route path="/menu" render={() => <Menu user={this.state.user} />} />
           <Route path="/converter" render={() => <Converter />} />
         </Switch>
       </div>
