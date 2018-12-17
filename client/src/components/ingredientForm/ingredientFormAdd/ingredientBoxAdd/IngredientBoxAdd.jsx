@@ -6,10 +6,9 @@ export default class IngredientBoxAdd extends Component {
 //     this.key = this.props.key
 // }
   render() {
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <div id="ingredient">
-      <p>Nuevo ingrediente a añadir !!, las pilla</p>
         <p>{this.props.name}</p>
         <button onClick={(e) => { e.preventDefault();this.props.addIngredientSelected(this.props.name)}}>+</button>
       </div>

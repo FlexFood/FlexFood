@@ -7,7 +7,7 @@ export default class IngredientBoxDelete extends Component {
     return (
       <div id="ingredient">
         <p>{this.props.ing}</p>
-        <button onClick={(e) => { e.preventDefault();this.props.deleteIngredient(this.props.ing)}}>-</button>
+        <button onClick={(e) => { e.preventDefault();this.props.deleteIngredientSelected(this.props.ing)}}>-</button>
       </div>
     )
   }

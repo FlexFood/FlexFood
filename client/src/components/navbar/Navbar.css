@@ -4,7 +4,9 @@
   align-items: center;
   margin: 0;
   padding: 0 3vw;
-  background-color: white;
+  /* background-color: white; */
+  background-image: url("../../images/navbar-background.jpg");
+  background-size: cover;
   height: 8.9vh;
 }
 #navbar ul {

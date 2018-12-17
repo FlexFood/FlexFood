@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-import EdamamService from "./services/EdamamService";
+//import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -31,7 +31,7 @@ class App extends Component {
 
     this.authService = new AuthService();
 
-    this.edamamService = new EdamamService();
+    //this.edamamService = new EdamamService();
 
     this.fetchUser();
   }
@@ -78,45 +78,45 @@ class App extends Component {
 
 
   
-  //ESTAS 3 FUERS ESTAN EN FORMS DE INGRS y meal
-  addIngredient = event => {
-    let ingredientsSelected = this.state.ingredientsSelected;
+  // //ESTAS 3 FUERS ESTAN EN FORMS DE INGRS y meal
+  // addIngredient = event => {
+  //   let ingredientsSelected = this.state.ingredientsSelected;
 
-    //La idea es que solo pushee si no hay otro igual en seleccionados
-    if (
-      !this.state.ingredientsSelected.find(ingredient => ingredient === event)
-    )
-      ingredientsSelected.push(event);
-    //QUE ACTUALICE EN APP
-    this.setState({
-      ingredientsSelected
-    });
-  };
+  //   //La idea es que solo pushee si no hay otro igual en seleccionados
+  //   if (
+  //     !this.state.ingredientsSelected.find(ingredient => ingredient === event)
+  //   )
+  //     ingredientsSelected.push(event);
+  //   //QUE ACTUALICE EN APP
+  //   this.setState({
+  //     ingredientsSelected
+  //   });
+  // };
 
-  handleChangeChecked = e => {
-    const { name, value } = e.target;
-    let array = [...this.state[name]];
+  // handleChangeChecked = e => {
+  //   const { name, value } = e.target;
+  //   let array = [...this.state[name]];
 
-    if (e.target.checked) {
-      array.push(value);
-      this.setState({ ...this.state, [name]: array });
-    } else {
-      array.splice(array.indexOf(value), 1);
-      this.setState({ ...this.state, [name]: array });
-    }
-  };
+  //   if (e.target.checked) {
+  //     array.push(value);
+  //     this.setState({ ...this.state, [name]: array });
+  //   } else {
+  //     array.splice(array.indexOf(value), 1);
+  //     this.setState({ ...this.state, [name]: array });
+  //   }
+  // };
 
-  deleteIngredient = event => {
-    console.log(event, this.state.ingredientsSelected);
-    var ingredientsSelected = this.state.ingredientsSelected;
-    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+  // deleteIngredient = event => {
+  //   console.log(event, this.state.ingredientsSelected);
+  //   var ingredientsSelected = this.state.ingredientsSelected;
+  //   ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
 
-    //QUE ACTUALICE EN APP
+  //   //QUE ACTUALICE EN APP
 
-    this.setState({
-      ingredientsSelected
-    });
-  };
+  //   this.setState({
+  //     ingredientsSelected
+  //   });
+  // };
 
   // handleFormSubmit = e => {
   //   e.preventDefault();
@@ -197,6 +197,7 @@ class App extends Component {
             )}
           />
           <Route
+          exact
             path="/recipes"
             render={() => (
               <Recipes
@@ -210,23 +211,25 @@ class App extends Component {
             path="/advancedSearch"
             render={() => (
               <AdvancedSearch
-                handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
-                ingredientsSelected={this.state.ingredientsSelected}
-                deleteIngredient={this.deleteIngredient}
-                handleChangeChecked={this.handleChangeChecked}
-                addIngredient={this.addIngredient}
+                //handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
+                //ingredientsSelected={this.state.ingredientsSelected}
+                //deleteIngredient={this.deleteIngredient}
+                //handleChangeChecked={this.handleChangeChecked}
+                //addIngredient={this.addIngredient}
                 user={this.state.user}
-                recipes={this.state.recipes}
-                redirectToRecipes={this.state.redirectToRecipes}
+                //recipes={this.state.recipes}
+                //redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />
           {/* <Route exact path="/menu" render={() => <Menu user={this.state.user}/>} /> */}
           <Route
+          exact
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
           />
           <Route
+          exact
             path="/login"
             render={() => <Login getUser={this.getUser} />}
           />
@@ -236,8 +239,8 @@ class App extends Component {
             path="/editUser"
             render={() => (<EditUser user={this.state.user} getUser={this.getUser}/> )}
           />
-          <Route path="/menu" render={() => <Menu user={this.state.user} />} />
-          <Route path="/converter" render={() => <Converter />} />
+          <Route exact path="/menu" render={() => <Menu user={this.state.user} />} />
+          <Route exact path="/converter" render={() => <Converter />} />
         </Switch>
       </div>
     );

@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
-import ingredients from '../ingredients.json';
+//import ingredients from '../ingredients.json';
 
 import IngredientBoxDelete from './ingredientBoxDelete';
 
-export default class ingredientFormDelete extends Component {
+export default class IngredientFormDelete extends Component {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     ingredients,
+  //     searchArray: null,
+  //     search: ""
+  //   }
+  // }
   render() {
     console.log(this.props, 'Props en deleeeeeeteeeeeee')
-    var ingredientsSelected = this.props.name;
-    console.log(ingredientsSelected, 'ingredientsSelected en deleteForm')
+    var ingredientsSelected = this.props.ingredientsSelected;
+    var title = this.props.ingredientsSelected
+    ? (<h3>No hay ingredientes Seleccionados</h3>)
+    : (<h3>Ingredientes Seleccionados</h3>)
+
+    console.log(ingredientsSelected, 'props-----ingredientsSelected en deleteForm')
     return (
       <div className="ingredient-form-delete">
-        <h2>Ingredients for use</h2>
+      {title}
         <form id="advancedSearchForm" onSubmit={this.props.handleFormAdvancedSubmit}>
           {(ingredientsSelected
             && ingredientsSelected.map((ingredient, index) => {
               return (
+              
                 <IngredientBoxDelete
                   ing={ingredient}
                   key={index}

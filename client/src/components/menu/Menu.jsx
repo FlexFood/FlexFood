@@ -35,9 +35,7 @@ export default class Menu extends Component {
 
 
   //LÓGICA DE --HEALTHLABEL-- 
-  //PARA MANDAR AL SERVICE
-  //en app  handleChangeChecked
-  //toggle en el array helathlabels
+  //Cambiar por el ternario de Search
 
   handleChange = e => {
 
@@ -57,32 +55,7 @@ export default class Menu extends Component {
     this.setState({ ...this.state, healthLabels });
   };
 
-  //LÓGICA DEL --INGRSIENT-SELECTED--
-
-  // addIngredientSelected = inputLabel => {
-  //   console.log(inputLabel, 'Pasa por añadir ingrSeleccionado')
-  //   let ingredientsSelected = this.state.ingredientsSelected;
-
-  //   //La idea es que solo pushee si no hay otro igual en seleccionados
-  //   if (!this.state.ingredientsSelected
-  //     .find(ingredient => ingredient === inputLabel))
-  //     ingredientsSelected.push(inputLabel);
-  //   this.setState({
-  //     ingredientsSelected
-  //   });
-  // };
-
-  // deleteIngredientSelected = event => {
-  //   console.log(event, this.state.ingredientsSelected);
-  //   var ingredientsSelected = this.state.ingredientsSelected;
-  //   ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-
-  //   //QUE ACTUALICE EN APP
-
-  //   this.setState({
-  //     ingredientsSelected
-  //   });
-  // };
+  
 
 
 
@@ -150,6 +123,10 @@ export default class Menu extends Component {
 
     var menuSave = this.state.menuSave ? (
       <MenuSave 
+      healthLabels= {this.state.healthLabels}
+      days= {this.state.days}
+      name= {this.state.name}
+      userID= {this.props.user._id}
       recipesLunch={this.state.recipesLunch}
       recipesDinner={this.state.recipesDinner} />
     ) : (

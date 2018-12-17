@@ -11,6 +11,7 @@ export default class HealthLabels extends Component {
   }
 
   checkedLabelsInit = () => {
+    if(this.props.user)
     this.props.user.healthLabels.map(label => {
       label = `${label}`;
       this.setState({ ...this.state, [label]: "checked" });

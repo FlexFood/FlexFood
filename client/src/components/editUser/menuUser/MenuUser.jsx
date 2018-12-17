@@ -3,22 +3,18 @@ import HealthLabels from "../healthLabels";
 //import DietLabels from "../dietLabels";
 import AuthService from "../../services/AuthService";
 
-export default class EditUser extends Component {
+export default class MenuUser extends Component {
   constructor() {
     super();
     this.state = {
       user: null,
-      healthLabels: [],
-      dietLabels: []
+      menus: [],
     };
     this.authService = new AuthService();
   }
-
-  //GET PARA SACAR LOS MEALS DEL USER
-  //LOGIN- ME ASEGURO DE Q ME CTUALICE 
-  //DESPUES DE HSBER GUARDARDO UNA
   
 
+  //GUARDA LAS ETIQUETAS POR DEFECTO
   handleFormSubmit = e => {
     e.preventDefault();
     const { healthLabels, dietLabels } = this.state;

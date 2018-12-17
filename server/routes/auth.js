@@ -4,11 +4,15 @@ const authRoutes = express.Router();
 const User = require("../models/User");
 const uploadCload = require("../config/cloudinary");
 
+
+//SI SALEN MUCHAS AQUI LO PODEMOS PASAR A OTRO HOJA DE RUTA 
+const Menu = require("../models/Menu");
+
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-authRoutes.post("/login", function(req, res, next) {
-  passport.authenticate("local", function(err, user, info) {
+authRoutes.post("/login", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
     if (err) {
       return res.status(500).json({ message: "Error login" });
     }
@@ -16,7 +20,7 @@ authRoutes.post("/login", function(req, res, next) {
       return res.status(500).json({ message: "Error login" });
     }
 
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         return res.status(500).json({ message: "Error login" });
       }
@@ -82,13 +86,27 @@ authRoutes.get("/loggedin", (req, res) => {
 });
 
 authRoutes.post("/edit", (req, res) => {
-  let update = {healthLabels,dietLabels} = req.body
+  let update = { healthLabels, dietLabels } = req.body
 
-  User.findByIdAndUpdate(req.user._id, update,{new:true})
-  .then(user=>{
-    res.status(200).json(user);
-  })
-  .catch(err => console.log("ERROR AL ATUALZAR EL USUARIO", err));
+  User.findByIdAndUpdate(req.user._id, update, { new: true })
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(err => console.log("ERROR AL ATUALZAR EL USUARIO", err));
+
+});
+
+authRoutes.post("/menu", (req, res) => {
+  console.log('Ya en server', req.body)
+
+  const newMenu = new Menu(req.body);
+  console.log(newMenu);
+
+  newMenu.save()
+    .then(menu => {
+      console.log("GUARDADO")
+    })
+    .catch(err => console.log(err))
 
 });
 
