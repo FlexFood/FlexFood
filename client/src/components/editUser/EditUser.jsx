@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
-//import DietLabels from "../dietLabels";
 import AuthService from "../../services/AuthService";
-
+import "./EditUser.css";
 export default class EditUser extends Component {
   constructor() {
     super();
@@ -50,12 +49,13 @@ export default class EditUser extends Component {
     return this.state.user ? 
 
      (
-      <div>
-        <div>
-          <h3>Perfil de {this.state.user.username}</h3>
+      <div id="profile">
+      <div id="profile-container"></div>
+        <div id="user-container">
+          <h3>{this.state.user.username}'s profile</h3>
           <img src={this.state.user.pictureUrl} alt="userImg"/>
         </div>
-        <form onSubmit={this.handleFormSubmit}>
+        <form id="user-form" onSubmit={this.handleFormSubmit}>
           <HealthLabels handleChange={this.handleChange} user={this.state.user}
           healthLabels={this.healthLabels}
           />
