@@ -82,7 +82,7 @@ export default class AdvancedSearch extends Component {
     
     //API
 
-    handleFormAdvancedSubmit = e => {
+    handleFormSubmit = e => {
         e.preventDefault();
     
         console.log('Pasa por handleFormAdvSubm en App')
@@ -116,11 +116,11 @@ export default class AdvancedSearch extends Component {
 
 
     render() {
-        if (this.props.redirectToRecipes) {
-            return <Redirect to="/recipes" />
-        }
+        // if (this.props.redirectToRecipes) {
+        //     return <Redirect to="/recipes" />
+        // }
         return (
-            <form id="advancedSearch">
+            <form id="advancedSearch" onSubmit={this.handleFormSubmit}>
 
                 <section className="left">
                     <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
@@ -135,6 +135,7 @@ export default class AdvancedSearch extends Component {
                     <HealthLabels handleChange={this.handleChange} user={this.props.user} />
                 </section>
 
+                <input type="submit" value="Search yours recipes!!" />
 
             </form>
         )
