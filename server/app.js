@@ -11,8 +11,6 @@ const cors         = require('cors');
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 
-console.log(process.env.BBURL)
-
 mongoose.Promise = Promise;
 mongoose
   .connect(process.env.BBURL)
@@ -48,13 +46,13 @@ app.use(cors({
   origin: ['http://localhost:3000'],
 }));
 
+
+app.use('/', require('./routes/index'));
+
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/public/index.html");
 });
-
-app.use('/', require('./routes/index'));
-
 
 // mongoose
 //   .connect(process.env.MONGODB_URI)
@@ -64,6 +62,5 @@ app.use('/', require('./routes/index'));
 //   .catch(err => {
 //     console.error('Error connecting to mongo', err)
 //   });
-
 
 module.exports = app;

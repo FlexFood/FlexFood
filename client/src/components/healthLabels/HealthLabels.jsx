@@ -44,6 +44,7 @@ export default class HealthLabels extends Component {
       <div id="health-labels">
         <div id="diets">
           <h2>Diets</h2>
+          <hr id="line-health"/>
           <label>
             <input
               type="checkbox"
@@ -86,7 +87,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="high-fiber"
               checked={this.state["high-fiber"]}
               onChange={e => this.props.handleChange(e)}
@@ -97,7 +98,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="high-protein"
               checked={this.state["high-protein"]}
               onChange={e => this.props.handleChange(e)}
@@ -108,7 +109,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="low-carb"
               checked={this.state["low-carb"]}
               onChange={e => this.props.handleChange(e)}
@@ -119,7 +120,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="low-fat"
               checked={this.state["low-fat"]}
               onChange={e => this.props.handleChange(e)}
@@ -130,7 +131,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="low-sodium"
               checked={this.state["low-sodium"]}
               onChange={e => this.props.handleChange(e)}
@@ -167,7 +168,7 @@ export default class HealthLabels extends Component {
           <label>
             <input
               type="checkbox"
-              name="dietLabels"
+              name="healthLabels"
               value="balanced"
               checked={this.state["balanced"]}
               onChange={e => this.props.handleChange(e)}
@@ -176,9 +177,10 @@ export default class HealthLabels extends Component {
             Balanced
           </label>
         </div>
-        <hr id="line-health"/>
+        
         <div id="allergies">
         <h2>Allergies</h2>
+        <hr id="line-health"/>
         <label>
             <input
               type="checkbox"

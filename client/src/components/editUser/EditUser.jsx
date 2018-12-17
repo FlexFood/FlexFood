@@ -8,27 +8,26 @@ export default class EditUser extends Component {
     this.state = {
       user: null,
       healthLabels: [],
-      dietLabels: []
     };
     this.authService = new AuthService();
   }
-  
 
   handleFormSubmit = e => {
     e.preventDefault();
     const { healthLabels, dietLabels } = this.state;
-    this.authService.edit({ healthLabels, dietLabels })
-    .then(user => {
-      this.props.getUser(user)
-      this.setState({ ...this.state, user: user.data },()=>console.log("estado",this.state,"user",user));
+    this.authService.edit({ healthLabels, dietLabels }).then(user => {
+      this.props.getUser(user);
+      this.setState({ ...this.state, user: user.data }, () =>
+        console.log("estado", this.state, "user", user)
+      );
     });
   };
 
   handleChange = e => {
     const { name, value } = e.target;
     let array = [...this.state[name]];
-    
-    console.log(array)
+
+    console.log(array);
     if (e.target.checked) {
       array.push(value);
       this.setState({ ...this.state, [name]: array });
@@ -39,29 +38,41 @@ export default class EditUser extends Component {
   };
 
   render() {
-
-
-    if(!this.state.user && this.props && this.props.user) {
-      console.log(this.props.user,'Setteando por primera vez desde App')
-      this.setState({ ...this.state, user: this.props.user, healthLabels: this.props.user.healthLabels });
+    if (!this.state.user && this.props && this.props.user) {
+      console.log(this.props.user, "Setteando por primera vez desde App");
+      this.setState({
+        ...this.state,
+        user: this.props.user,
+        healthLabels: this.props.user.healthLabels
+      });
     }
 
-    return this.state.user ? 
-
-     (
+    return this.state.user ? (
       <div id="profile">
-      <div id="profile-container"></div>
         <div id="user-container">
-          <h3>{this.state.user.username}'s profile</h3>
-          <img src={this.state.user.pictureUrl} alt="userImg"/>
+          <div className="aux-container">
+            <h2>{this.state.user.username}'s profile</h2>
+            <hr id="line-user" />
+            <img src={this.state.user.pictureUrl} alt="userImg" />
+          </div>
+        </div>
+        <div id="menu-user-container">
+          <div className="aux-container">
+            <h2>{this.state.user.username}'s menus</h2>
+            <hr id="line-user" />
+          </div>
         </div>
         <form id="user-form" onSubmit={this.handleFormSubmit}>
-          <HealthLabels handleChange={this.handleChange} user={this.state.user}
-          healthLabels={this.healthLabels}
+          <HealthLabels
+            handleChange={this.handleChange}
+            user={this.state.user}
+            healthLabels={this.healthLabels}
           />
-          <input type="submit" value="Enviar" />
+          <input id="profile-btn" type="submit" value="Send" />
         </form>
       </div>
-    ) :  (<p>Loading...</p>)
+    ) : (
+      <p>Loading...</p>
+    );
   }
 }

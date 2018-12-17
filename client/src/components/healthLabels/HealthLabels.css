@@ -1,5 +1,4 @@
 #health-labels {
-  background-color: rgb(224, 224, 224);
 }
 #health-labels h2 {
   color:rgb(97, 97, 97);
@@ -11,7 +10,7 @@
   align-items: center;
   width: 10vw;
   height: 4vh;
-  margin: 1vh;
+  margin: 0.5vh;
   background-color: rgb(238, 238, 238);
   color: rgb(97, 97, 97);
   transition: 1s;
@@ -24,20 +23,18 @@
   width: 25vw;
   display: flex;
   flex-wrap: wrap;
-  padding: 3vh;
   justify-content: space-around;
 }
 #allergies {
   width: 25vw;
   display: flex;
   flex-wrap: wrap;
-  padding: 3vh;
   justify-content: space-around;
 }
 #line-health {
   
-  width: 20vw;
-  margin: 0 auto;
+  width: 22.3vw;
+  margin: 1vh auto;
   padding: 0;
   border: 0.5px solid rgb(179, 179, 179);
 }

@@ -6,7 +6,6 @@ const userSchema = new Schema({
   password: String,
   pictureUrl: {type: String, default:"https://res.cloudinary.com/dnuwv52dc/image/upload/v1544448587/react/husband.png"},
   healthLabels: [{type: String, enum: ['alcohol-free','crustacean-free','dairy-free','egg-free','fish-free','gluten-free','kosher','low-potassium','low-sugar','paleo','penaut-free','pescatarian','pork-free','soy-free','sugar-conscisious','tree-nut-free','vegetarian','vegan']}],
-  dietLabels: [{type: String, enum: ['balanced','high-fiber','high-protein','low-carb','low-fat','low-sodium']}],
   favouriteRecipes: [{ type : Schema.Types.ObjectId, ref: 'Recipe' }]
 }, {
   timestamps: {

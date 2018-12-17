@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 //import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
 //import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
-import HealthLabels from '../healthLabels';
-import MenuSave from './menuSave'
-
+import HealthLabels from "../healthLabels";
+import MenuSave from "./menuSave";
+import "./Menu.css";
 
 import EdamamService from "../../services/EdamamService";
 
@@ -16,9 +16,9 @@ export default class Menu extends Component {
       //API
       days: 5,
       //ingredientsSelected: [],  //ingredientForm component
-      healthLabels: [], //labelInitUser // Por defecto lo del user 
+      healthLabels: [], //labelInitUser // Por defecto lo del user
       menuSave: false
-    }
+    };
     this.edamamService = new EdamamService();
   }
 
@@ -31,25 +31,22 @@ export default class Menu extends Component {
     this.setState({
       healthLabels
     });
-  }
+  };
 
-
-  //LÓGICA DE --HEALTHLABEL-- 
+  //LÓGICA DE --HEALTHLABEL--
   //PARA MANDAR AL SERVICE
   //en app  handleChangeChecked
   //toggle en el array helathlabels
 
   handleChange = e => {
-
     let inputLabel = e.target.value;
     let healthLabels = this.state.healthLabels;
 
     if (!healthLabels.some(label => label === inputLabel)) {
-      console.log('No hay etiqueta, la añado')
+      console.log("No hay etiqueta, la añado");
       healthLabels.push(inputLabel);
-    }
-    else {
-      console.log('Hay etiqueta, la quito')
+    } else {
+      console.log("Hay etiqueta, la quito");
       healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
     }
 
@@ -84,9 +81,7 @@ export default class Menu extends Component {
   //   });
   // };
 
-
-
-  ///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO 
+  ///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO
   // handleChangeChecked = e => {
   //   const { name, value } = e.target;
   //   let array = [...this.state[name]];
@@ -100,42 +95,33 @@ export default class Menu extends Component {
   //   }
   // };
 
-
-
-
-
-
-
-
   //API
-  
+
   handleFormMealSubmit = e => {
     e.preventDefault();
-    
+
     let { days, healthLabels } = this.state;
-    
+
     this.edamamService
-    .menuLunchSearch({ days, healthLabels })
-    .then(recipesLunch => {
-      console.log(recipesLunch, "recipes for LUNCH")
-      this.setState({
-        ...this.state,
-        recipesLunch: recipesLunch.data
-      });
-      this.edamamService
-      .menuDinnerSearch({ days, healthLabels })
-        .then(recipesDinner => {
-          console.log(recipesDinner, "recipes for DINNER")
-          this.setState({
-            ...this.state,
-            recipesDinner: recipesDinner.data,
-            menuSave: true
+      .menuLunchSearch({ days, healthLabels })
+      .then(recipesLunch => {
+        console.log(recipesLunch, "recipes for LUNCH");
+        this.setState({
+          ...this.state,
+          recipesLunch: recipesLunch.data
+        });
+        this.edamamService
+          .menuDinnerSearch({ days, healthLabels })
+          .then(recipesDinner => {
+            console.log(recipesDinner, "recipes for DINNER");
+            this.setState({
+              ...this.state,
+              recipesDinner: recipesDinner.data,
+              menuSave: true
+            });
           });
-        })
-
-    });
+      });
   };
-
 
   handleChangeName = e => {
     const { value } = e.target;
@@ -147,56 +133,72 @@ export default class Menu extends Component {
   };
 
   render() {
-
     var menuSave = this.state.menuSave ? (
-      <MenuSave 
-      recipesLunch={this.state.recipesLunch}
-      recipesDinner={this.state.recipesDinner} />
+      <MenuSave
+        recipesLunch={this.state.recipesLunch}
+        recipesDinner={this.state.recipesDinner}
+      />
     ) : (
       ""
     );
 
     return (
       <div id="menu">
-
-      {menuSave}
-
-        <h2>Menu {this.state.name}</h2>
-
-
         <form id="form-menu" onSubmit={this.handleFormMealSubmit}>
-
-          <section className="left">
-            <input id="name-menu"
+          <div className="container-menu">
+          <div className="aux-menu-container"></div>
+            <h2>Menu: {this.state.name}</h2>
+            <hr className="line" />
+            <label className="labels-menu">Menu's name</label>
+            <input
+              id="name-menu"
+              placeholder="
+              Rename your menu..."
               type="text"
-              placeholder="Menu's name..."
               onChange={e => this.handleChangeName(e)}
             />
-            <p>Number of days</p>
-            <select id="days-menu"
+            <label className="labels-menu">Number of days</label>
+            <select
+              id="days-menu"
               // placeholder="Menu's days [1-7]"
               onChange={e => this.handleChangeDays(e)}
             >
-              <option type="number" value="1">1</option>
-              <option type="number" value="2">2</option>
-              <option type="number" value="3">3</option>
-              <option type="number" value="4">4</option>
+              <option type="number" value="1">
+                1
+              </option>
+              <option type="number" value="2">
+                2
+              </option>
+              <option type="number" value="3">
+                3
+              </option>
+              <option type="number" value="4">
+                4
+              </option>
+              <option type="number" value="5">
+                5
+              </option>
+              <option type="number" value="6">
+                6
+              </option>
+              <option type="number" value="7">
+                7
+              </option>
             </select>
-          </section>
-          <section className="center">
+            <p>calories/range || excluded</p>
+          </div>
+          <div className="container-menu">
+            <HealthLabels
+              handleChange={this.handleChange}
+              user={this.props.user}
+            />
+            <input type="submit" value="Search yours weekly menu!!" />
             {/* <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
             <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} /> */}
-            <p>calories/range || excluded</p>
-          </section>
-          <section className="rigth">
-            <HealthLabels handleChange={this.handleChange} user={this.props.user} />
-          </section>
-          <input type="submit" value="Search yours weekly menu!!" />
+          </div>
         </form>
-
-
+        {menuSave}
       </div>
-
-    )
+    );
   }
 }

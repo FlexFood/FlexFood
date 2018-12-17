@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './AdvancedSearchForm.css';
 import { Link } from "react-router-dom";
 import HealthLabels from "../../healthLabels";
-import DietLabels from "../../dietLabels";
 import IngredientBoxDelete from "../ingredientBox/ingredientBoxDelete";
 
 export default class AdvancedSearchForm extends Component {
@@ -27,7 +26,6 @@ export default class AdvancedSearchForm extends Component {
             }))}
         </div>
         <HealthLabels handleChange={this.props.handleChange} user={this.props.user} />
-        <DietLabels handleChange={this.props.handleChange} />
         <input type="submit" value="Buscar" />
       </form>
     )
