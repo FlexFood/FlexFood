@@ -19,7 +19,6 @@ export default class AdvancedSearch extends Component {
             ingredientsSelected: [],
             search: "",
             healthLabels: [],
-            dietLabels: []
         }
 
         this.edamamService = new EdamamService()

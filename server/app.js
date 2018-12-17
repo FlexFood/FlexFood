@@ -10,11 +10,10 @@ const cors         = require('cors');
 
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
-    
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/server', {useMongoClient: true})
+  .connect(process.env.BBURL)
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -47,7 +46,21 @@ app.use(cors({
   origin: ['http://localhost:3000'],
 }));
 
+
 app.use('/', require('./routes/index'));
 
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+// mongoose
+//   .connect(process.env.MONGODB_URI)
+//   .then(x => {
+//     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+//   })
+//   .catch(err => {
+//     console.error('Error connecting to mongo', err)
+//   });
 
 module.exports = app;

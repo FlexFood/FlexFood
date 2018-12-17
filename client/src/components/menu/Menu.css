@@ -1,0 +1,78 @@
+#menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5vh;
+}
+#menu h2 {
+  color: rgb(97, 97, 97);
+  width: 25vw;
+  margin: 0 2.5vh;
+}
+#form-menu {
+  width: 80vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-menu {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  width: 25vw;
+  padding: 2.5vh;
+  /* margin: 8vh 8vw; */
+  background-color: rgb(224, 224, 224);
+}
+.aux-manu-container {
+  padding: 2.5vh;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  width: 25vw;
+}
+.line {
+  width: 22.3vw;
+  margin: 1vh auto;
+  padding: 0;
+  border: 0.5px solid rgb(179, 179, 179);
+}
+.labels-menu {
+  margin: 2.5vh 0 0.5vh 2.5vh;
+  color: rgb(97, 97, 97);
+}
+#name-menu {
+  display: flex;
+  align-items: center;
+  height: 4vh;
+  margin: 0 2.5vh 2.5vh 2.5vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+}
+#days-menu {
+  display: flex;
+  align-items: center;
+  height: 4vh;
+  margin: 0 2.5vh 2.5vh 2.5vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+
+}
+#submit-menu{
+  text-align: center;
+  height: 4vh;
+  margin: 1vh 2.5vh;
+  background-color: rgb(194, 194, 194);
+  color: rgb(97, 97, 97);
+  transition: 1s;
+  border: none;
+  font-size: 14px;
+}
+
+#submit-menu:hover {
+  color: black;
+  background-color: rgb(238, 238, 238);
+}

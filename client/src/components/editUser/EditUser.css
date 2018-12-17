@@ -1,0 +1,75 @@
+#profile {
+  display: flex;
+  justify-content: space-around;
+  padding: 4vh 3vw;
+}
+#user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+  padding: 2.5vh;
+  background-color: rgb(224, 224, 224);
+}
+
+#user-container img {
+  margin-top: 5vh;
+  height: 15vh;
+  border-radius: 7.5vh;
+
+}
+#user-form {
+  width: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(224, 224, 224);
+  padding: 2vh;
+}
+#profile-btn {
+  text-align: center;
+  width: 10vw;
+  height: 4vh;
+  margin-top: 1vh;
+  background-color: rgb(194, 194, 194);
+  color: rgb(97, 97, 97);
+  transition: 1s;
+  border: none;
+  font-size: 14px;
+}
+#profile-btn:hover {
+  color: black;
+  background-color: rgb(238, 238, 238);
+}
+#menu-user-container {
+  width: 25vw;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  background-color: rgb(224, 224, 224);
+  padding: 2vh;
+}
+#user-container h2 {
+  width: 25vw;
+  color: rgb(97, 97, 97);
+  margin: 0 2.5vh;
+}
+#line-user {
+  width: 22.3vw;
+  margin: 1vh auto;
+  padding: 0;
+  border: 0.5px solid rgb(179, 179, 179);
+}
+#menu-user-container h2 {
+  width: 25vw;
+  color: rgb(97, 97, 97);
+  margin: 0 2.5vh;
+}
+.aux-container{
+  width: 25vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
