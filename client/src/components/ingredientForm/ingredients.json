@@ -1,54 +1,247 @@
 [
     {
       "name": "apple", 
-      "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
+      "image": "🍎"
     },
     {
-        "name": "tomato", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "beans", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "cucumber", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "rize", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "potatoes", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "chocolat", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "lettuce", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "carrot", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "tuna", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "chiken", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "beer", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      },
-      {
-        "name": "honey", 
-        "image": "https://res.cloudinary.com/dnuwv52dc/image/upload/v1544570345/react/apple.svg"
-      }
+      "name": "grapes", 
+      "image": "🍇"
+    },
+    {
+      "name": "melon", 
+      "image": "🍈"
+    },
+    {
+      "name": "watermelon", 
+      "image": "🍉"
+    },
+    {
+      "name": "orange", 
+      "image": "🍊"
+    },
+    {
+      "name": "lemon", 
+      "image": "🍋"
+    },
+    {
+      "name": "banana", 
+      "image": "🍌"
+    },
+    {
+      "name": "pineapple", 
+      "image": "🍍"
+    },
+    {
+      "name": "pear", 
+      "image": "🍐"
+    },
+    {
+      "name": "peach", 
+      "image": "🍑"
+    }, 
+    {
+      "name": "cherry", 
+      "image": "🍒"
+    }, 
+    {
+      "name": "strawberry", 
+      "image": "🍓"
+    },
+    {
+      "name": "kiwi", 
+      "image": "🥝"
+    },
+    {
+      "name": "tomato", 
+      "image": "🍅"
+    }, 
+    {
+      "name": "coconut", 
+      "image": "🥥"
+    }, 
+    {
+      "name": "avocado", 
+      "image": "🥑"
+    }, 
+    {
+      "name": "eggplant", 
+      "image": "🍆"
+    },
+    {
+      "name": "carrot", 
+      "image": "🥕"
+    },
+    {
+      "name": "corn", 
+      "image": "🌽"
+    },
+    {
+      "name": "pepper", 
+      "image": "🌶️"
+    },
+    {
+      "name": "cucumber", 
+      "image": "🥒"
+    },
+    {
+      "name": "broccoli", 
+      "image": "🥦"
+    },
+    {
+      "name": "mushroom", 
+      "image": "🍄"
+    },
+    {
+      "name": "peanut", 
+      "image": "🥜"
+    },
+    {
+      "name": "chestnut", 
+      "image": "🌰"
+    },
+    {
+      "name": "potatoe", 
+      "image": "🥔"
+    },
+    {
+      "name": "lettuce", 
+      "image": "🥗"
+    },
+    {
+      "name": "tomato sauce", 
+      "image": "🥫"
+    },
+    {
+      "name": "pumpkin", 
+      "image": "🎃"
+    },
+    {
+      "name": "parsley", 
+      "image": "☘️"
+    },
+    {
+      "name": "bread", 
+      "image": "🍞"
+    },
+    {
+      "name": "rice", 
+      "image": "🍚"
+    },
+    {
+      "name": "noodles", 
+      "image": "🍜"
+    },
+    {
+      "name": "pasta", 
+      "image": "🍝"
+    },
+    {
+      "name": "cheese", 
+      "image": "🧀"
+    },
+    {
+      "name": "egg", 
+      "image": "🥚"
+    },
+    {
+      "name": "milk", 
+      "image": "🥛"
+    },
+    {
+      "name": "beer", 
+      "image": "🍺"
+    },
+    {
+      "name": "ham", 
+      "image": "🍖"
+    },
+    {
+      "name": "chicken", 
+      "image": "🍗"
+    },
+    {
+      "name": "pollos hermanos", 
+      "image": "🐥&🐥"
+    },
+    {
+      "name": "bacon", 
+      "image": "🥓"
+    },
+    {
+      "name": "sausage", 
+      "image": "🌭"
+    },
+    {
+      "name": "meet", 
+      "image": "🥩"
+    },
+    {
+      "name": "pork", 
+      "image": "🐖"
+    },
+    {
+      "name": "lamb", 
+      "image": "🐑"
+    },
+    {
+      "name": "beef", 
+      "image": "🐄"
+    },
+    {
+      "name": "rabbit", 
+      "image": "🐇"
+    },
+    {
+      "name": "turkey", 
+      "image": "🦃"
+    },
+    {
+      "name": "duck", 
+      "image": "🦆"
+    },
+    {
+      "name": "surimi", 
+      "image": "🍥"
+    },
+    {
+      "name": "fish", 
+      "image": "🐟"
+    },
+    {
+      "name": "octopus", 
+      "image": "🐙"
+    },
+    {
+      "name": "crab", 
+      "image": "🦀"
+    },
+    {
+      "name": "prawn", 
+      "image": "🦐"
+    },
+    {
+      "name": "squid", 
+      "image": "🦑"
+    },
+    {
+      "name": "ice-cream", 
+      "image": "🍦"
+    },
+    {
+      "name": "chocolate", 
+      "image": "🍫"
+    },
+    {
+      "name": "rock'n roll", 
+      "image": "🤟🏽"
+    },
+    {
+      "name": "honey", 
+      "image": "🍯"
+    }, 
+    {
+      "name": "wine", 
+      "image": "🍷"
+    }  
+    
 ]

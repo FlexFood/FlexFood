@@ -95,6 +95,7 @@ export default class AdvancedSearch extends Component {
             console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
             return;
         }
+        
 
         this.edamamService
             .advancedSearch({ ingredientsSelected, healthLabels })
