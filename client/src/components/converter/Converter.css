@@ -1,0 +1,76 @@
+#converter{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:7vh;
+}
+#aux-converter{
+  width: 90vw;
+  height: 70vh;
+  display: flex;
+  justify-content: space-around;
+}
+.block-converter{
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  padding: 2.5vh;
+  background-color: rgb(224, 224, 224);
+}
+.block-converter h2 {
+  width: 25vw;
+  color: rgb(97, 97, 97);
+  margin: 0 2.5vh;
+}
+.block-converter table{
+  color: rgb(97, 97, 97);
+}
+.block-converter label{
+  margin: 0 0 0vh 2.5vh;
+  color: rgb(97, 97, 97);
+}
+.block-converter form{
+  display: flex;
+  flex-direction: column;
+}
+.block-converter input{
+  height: 4vh;
+  margin: 0 2.5vh 0.5vh 2.5vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+}
+.block-converter button{
+  height: 4vh;
+  margin: 0 2.5vh 0.5vh 2.5vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+  transition: 0.5s;
+}
+#add-converter-btn:hover{
+  background-color: rgb(97, 97, 97);
+  color: rgb(238, 238, 238);
+}
+.block-converter button:hover{
+  background-color: rgb(255, 138, 138);
+  color: rgb(0, 0, 0);
+}
+.space-b{
+  justify-content: space-between;
+}
+.block-converter table{
+  height: 4vh;
+  margin: 0 2.5vh 0.5vh 2.5vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+}
+.block-converter table thead{
+  font-weight: bold;
+}
+
+.block-converter table tbody{
+  background-color: rgb(255, 255, 255);  
+}
