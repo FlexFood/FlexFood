@@ -97,9 +97,10 @@ authRoutes.post("/edit", (req, res) => {
 });
 
 authRoutes.post("/menu", (req, res) => {
-  console.log('Ya en server', req.body)
-
-  const newMenu = new Menu(req.body);
+console.log(req.body)
+let menu = req.body
+console.log(menu)
+  const newMenu = new Menu(menu);
   console.log(newMenu);
 
   newMenu.save()
@@ -107,6 +108,19 @@ authRoutes.post("/menu", (req, res) => {
       console.log("GUARDADO")
     })
     .catch(err => console.log(err))
+
+});
+
+authRoutes.get("/menus", (req, res) => {
+
+  console.log(req.user._id);
+
+  Menu.find({owner: req.user._id})
+    .then(menus => {
+      console.log(menus, 'respuesto mongo')
+      res.status(200).json(menus);
+    })
+    .catch(err => console.log("ERROR AL ATUALZAR EL USUARIO", err));
 
 });
 

@@ -41,9 +41,17 @@ class AuthService {
   }
 
   saveMenu = (menu) => {
-    return this.service.post('/menu', menu)
+    
+    return this.service.post('/menu', menu,{ headers: {
+      "Content-Type": "application/json"
+    }})
       .then(response => response.data);
   }
+
+  getUserMenus = () => {
+    return this.service.get('/menus')
+      .then(response => response.data)
+  };
 
 }
 

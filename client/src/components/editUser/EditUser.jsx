@@ -10,14 +10,21 @@ export default class EditUser extends Component {
       healthLabels: [],
     };
     this.authService = new AuthService();
+
   }
+
+  getUserMenus = () => {
+    this.authService
+      .getUserMenus()
+      .then(menus => this.setState({ ...this.state, menus }));
+  };
 
   //GET PARA SACAR LOS MEALS DEL USER
   //LOGIN- ME ASEGURO DE Q ME CTUALICE 
   //DESPUES DE HSBER GUARDARDO UNA
-  
 
-  handleFormSubmit = e => {
+
+  handleFormHealthLabelsSubmit = e => {
     e.preventDefault();
     const { healthLabels, dietLabels } = this.state;
     this.authService.edit({ healthLabels, dietLabels }).then(user => {
@@ -28,6 +35,7 @@ export default class EditUser extends Component {
     });
   };
 
+  //CHECKED HEALTHLABELS
   handleChange = e => {
     const { name, value } = e.target;
     let array = [...this.state[name]];
@@ -42,6 +50,7 @@ export default class EditUser extends Component {
     }
   };
 
+//NO FUNCIONA NI EN WILL/DID MOUNT NI EL CONSTRUCTOR
   render() {
     if (!this.state.user && this.props && this.props.user) {
       console.log(this.props.user, "Setteando por primera vez desde App");
@@ -50,6 +59,7 @@ export default class EditUser extends Component {
         user: this.props.user,
         healthLabels: this.props.user.healthLabels
       });
+      this.getUserMenus();
     }
 
     return this.state.user ? (
@@ -67,7 +77,7 @@ export default class EditUser extends Component {
             <hr id="line-user" />
           </div>
         </div>
-        <form id="user-form" onSubmit={this.handleFormSubmit}>
+        <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
           <HealthLabels
             handleChange={this.handleChange}
             user={this.state.user}
@@ -77,7 +87,7 @@ export default class EditUser extends Component {
         </form>
       </div>
     ) : (
-      <p>Loading...</p>
-    );
+        <p>Loading...</p>
+      );
   }
 }

@@ -34,13 +34,14 @@ export default class MenuSave extends Component {
       numberOfDays: this.props.days,
       recipesDinner,
       recipesLunch
-    };
-
-    this.authService.saveMenu(menu).then(menu => {
-      console.log(menu, "GURADADO EN YOUR PROFILE");
-      // this.props.getUser(user)
-      // this.setState({ ...this.state, user: user.data }, () => console.log("estado", this.state, "user", user));
-    });
+    }
+   menu = JSON.stringify(menu)
+    this.authService.saveMenu(menu)
+      .then(menu => {
+        console.log(menu, 'GURADADO EN YOUR PROFILE')
+        // this.props.getUser(user)
+        // this.setState({ ...this.state, user: user.data }, () => console.log("estado", this.state, "user", user));
+      });
 
     //7REDIRECT TO PROFILEEEE
   };

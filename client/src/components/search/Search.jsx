@@ -1,20 +1,50 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
+import EdamamService from "../../services/EdamamService";
 import "./Search.css";
 
+
 export default class Search extends Component {
+  constructor(){
+    super()
+    this.state = {
+      search: ""
+    }
+    this.edamamService = new EdamamService();
+  }
+
+  handleChange = e => {
+    const { value } = e.target;
+    this.setState({ ...this.state, search: value });
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    const search = this.state.search;
+    this.edamamService.getByLabel(search).then(recipes => {
+      console.log(recipes)
+      this.props.setRecipes(recipes)
+      this.setState({
+        ...this.state,
+        recipes: recipes.data,
+        redirectToRecipes: true
+      });
+    });
+  };
+  
+
   render() {
-    if (this.props.redirectToRecipes) {
+    if (this.state.redirectToRecipes) {
       return <Redirect to="/recipes" />;
     }
 
     return (
       <div id="search">
-        <form onSubmit={this.props.handleFormSubmit}>
+        <form onSubmit={this.handleFormSubmit}>
           <input
             id="input-search"
             type="search"
-            onChange={e => this.props.handleChange(e)}
+            onChange={e => this.handleChange(e)}
           />
           <input id="input-submit" type="submit" value="search" />
         </form>

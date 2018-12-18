@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import ReactDOM from 'react-dom';
-import InputRange from 'react-input-range';
 
 import './AdvancedSearch.css'
 
