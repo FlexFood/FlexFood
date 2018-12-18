@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import AuthService from "./services/AuthService.js";
 import { Route, Switch, Redirect } from "react-router-dom";
+import AuthService from "./services/AuthService.js";
 import "./App.css";
-import EdamamService from "./services/EdamamService";
+
+
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -30,9 +31,6 @@ class App extends Component {
     };
 
     this.authService = new AuthService();
-
-    this.edamamService = new EdamamService();
-
     this.fetchUser();
   }
 
@@ -52,84 +50,6 @@ class App extends Component {
       .then(() =>
         this.setState({ ...this.state, user: null, redirectToHome: true })
       );
-  };
-
-  handleFormSubmit = e => {
-    e.preventDefault();
-
-    const search = this.state.search;
-
-    this.edamamService.getByLabel(search).then(recipes => {
-      console.log(recipes)
-      this.setState({
-        ...this.state,
-        recipes: recipes.data,
-        redirectToRecipes: true
-      });
-    });
-  };
-
-  //PARA SETEAR LOS FILTROS
-  // setAdvancedSearch = state => {
-  //   console.log(state, 'Intentando pasar ingrs and healt to App')
-  //   // const { ingredientsSelected, healthLabels } = e.target;
-  //   // this.setState({ ...this.state,  ingredientsSelected, healthLabels});
-  // }
-
-
-
-  // //ESTAS 3 FUERS ESTAN EN FORMS DE INGRS y meal
-  // addIngredient = event => {
-  //   let ingredientsSelected = this.state.ingredientsSelected;
-
-  //   //La idea es que solo pushee si no hay otro igual en seleccionados
-  //   if (
-  //     !this.state.ingredientsSelected.find(ingredient => ingredient === event)
-  //   )
-  //     ingredientsSelected.push(event);
-  //   //QUE ACTUALICE EN APP
-  //   this.setState({
-  //     ingredientsSelected
-  //   });
-  // };
-
-  // handleChangeChecked = e => {
-  //   const { name, value } = e.target;
-  //   let array = [...this.state[name]];
-
-  //   if (e.target.checked) {
-  //     array.push(value);
-  //     this.setState({ ...this.state, [name]: array });
-  //   } else {
-  //     array.splice(array.indexOf(value), 1);
-  //     this.setState({ ...this.state, [name]: array });
-  //   }
-  // };
-
-  // deleteIngredient = event => {
-  //   console.log(event, this.state.ingredientsSelected);
-  //   var ingredientsSelected = this.state.ingredientsSelected;
-  //   ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-
-  //   //QUE ACTUALICE EN APP
-
-  //   this.setState({
-  //     ingredientsSelected
-  //   });
-  // };
-
-  handleFormSubmit = e => {
-    e.preventDefault();
-
-    const search = this.state.search;
-
-    this.edamamService.getByLabel(search).then(recipes => {
-      this.setState({
-        ...this.state,
-        recipes: recipes.data,
-        redirectToRecipes: true
-      });
-    });
   };
 
   setRecipes = recipes => {
@@ -171,11 +91,6 @@ class App extends Component {
   //     });
   // };
 
-  handleChange = e => {
-    const { value } = e.target;
-    this.setState({ ...this.state, search: value });
-  };
-
 
   render() {
     if (this.state && this.state.redirectToHome) {
@@ -198,9 +113,10 @@ class App extends Component {
             render={() => (
 
               <Search
-                handleFormSubmit={this.handleFormSubmit}
-                handleChange={this.handleChange}
-                redirectToRecipes={this.state.redirectToRecipes}
+              setRecipes={this.setRecipes}
+                // handleFormSubmit={this.handleFormSubmit}
+                // handleChange={this.handleChange}
+                // redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />
