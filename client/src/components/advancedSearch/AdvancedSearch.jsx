@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import InputRange from 'react-input-range';
@@ -7,11 +7,11 @@ import './AdvancedSearch.css'
 
 import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
 import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
-import HealthLabels from '../healthLabels'
+import HealthLabels from "../healthLabels";
 //import AdvancedSearchForm from "./advancedSearchForm";
 //import ingredients from '../../ingredients.json';
 
-import EdamamService from '../../services/EdamamService';
+import EdamamService from "../../services/EdamamService";
 
 export default class AdvancedSearch extends Component {
     constructor() {
@@ -27,7 +27,6 @@ export default class AdvancedSearch extends Component {
         }
 
         this.edamamService = new EdamamService()
-
 
     }
 
@@ -51,16 +50,13 @@ export default class AdvancedSearch extends Component {
         });
     };
 
-
     //HEALTHLABELS
     handleChange = e => {
-
         let inputLabel = e.target.value;
         let healthLabels = this.state.healthLabels;
-        (!healthLabels.some(label => label === inputLabel))
+        !healthLabels.some(label => label === inputLabel)
             ? healthLabels.push(inputLabel)
-            : healthLabels.splice(healthLabels.indexOf(inputLabel), 1)
-
+            : healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
 
         this.setState({ ...this.state, healthLabels });
     };
@@ -70,20 +66,19 @@ export default class AdvancedSearch extends Component {
     }
 
     userDefault = healthLabels => {
-        if (this.props.user)
-            healthLabels = this.props.user.healthLabels;
+        if (this.props.user) healthLabels = this.props.user.healthLabels;
         this.setState({
             healthLabels
         });
-    }
+    };
 
     //API
 
     handleFormSubmit = e => {
         e.preventDefault();
 
-        console.log('Pasa por handleFormAdvSubm en App')
-        console.log(this.state)
+        console.log("Pasa por handleFormAdvSubm en App");
+        console.log(this.state);
 
         let { ingredientsSelected, healthLabels } = this.state;
 
@@ -95,63 +90,49 @@ export default class AdvancedSearch extends Component {
             console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
             return;
         }
-        
 
         this.edamamService
             .advancedSearch({ ingredientsSelected, healthLabels })
             .then(recipes => {
-                console.log('Respuesta en front')
-                console.log(recipes)
+                console.log("Respuesta en front");
+                console.log(recipes);
 
-                this.props.setRecipes(recipes.data);
-                    this.setState({
-                        ...this.state,
-                        recipes: recipes.data,
-                        redirectToRecipes: true
-                    });
-
+                this.props.setRecipes(recipes)
+                this.setState({
+                    ...this.state,
+                    recipes: recipes.data,
+                    redirectToRecipes: true
+                });
             });
     };
 
-
     render() {
         if (this.state.redirectToRecipes) {
-            return <Redirect to="/recipes" />;
+            return <Redirect to="/recipes" />
         }
         return (
             <form id="advancedSearch" onSubmit={this.handleFormSubmit}>
-<InputRange
-                            maxValue={20}
-                            minValue={0}
-                            value={this.state.value}
-                            onChange={value => this.setState({ value })} />
-                <section className="left">
-                    <p>CaloriesForDinner</p>
-                    <div className="row">
-                        
-                        <input type="range" min="0" max="10000" />
-                        <input type="range" min="0" max="10000" />
-                    </div>
-                    <p>Time</p>
-                    <div className="row">
-                        <input type="range" min="0" max="10000" />
-                        <input type="range" min="0" max="10000" />
-                    </div>
-                    <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
-                </section>
-                <section className="center">
-                    <IngredientFormDelete
-                        deleteIngredientSelected={this.deleteIngredientSelected}
-                        ingredientsSelected={this.state.ingredientsSelected}
-                    />
-                </section>
-                <section className="rigth">
-                    <HealthLabels handleChange={this.handleChange} user={this.props.user} />
-                </section>
-
-                <input type="submit" value="Search yours recipes!!" />
-
+                <div id="advenced-search-container" >
+                    <section className="advanced-search-box">
+                        <IngredientFormAdd
+                            addIngredientSelected={this.addIngredientSelected}
+                        />
+                    </section>
+                    <section className="advanced-search-box" id="box-submit">
+                        <IngredientFormDelete
+                            deleteIngredientSelected={this.deleteIngredientSelected}
+                            ingredientsSelected={this.state.ingredientsSelected}
+                        />
+                        <input type="submit" value="Search yours recipes!!" id="submit-advanced" />
+                    </section>
+                    <section className="advanced-search-box">
+                        <HealthLabels
+                            handleChange={this.handleChange}
+                            user={this.props.user}
+                        />
+                    </section>
+                </div>
             </form>
-        )
+        );
     }
 }

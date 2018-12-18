@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ingredients from '../ingredients.json';
-
 import IngredientBoxAdd from './ingredientBoxAdd';
+import "./IngredientFormAdd.css"
 
 export default class IngredientFormAdd extends Component {
     constructor() {
@@ -40,13 +40,13 @@ export default class IngredientFormAdd extends Component {
     render() {
         return (
             <div className="ingredient-form-add">
-                <h2>¿Qué tienes en la nevera?</h2>
-
+                <h2>Add your ingredients...</h2>
+                <hr className="line" />
                 <form onSubmit={this.addIngredientFormSubmit} autocomplete="off">
                     <input
-                        id="advancedSearch-bar"
+                        id="advancedSearch-input"
                         type="text"
-                        placeholder="Search"
+                        placeholder="Search..."
                         onChange={this.findIngredients}
                     // Gabiiii: value={this.state.search}
                     />
