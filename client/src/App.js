@@ -52,6 +52,8 @@ class App extends Component {
       );
   };
 
+  //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
+  //CUALQUIER RUTA
   setRecipes = recipes => {
     this.setState({
       ...this.state,

@@ -97,9 +97,10 @@ authRoutes.post("/edit", (req, res) => {
 });
 
 authRoutes.post("/menu", (req, res) => {
-  console.log('Ya en server', req.body)
-
-  const newMenu = new Menu(req.body);
+console.log(req.body)
+let menu = req.body
+console.log(menu)
+  const newMenu = new Menu(menu);
   console.log(newMenu);
 
   newMenu.save()

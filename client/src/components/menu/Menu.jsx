@@ -84,18 +84,27 @@ deleteIngredientSelected = event => {
     this.edamamService
       .menuLunchSearch({ days, healthLabels })
       .then(recipesLunch => {
+        let recipes = recipesLunch.data.map(recipe => {
+          console.log(recipe)
+          delete recipe.recipe['totalNutrients']
+          return ({...recipe})
+        })
         console.log(recipesLunch, "recipes for LUNCH");
         this.setState({
           ...this.state,
-          recipesLunch: recipesLunch.data
+          recipesLunch: recipes
         });
         this.edamamService
           .menuDinnerSearch({ days, healthLabels })
           .then(recipesDinner => {
-            console.log(recipesDinner, "recipes for DINNER");
+            let recipes = recipesDinner.data.map(recipe => {
+              console.log(recipe)
+              delete recipe.recipe['totalNutrients']
+              return ({...recipe})
+            })
             this.setState({
               ...this.state,
-              recipesDinner: recipesDinner.data,
+              recipesDinner: recipes,
               menuSave: true
             });
           });

@@ -37,7 +37,7 @@ export default class MenuSave extends Component {
       recipesDinner,
       recipesLunch
     }
-
+   menu = JSON.stringify(menu)
     this.authService.saveMenu(menu)
       .then(menu => {
         console.log(menu, 'GURADADO EN YOUR PROFILE')
