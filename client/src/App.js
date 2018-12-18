@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-//import EdamamService from "./services/EdamamService";
+import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -31,7 +31,7 @@ class App extends Component {
 
     this.authService = new AuthService();
 
-    //this.edamamService = new EdamamService();
+    this.edamamService = new EdamamService();
 
     this.fetchUser();
   }
@@ -118,51 +118,58 @@ class App extends Component {
   //   });
   // };
 
-  // handleFormSubmit = e => {
-  //   e.preventDefault();
-
-  //   const search = this.state.search;
-
-  //   this.edamamService.getByLabel(search).then(recipes => {
-  //     this.setState({
-  //       ...this.state,
-  //       recipes: recipes.data,
-  //       redirectToRecipes: true
-  //     });
-  //   });
-  // };
-
-  handleFormAdvancedSubmit = e => {
+  handleFormSubmit = e => {
     e.preventDefault();
 
-    console.log('Pasa por handleFormAdvSubm en App')
-    console.log(this.state)
+    const search = this.state.search;
 
-    let { ingredientsSelected, healthLabels } = this.state;
-
-    if (
-      Object.values({ ingredientsSelected, healthLabels }).every(
-        element => !element.length
-      )
-    ) {
-      console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-      return;
-    }
-
-    this.edamamService
-      .advancedSearch({ ingredientsSelected, healthLabels })
-      .then(recipes => {
-        console.log('Respuesta en front')
-        console.log(recipes)
-
-        this.setState({
-          ...this.state,
-          recipes: recipes.data,
-          redirectToRecipes: true
-        });
-
+    this.edamamService.getByLabel(search).then(recipes => {
+      this.setState({
+        ...this.state,
+        recipes: recipes.data,
+        redirectToRecipes: true
       });
+    });
   };
+
+  setRecipes = recipes => {
+    this.setState({
+             ...this.state,
+             recipes: recipes,
+      //         redirectToRecipes: true
+           });
+  }
+  // handleFormAdvancedSubmit = e => {
+  //   e.preventDefault();
+
+  //   console.log('Pasa por handleFormAdvSubm en App')
+  //   console.log(this.state)
+
+  //   let { ingredientsSelected, healthLabels } = this.state;
+
+  //   if (
+  //     Object.values({ ingredientsSelected, healthLabels }).every(
+  //       element => !element.length
+  //     )
+  //   ) {
+  //     console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
+  //     return;
+  //   }
+
+  //   this.edamamService
+  //     .advancedSearch({ ingredientsSelected, healthLabels })
+  //     .then(recipes => {
+  //       console.log('Respuesta en front')
+  //       console.log(recipes)
+
+  //       this.setState({
+  //         ...this.state,
+  //         recipes: recipes.data,
+  //         redirectToRecipes: true
+  //       });
+
+  //     });
+  // };
 
   handleChange = e => {
     const { value } = e.target;
@@ -217,8 +224,9 @@ class App extends Component {
                 //handleChangeChecked={this.handleChangeChecked}
                 //addIngredient={this.addIngredient}
                 user={this.state.user}
+                setRecipes= {this.setRecipes}
                 //recipes={this.state.recipes}
-                //redirectToRecipes={this.state.redirectToRecipes}
+                // redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 //import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
 //import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
+import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
+import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
 import HealthLabels from "../healthLabels";
 import MenuSave from "./menuSave";
 import "./Menu.css";
@@ -15,7 +17,7 @@ export default class Menu extends Component {
       name: Date.now(),
       //API
       days: 5,
-      //ingredientsSelected: [],  //ingredientForm component
+      ingredientsSelected: [],  //ingredientForm component
       healthLabels: [], //labelInitUser // Por defecto lo del user
       menuSave: false
     };
@@ -47,26 +49,30 @@ export default class Menu extends Component {
       console.log("Hay etiqueta, la quito");
       healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
     }
-
-    //const { value } = e.target;
     this.setState({ ...this.state, healthLabels });
   };
 
-  
 
-  ///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO
-  // handleChangeChecked = e => {
-  //   const { name, value } = e.target;
-  //   let array = [...this.state[name]];
+  //LÓGICA DEL --INGRSIENT-SELECTED--
 
-  //   if (e.target.checked) {
-  //     array.push(value);
-  //     this.setState({ ...this.state, [name]: array });
-  //   } else {
-  //     array.splice(array.indexOf(value), 1);
-  //     this.setState({ ...this.state, [name]: array });
-  //   }
-  // };
+  addIngredientSelected = inputLabel => {
+    let ingredientsSelected = this.state.ingredientsSelected;
+    if (!this.state.ingredientsSelected
+        .find(ingredient => ingredient === inputLabel))
+        ingredientsSelected.push(inputLabel);
+    this.setState({
+        ingredientsSelected
+    });
+};
+
+deleteIngredientSelected = event => {
+    var ingredientsSelected = this.state.ingredientsSelected;
+    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+    this.setState({
+        ingredientsSelected
+    });
+};
+
 
   //API
 
@@ -161,7 +167,29 @@ export default class Menu extends Component {
                 7
               </option>
             </select>
-            <p>calories/range || excluded</p>
+            <p>CaloriesForLunch</p> 
+            <div className="row">
+              <input type="range" min="0" max="10000" />
+              <input type="range" min="0" max="10000" />
+            </div>
+            <p>CaloriesForDinner</p> 
+            <div className="row">
+              <input type="range" min="0" max="10000" />
+              <input type="range" min="0" max="10000" />
+            </div>
+            <p>Time</p> 
+            <div className="row">
+              <input type="range" min="0" max="10000" />
+              <input type="range" min="0" max="10000" />
+            </div>
+          </div>
+          <div>
+            <h3>NOT included</h3>
+              <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
+              <IngredientFormDelete
+                        deleteIngredientSelected={this.deleteIngredientSelected}
+                        ingredientsSelected={this.state.ingredientsSelected}
+                    />
           </div>
           <div className="container-menu">
             <HealthLabels

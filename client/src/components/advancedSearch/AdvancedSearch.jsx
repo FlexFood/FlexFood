@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom";
+import ReactDOM from 'react-dom';
+import InputRange from 'react-input-range';
+
 import './AdvancedSearch.css'
 
 import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
@@ -18,7 +21,9 @@ export default class AdvancedSearch extends Component {
             searchArray: null,
             ingredientsSelected: [],
             search: "",
+            value: { min: 2, max: 10 },
             healthLabels: [],
+            redirectToRecipes: false
         }
 
         this.edamamService = new EdamamService()
@@ -28,30 +33,23 @@ export default class AdvancedSearch extends Component {
 
     //LÓGICA DEL --INGRSIENT-SELECTED--
 
-  addIngredientSelected = inputLabel => {
-    console.log(inputLabel, 'Pasa por añadir ingrSeleccionado')
-    let ingredientsSelected = this.state.ingredientsSelected;
+    addIngredientSelected = inputLabel => {
+        let ingredientsSelected = this.state.ingredientsSelected;
+        if (!this.state.ingredientsSelected
+            .find(ingredient => ingredient === inputLabel))
+            ingredientsSelected.push(inputLabel);
+        this.setState({
+            ingredientsSelected
+        });
+    };
 
-    //La idea es que solo pushee si no hay otro igual en seleccionados
-    if (!this.state.ingredientsSelected
-      .find(ingredient => ingredient === inputLabel))
-      ingredientsSelected.push(inputLabel);
-    this.setState({
-      ingredientsSelected
-    });
-  };
-
-  deleteIngredientSelected = event => {
-    console.log(event, this.state.ingredientsSelected);
-    var ingredientsSelected = this.state.ingredientsSelected;
-    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-
-    //QUE ACTUALICE EN APP
-
-    this.setState({
-      ingredientsSelected
-    });
-  };
+    deleteIngredientSelected = event => {
+        var ingredientsSelected = this.state.ingredientsSelected;
+        ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
+        this.setState({
+            ingredientsSelected
+        });
+    };
 
 
     //HEALTHLABELS
@@ -78,56 +76,72 @@ export default class AdvancedSearch extends Component {
             healthLabels
         });
     }
-    
+
     //API
 
     handleFormSubmit = e => {
         e.preventDefault();
-    
+
         console.log('Pasa por handleFormAdvSubm en App')
         console.log(this.state)
-    
+
         let { ingredientsSelected, healthLabels } = this.state;
-    
+
         if (
-          Object.values({ ingredientsSelected, healthLabels }).every(
-            element => !element.length
-          )
+            Object.values({ ingredientsSelected, healthLabels }).every(
+                element => !element.length
+            )
         ) {
-          console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-          return;
+            console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
+            return;
         }
-    
+
         this.edamamService
-          .advancedSearch({ ingredientsSelected, healthLabels })
-          .then(recipes => {
-            console.log('Respuesta en front')
-            console.log(recipes)
-    
-            this.setState({
-              ...this.state,
-              recipes: recipes.data,
-              redirectToRecipes: true
+            .advancedSearch({ ingredientsSelected, healthLabels })
+            .then(recipes => {
+                console.log('Respuesta en front')
+                console.log(recipes)
+
+                this.props.setRecipes(recipes.data);
+                    this.setState({
+                        ...this.state,
+                        recipes: recipes.data,
+                        redirectToRecipes: true
+                    });
+
             });
-    
-          });
-      };
+    };
 
 
     render() {
-        // if (this.props.redirectToRecipes) {
-        //     return <Redirect to="/recipes" />
-        // }
+        if (this.state.redirectToRecipes) {
+            return <Redirect to="/recipes" />;
+        }
         return (
             <form id="advancedSearch" onSubmit={this.handleFormSubmit}>
-
+<InputRange
+                            maxValue={20}
+                            minValue={0}
+                            value={this.state.value}
+                            onChange={value => this.setState({ value })} />
                 <section className="left">
+                    <p>CaloriesForDinner</p>
+                    <div className="row">
+                        
+                        <input type="range" min="0" max="10000" />
+                        <input type="range" min="0" max="10000" />
+                    </div>
+                    <p>Time</p>
+                    <div className="row">
+                        <input type="range" min="0" max="10000" />
+                        <input type="range" min="0" max="10000" />
+                    </div>
                     <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
                 </section>
                 <section className="center">
-                    <IngredientFormDelete 
-                    deleteIngredientSelected={this.deleteIngredientSelected}
-                    ingredientsSelected={this.state.ingredientsSelected}
+                    <IngredientFormDelete
+                        deleteIngredientSelected={this.deleteIngredientSelected}
+                        ingredientsSelected={this.state.ingredientsSelected}
                     />
                 </section>
                 <section className="rigth">
