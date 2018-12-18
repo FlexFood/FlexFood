@@ -48,9 +48,8 @@ class AuthService {
       .then(response => response.data);
   }
 
-  getUserMenus = userId => {
-    console.log(userId)
-    return this.service.post('/menus', userId)
+  getUserMenus = () => {
+    return this.service.get('/menus')
       .then(response => response.data)
   };
 

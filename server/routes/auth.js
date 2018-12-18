@@ -111,5 +111,18 @@ console.log(menu)
 
 });
 
+authRoutes.get("/menus", (req, res) => {
+
+  console.log(req.user._id);
+
+  Menu.find({owner: req.user._id})
+    .then(menus => {
+      console.log(menus, 'respuesto mongo')
+      res.status(200).json(menus);
+    })
+    .catch(err => console.log("ERROR AL ATUALZAR EL USUARIO", err));
+
+});
+
 
 module.exports = authRoutes;

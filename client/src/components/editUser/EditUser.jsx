@@ -13,10 +13,9 @@ export default class EditUser extends Component {
 
   }
 
-  getUserMenus = (userId) => {
-    userId = this.props.user._id;
+  getUserMenus = () => {
     this.authService
-      .getUserMenus(userId)
+      .getUserMenus()
       .then(menus => this.setState({ ...this.state, menus }));
   };
 
