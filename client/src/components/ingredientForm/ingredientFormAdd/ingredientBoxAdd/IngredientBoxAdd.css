@@ -1,0 +1,32 @@
+#ingredient{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4vh;
+  margin: 0.5vh 2vh;
+  background-color: rgb(194, 194, 194);
+  color: rgb(97, 97, 97);
+  transition: 0.5s;
+}
+#ingredient:hover {
+  color: black;
+  background-color: rgb(97, 97, 97);
+}
+#ingredient p{
+  margin-left: 2vh;
+}
+#ingredient button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5vh 2vh;
+  height: 3vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  transition: 0.5s;
+  border: none;
+}
+#ingredient button:hover {
+  color: black;
+  background-color: rgb(194, 194, 194);
+}

@@ -1,0 +1,17 @@
+.ingredient-form-add {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  color: rgb(97, 97, 97);
+}
+.ingredient-form-add h2 {
+  margin: 0 0 1vh 2.2vh;
+}
+#advancedSearch-input {
+  height: 4vh;
+  width: 22.7vw;
+  margin: 0.5vh 2vh 2.5vh 2vh;
+  background-color: rgb(238, 238, 238);
+  color: rgb(97, 97, 97);
+  border: none;
+}

@@ -1,42 +1,42 @@
-import React, { Component } from 'react'
-//import ingredients from '../ingredients.json';
-
-import IngredientBoxDelete from './ingredientBoxDelete';
+import React, { Component } from "react";
+import IngredientBoxDelete from "./ingredientBoxDelete";
+import "./IngredientFormDelete.css";
 
 export default class IngredientFormDelete extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     ingredients,
-  //     searchArray: null,
-  //     search: ""
-  //   }
-  // }
-  render() {
-    console.log(this.props, 'Props en deleeeeeeteeeeeee')
-    var ingredientsSelected = this.props.ingredientsSelected;
-    var title = this.props.ingredientsSelected
-    ? (<h3>No hay ingredientes Seleccionados</h3>)
-    : (<h3>Ingredientes Seleccionados</h3>)
 
-    console.log(ingredientsSelected, 'props-----ingredientsSelected en deleteForm')
+  render() {
+    console.log(this.props, "Props en deleeeeeeteeeeeee");
+    var ingredientsSelected = this.props.ingredientsSelected;
+    var title = ingredientsSelected.length > 0 ? (
+      <h2>Selected ingredients:</h2>
+      ) : (
+        <h2>There are no selected ingredients</h2>
+    );
+
+    console.log(
+      ingredientsSelected,
+      "props-----ingredientsSelected en deleteForm"
+    );
     return (
       <div className="ingredient-form-delete">
-      {title}
-        <form id="advancedSearchForm" onSubmit={this.props.handleFormAdvancedSubmit}>
-          {(ingredientsSelected
-            && ingredientsSelected.map((ingredient, index) => {
+        {title}
+        <hr className="line" />
+        <form
+          id="advancedSearchForm"
+          onSubmit={this.props.handleFormAdvancedSubmit}
+        >
+          {ingredientsSelected &&
+            ingredientsSelected.map((ingredient, index) => {
               return (
-              
                 <IngredientBoxDelete
                   ing={ingredient}
                   key={index}
-                  deleteIngredientSelected={this.props.deleteIngredientSelected} />
-              )
-            }))}
+                  deleteIngredientSelected={this.props.deleteIngredientSelected}
+                />
+              );
+            })}
         </form>
       </div>
-
-    )
+    );
   }
 }

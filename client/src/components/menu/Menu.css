@@ -19,18 +19,16 @@
 .container-menu {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  justify-content: space-between;
   width: 25vw;
   padding: 2.5vh;
-  /* margin: 8vh 8vw; */
   background-color: rgb(224, 224, 224);
 }
 .aux-manu-container {
-  padding: 2.5vh;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   width: 25vw;
+  padding: 2.5vh;
 }
 .line {
   width: 22.3vw;
@@ -46,15 +44,18 @@
   display: flex;
   align-items: center;
   height: 4vh;
+  width: 22vw;
   margin: 0 2.5vh 2.5vh 2.5vh;
   background-color: rgb(238, 238, 238);
   color: rgb(97, 97, 97);
   border: none;
+  
 }
 #days-menu {
   display: flex;
   align-items: center;
   height: 4vh;
+  width: 22vw;
   margin: 0 2.5vh 2.5vh 2.5vh;
   background-color: rgb(238, 238, 238);
   color: rgb(97, 97, 97);

@@ -1,9 +1,38 @@
 #advancedSearch {
-    display: flex;
-    margin: 0 auto;
-    width: 85vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+#advenced-search-container {
+  padding-top: 7vh;
+  display: flex;
+  justify-content: space-around;
+  width: 90vw;
+  flex-wrap: wrap;
 }
 
-#advancedSearchBox {
-    width: 30vw; 
+.advanced-search-box {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  padding: 2.5vh;
+  background-color: rgb(224, 224, 224);
+}
+#box-submit {
+  justify-content: space-between;
+}
+#submit-advanced {
+  text-align: center;
+  height: 4vh;
+  margin-top: 1vh;
+  background-color: rgb(97, 97, 97);
+  color: rgb(224, 224, 224);
+  transition: 1s;
+  border: none;
+  font-size: 14px;
+}
+#submit-advanced:hover {
+  color: black;
+  background-color: rgb(238, 238, 238);
 }

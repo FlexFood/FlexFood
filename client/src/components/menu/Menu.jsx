@@ -33,7 +33,7 @@ export default class Menu extends Component {
     });
   };
 
-  //LÓGICA DE --HEALTHLABEL-- 
+  //LÓGICA DE --HEALTHLABEL--
   //Cambiar por el ternario de Search
 
   handleChange = e => {
@@ -51,8 +51,6 @@ export default class Menu extends Component {
     //const { value } = e.target;
     this.setState({ ...this.state, healthLabels });
   };
-
-  
 
   ///INTENTAR JUTAR LOS TRES CON ALGO COMO ESTO
   // handleChangeChecked = e => {
@@ -107,13 +105,14 @@ export default class Menu extends Component {
 
   render() {
     var menuSave = this.state.menuSave ? (
-      <MenuSave 
-      healthLabels= {this.state.healthLabels}
-      days= {this.state.days}
-      name= {this.state.name}
-      userID= {this.props.user._id}
-      recipesLunch={this.state.recipesLunch}
-      recipesDinner={this.state.recipesDinner} />
+      <MenuSave
+        healthLabels={this.state.healthLabels}
+        days={this.state.days}
+        name={this.state.name}
+        userID={this.props.user._id}
+        recipesLunch={this.state.recipesLunch}
+        recipesDinner={this.state.recipesDinner}
+      />
     ) : (
       ""
     );
@@ -122,53 +121,60 @@ export default class Menu extends Component {
       <div id="menu">
         <form id="form-menu" onSubmit={this.handleFormMealSubmit}>
           <div className="container-menu">
-          <div className="aux-menu-container"></div>
-            <h2>Menu: {this.state.name}</h2>
-            <hr className="line" />
-            <label className="labels-menu">Menu's name</label>
-            <input
-              id="name-menu"
-              placeholder="
+            <div className="aux-menu-container">
+              <h2>Menu: {this.state.name}</h2>
+              <hr className="line" />
+              <label className="labels-menu">Menu's name</label>
+              <input
+                id="name-menu"
+                placeholder="
               Rename your menu..."
-              type="text"
-              onChange={e => this.handleChangeName(e)}
+                type="text"
+                onChange={e => this.handleChangeName(e)}
+              />
+              <label className="labels-menu">Number of days</label>
+              <select
+                id="days-menu"
+                // placeholder="Menu's days [1-7]"
+                onChange={e => this.handleChangeDays(e)}
+              >
+                <option type="text" value="">
+                  How many days?
+                </option>
+                <option type="number" value="1">
+                  1
+                </option>
+                <option type="number" value="2">
+                  2
+                </option>
+                <option type="number" value="3">
+                  3
+                </option>
+                <option type="number" value="4">
+                  4
+                </option>
+                <option type="number" value="5">
+                  5
+                </option>
+                <option type="number" value="6">
+                  6
+                </option>
+                <option type="number" value="7">
+                  7
+                </option>
+              </select>
+            </div>
+            <input
+              type="submit"
+              value="Search yours menu!!"
+              id="submit-menu"
             />
-            <label className="labels-menu">Number of days</label>
-            <select
-              id="days-menu"
-              // placeholder="Menu's days [1-7]"
-              onChange={e => this.handleChangeDays(e)}
-            >
-              <option type="number" value="1">
-                1
-              </option>
-              <option type="number" value="2">
-                2
-              </option>
-              <option type="number" value="3">
-                3
-              </option>
-              <option type="number" value="4">
-                4
-              </option>
-              <option type="number" value="5">
-                5
-              </option>
-              <option type="number" value="6">
-                6
-              </option>
-              <option type="number" value="7">
-                7
-              </option>
-            </select>
-            <p>calories/range || excluded</p>
           </div>
           <div className="container-menu">
             <HealthLabels
               handleChange={this.handleChange}
               user={this.props.user}
             />
-            <input type="submit" value="Search yours weekly menu!!" />
             {/* <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
             <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} /> */}
           </div>
