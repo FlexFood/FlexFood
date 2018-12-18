@@ -21,6 +21,7 @@ export default class Recipes extends Component {
   };
 
   render() {
+    console.log(this.props.recipes, 'Recetas en PROPS de RECIPES')
     var recipe = this.state.showRecipe ? (
       <Recipe recipe={this.state.recipe} />
     ) : (

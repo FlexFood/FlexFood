@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthService from "./services/AuthService.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-//import EdamamService from "./services/EdamamService";
+import EdamamService from "./services/EdamamService";
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -31,7 +31,7 @@ class App extends Component {
 
     this.authService = new AuthService();
 
-    //this.edamamService = new EdamamService();
+    this.edamamService = new EdamamService();
 
     this.fetchUser();
   }
@@ -77,7 +77,7 @@ class App extends Component {
   // }
 
 
-  
+
   // //ESTAS 3 FUERS ESTAN EN FORMS DE INGRS y meal
   // addIngredient = event => {
   //   let ingredientsSelected = this.state.ingredientsSelected;
@@ -118,51 +118,58 @@ class App extends Component {
   //   });
   // };
 
-  // handleFormSubmit = e => {
-  //   e.preventDefault();
-
-  //   const search = this.state.search;
-
-  //   this.edamamService.getByLabel(search).then(recipes => {
-  //     this.setState({
-  //       ...this.state,
-  //       recipes: recipes.data,
-  //       redirectToRecipes: true
-  //     });
-  //   });
-  // };
-
-  handleFormAdvancedSubmit = e => {
+  handleFormSubmit = e => {
     e.preventDefault();
 
-    console.log('Pasa por handleFormAdvSubm en App')
-    console.log(this.state)
+    const search = this.state.search;
 
-    let { ingredientsSelected, healthLabels } = this.state;
-
-    if (
-      Object.values({ ingredientsSelected, healthLabels }).every(
-        element => !element.length
-      )
-    ) {
-      console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-      return;
-    }
-
-    this.edamamService
-      .advancedSearch({ ingredientsSelected, healthLabels })
-      .then(recipes => {
-        console.log('Respuesta en front')
-        console.log(recipes)
-
-        this.setState({
-          ...this.state,
-          recipes: recipes.data,
-          redirectToRecipes: true
-        });
-
+    this.edamamService.getByLabel(search).then(recipes => {
+      this.setState({
+        ...this.state,
+        recipes: recipes.data,
+        redirectToRecipes: true
       });
+    });
   };
+
+  setRecipes = recipes => {
+    this.setState({
+      ...this.state,
+      recipes: recipes,
+      //         redirectToRecipes: true
+    });
+  }
+  // handleFormAdvancedSubmit = e => {
+  //   e.preventDefault();
+
+  //   console.log('Pasa por handleFormAdvSubm en App')
+  //   console.log(this.state)
+
+  //   let { ingredientsSelected, healthLabels } = this.state;
+
+  //   if (
+  //     Object.values({ ingredientsSelected, healthLabels }).every(
+  //       element => !element.length
+  //     )
+  //   ) {
+  //     console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
+  //     return;
+  //   }
+
+  //   this.edamamService
+  //     .advancedSearch({ ingredientsSelected, healthLabels })
+  //     .then(recipes => {
+  //       console.log('Respuesta en front')
+  //       console.log(recipes)
+
+  //       this.setState({
+  //         ...this.state,
+  //         recipes: recipes.data,
+  //         redirectToRecipes: true
+  //       });
+
+  //     });
+  // };
 
   handleChange = e => {
     const { value } = e.target;
@@ -189,6 +196,7 @@ class App extends Component {
             exact
             path="/"
             render={() => (
+
               <Search
                 handleFormSubmit={this.handleFormSubmit}
                 handleChange={this.handleChange}
@@ -197,39 +205,44 @@ class App extends Component {
             )}
           />
           <Route
-          exact
+            exact
             path="/recipes"
             render={() => (
               <Recipes
                 search={this.state.search}
-                recipes={this.state.recipes}
+                recipes={this.state.recipes.data}
               />
             )}
           />
+
           <Route
             exact
             path="/advancedSearch"
-            render={() => (
-              <AdvancedSearch
-                //handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
-                //ingredientsSelected={this.state.ingredientsSelected}
-                //deleteIngredient={this.deleteIngredient}
-                //handleChangeChecked={this.handleChangeChecked}
-                //addIngredient={this.addIngredient}
-                user={this.state.user}
+            render={() => {
+              console.log(this.state.recipes, 'Recetas en APP')
+              return (
+                <AdvancedSearch
+                  //handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
+                  //ingredientsSelected={this.state.ingredientsSelected}
+                  //deleteIngredient={this.deleteIngredient}
+                  //handleChangeChecked={this.handleChangeChecked}
+                  //addIngredient={this.addIngredient}
+                  user={this.state.user}
+                  setRecipes={this.setRecipes}
                 //recipes={this.state.recipes}
-                //redirectToRecipes={this.state.redirectToRecipes}
-              />
-            )}
+                // redirectToRecipes={this.state.redirectToRecipes}
+                />
+              )
+            }}
           />
           {/* <Route exact path="/menu" render={() => <Menu user={this.state.user}/>} /> */}
           <Route
-          exact
+            exact
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
           />
           <Route
-          exact
+            exact
             path="/login"
             render={() => <Login getUser={this.getUser} />}
           />
@@ -237,7 +250,7 @@ class App extends Component {
           <Route
             exact
             path="/editUser"
-            render={() => (<EditUser user={this.state.user} getUser={this.getUser}/> )}
+            render={() => (<EditUser user={this.state.user} getUser={this.getUser} />)}
           />
           <Route exact path="/menu" render={() => <Menu user={this.state.user} />} />
           <Route exact path="/converter" render={() => <Converter />} />

@@ -4,6 +4,7 @@ export default class IngredientBoxAdd extends Component {
   render() {
     return (
       <div id="ingredient">
+        <p>{this.props.img}</p>
         <p>{this.props.name}</p>
         <button onClick={(e) => { e.preventDefault();this.props.addIngredientSelected(this.props.name)}}>+</button>
       </div>
