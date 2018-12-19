@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   background-color: rgba(202, 202, 202, 0.8);
   padding: 5vh 3vh;
-  margin:10vh;
+  margin:10vh 10vh 5vh 10vh;
 }
 #recipe img {
   margin-left: 1vw;

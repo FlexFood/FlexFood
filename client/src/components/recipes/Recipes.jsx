@@ -13,6 +13,7 @@ export default class Recipes extends Component {
   }
 
   handleRecipeSelect = i => {
+    this.scrollToRecipe()
     this.setState({
       ...this.state,
       showRecipe: true,
@@ -20,8 +21,15 @@ export default class Recipes extends Component {
     });
   };
 
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
   render() {
-    console.log(this.props.recipes, 'Recetas en PROPS de RECIPES')
+    console.log(this.props.recipes, "Recetas en PROPS de RECIPES");
     var recipe = this.state.showRecipe ? (
       <Recipe recipe={this.state.recipe} />
     ) : (
@@ -41,7 +49,8 @@ export default class Recipes extends Component {
                   to="#recipe"
                   id="recipes-card"
                   key={i}
-                  onClick={() => this.handleRecipeSelect(i)}
+                  onClick={() => {this.handleRecipeSelect(i);
+                    this.scrollToRecipe()}}
                 >
                   <img src={recipe.recipe.image} alt={recipe.recipe.label} />
                   <div id="card-text">

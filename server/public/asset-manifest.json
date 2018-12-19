@@ -1,14 +1,15 @@
 {
-  "main.css": "/static/css/main.cb607ad5.chunk.css",
-  "main.js": "/static/js/main.f55f92f0.chunk.js",
-  "main.js.map": "/static/js/main.f55f92f0.chunk.js.map",
-  "static/js/1.ca799a7d.chunk.js": "/static/js/1.ca799a7d.chunk.js",
-  "static/js/1.ca799a7d.chunk.js.map": "/static/js/1.ca799a7d.chunk.js.map",
+  "main.css": "/static/css/main.e52265e7.chunk.css",
+  "main.js": "/static/js/main.65eca7dd.chunk.js",
+  "main.js.map": "/static/js/main.65eca7dd.chunk.js.map",
+  "static/js/1.2c33205d.chunk.js": "/static/js/1.2c33205d.chunk.js",
+  "static/js/1.2c33205d.chunk.js.map": "/static/js/1.2c33205d.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/Search.css": "/static/media/box1bis.5aa4a5c0.jpg",
-  "static/css/main.cb607ad5.chunk.css.map": "/static/css/main.cb607ad5.chunk.css.map",
+  "static/media/Search.css": "/static/media/box2.5d3795ba.jpg",
+  "static/media/Navbar.css": "/static/media/navbar-background.d0619284.jpg",
+  "static/css/main.e52265e7.chunk.css.map": "/static/css/main.e52265e7.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.45b22a6eb3f21ca4cb8f092933725c00.js": "/precache-manifest.45b22a6eb3f21ca4cb8f092933725c00.js",
+  "precache-manifest.bb11030ab49e7e8dcb876fd3a1b5131a.js": "/precache-manifest.bb11030ab49e7e8dcb876fd3a1b5131a.js",
   "service-worker.js": "/service-worker.js"
 }
