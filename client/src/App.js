@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import AuthService from "./services/AuthService.js";
 import "./App.css";
 
-
 import Recipes from "./components/recipes";
 import Search from "./components/search";
 import AdvancedSearch from "./components/advancedSearch";
@@ -13,7 +12,7 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Menu from "./components/menu";
 import EditUser from "./components/editUser";
-import Converter from "./components/converter"
+import Converter from "./components/converter";
 
 class App extends Component {
   constructor() {
@@ -57,10 +56,10 @@ class App extends Component {
   setRecipes = recipes => {
     this.setState({
       ...this.state,
-      recipes: recipes,
+      recipes: recipes
       //         redirectToRecipes: true
     });
-  }
+  };
   // handleFormAdvancedSubmit = e => {
   //   e.preventDefault();
 
@@ -93,7 +92,6 @@ class App extends Component {
   //     });
   // };
 
-
   render() {
     if (this.state && this.state.redirectToHome) {
       return <Redirect exact to="/" />;
@@ -113,9 +111,8 @@ class App extends Component {
             exact
             path="/"
             render={() => (
-
               <Search
-              setRecipes={this.setRecipes}
+                setRecipes={this.setRecipes}
                 // handleFormSubmit={this.handleFormSubmit}
                 // handleChange={this.handleChange}
                 // redirectToRecipes={this.state.redirectToRecipes}
@@ -137,7 +134,7 @@ class App extends Component {
             exact
             path="/advancedSearch"
             render={() => {
-              console.log(this.state.recipes, 'Recetas en APP')
+              console.log(this.state.recipes, "Recetas en APP");
               return (
                 <AdvancedSearch
                   //handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
@@ -147,10 +144,10 @@ class App extends Component {
                   //addIngredient={this.addIngredient}
                   user={this.state.user}
                   setRecipes={this.setRecipes}
-                //recipes={this.state.recipes}
-                // redirectToRecipes={this.state.redirectToRecipes}
+                  //recipes={this.state.recipes}
+                  // redirectToRecipes={this.state.redirectToRecipes}
                 />
-              )
+              );
             }}
           />
           {/* <Route exact path="/menu" render={() => <Menu user={this.state.user}/>} /> */}
@@ -168,9 +165,15 @@ class App extends Component {
           <Route
             exact
             path="/editUser"
-            render={() => (<EditUser user={this.state.user} getUser={this.getUser} />)}
+            render={() => (
+              <EditUser user={this.state.user} getUser={this.getUser} />
+            )}
           />
-          <Route exact path="/menu" render={() => <Menu user={this.state.user} />} />
+          <Route
+            exact
+            path="/menu"
+            render={() => <Menu user={this.state.user} />}
+          />
           <Route exact path="/converter" render={() => <Converter />} />
         </Switch>
       </div>

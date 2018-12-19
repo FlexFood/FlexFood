@@ -14,24 +14,26 @@ export default class Navbar extends Component {
       </li>
     );
     return (
-      <div id="navbar">
-        <div id="label-composition">
-          <Link to="/">
-            <h1>RecipesForUse</h1>
-          </Link>
+        <div id="navbar">
+          <div id="label-composition">
+            <Link to="/">
+              <h1>RecipesForUse</h1>
+            </Link>
+          </div>
+          <ul>
+            <li>
+              <Link to="/advancedSearch">
+                Recipes Finder <span>PRO</span>
+              </Link>
+            </li>
+            <li>|</li>
+            <li>
+              <Link to="/converter">Converter</Link>
+            </li>
+            <li>|</li>
+            {navBarUserControl}
+          </ul>
         </div>
-        <ul>
-          <li>
-            <Link to="/advancedSearch">Recipes Finder <span>PRO</span></Link>
-          </li>
-          <li>|</li>
-          <li>
-            <Link to="/converter">Converter</Link>
-          </li>
-          <li>|</li>
-          {navBarUserControl}
-        </ul>
-      </div>
     );
   }
 }

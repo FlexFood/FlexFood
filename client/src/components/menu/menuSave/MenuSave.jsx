@@ -24,7 +24,7 @@ export default class MenuSave extends Component {
 
   scrollToRecipe = () => {
     window.scrollBy({
-      top: document.querySelector("body").clientHeight, // could be negative value
+      top: document.querySelector("body").clientHeight,
       left: 0,
       behavior: "smooth"
     });
