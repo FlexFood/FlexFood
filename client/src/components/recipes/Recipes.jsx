@@ -25,8 +25,8 @@ export default class Recipes extends Component {
     var recipe = this.state.showRecipe ? (
       <Recipe recipe={this.state.recipe} />
     ) : (
-      ""
-    );
+        ""
+      );
 
     return (
       <div id="recipes">
