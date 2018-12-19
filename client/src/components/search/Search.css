@@ -1,12 +1,23 @@
-
-#search form {
-  padding-top: 10vh;
+#main-view {
   text-align: center;
-  height: 60vh;
+  height: 70vh;
   background-image: url("../../images/search-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 15vh;
+  z-index: -1;
+}
+
+#search form {
+  margin-bottom: 37vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #input-search {
@@ -96,9 +107,21 @@
   height: 7vh;
   width: 12vw;
   text-decoration: none;
-  color: white;
+  color: black;
   display: flex;
   background-color: rgb(219, 219, 219);
   justify-content: center;
   align-items: center;
+  transition: 0.5s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.menu-card a:hover {
+  background-color: rgb(94, 94, 94);
+  color: white;
+}
+.menu-card h2 {
+  margin: 0;
+}
+span{
+  color: rgb(236, 65, 65);
 }

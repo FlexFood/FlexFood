@@ -24,7 +24,8 @@
     border-radius: 2vh
 }
 #off-img{
-    height: 3vh
+    height: 3vh;
+    margin-top: 5px;
 }
 #userbar ul li a {
     color: #62b3ff;

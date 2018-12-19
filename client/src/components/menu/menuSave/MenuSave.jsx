@@ -22,24 +22,12 @@ export default class MenuSave extends Component {
     this.recipesInit();
   }
 
-  scrollToRecipe = () => {
-    window.scrollBy({
-      top: document.querySelector("body").clientHeight,
-      left: 0,
-      behavior: "smooth"
-    });
-  };
-
-componentDidMount(){
-  this.scrollToRecipe()
-}
-
+  //POST BACK PARA GUARDAR EN MONGO EL MENU
   handleFormSubmit = e => {
     e.preventDefault();
-    console.log("Pulsando el Guardar receta ");
+    console.log(this.props.userId,"Pulsando el Guardar receta ");
     const { recipesDinner, recipesLunch } = this.state;
 
-    //CREAR MEAL AND SAVE
     let menu = {
       owner: this.props.userId, //GuardarObjectID mirar en pizarra
       menuName: this.props.name,

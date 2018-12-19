@@ -3,13 +3,12 @@ import { Redirect, Link } from "react-router-dom";
 import EdamamService from "../../services/EdamamService";
 import "./Search.css";
 
-
 export default class Search extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       search: ""
-    }
+    };
     this.edamamService = new EdamamService();
   }
 
@@ -22,8 +21,8 @@ export default class Search extends Component {
     e.preventDefault();
     const search = this.state.search;
     this.edamamService.getByLabel(search).then(recipes => {
-      console.log(recipes)
-      this.props.setRecipes(recipes)
+      console.log(recipes);
+      this.props.setRecipes(recipes);
       this.setState({
         ...this.state,
         recipes: recipes.data,
@@ -31,7 +30,6 @@ export default class Search extends Component {
       });
     });
   };
-  
 
   render() {
     if (this.state.redirectToRecipes) {
@@ -40,14 +38,16 @@ export default class Search extends Component {
 
     return (
       <div id="search">
-        <form onSubmit={this.handleFormSubmit}>
-          <input
-            id="input-search"
-            type="search"
-            onChange={e => this.handleChange(e)}
-          />
-          <input id="input-submit" type="submit" value="search" />
-        </form>
+        <div id="main-view">
+          <form onSubmit={this.handleFormSubmit}>
+            <input
+              id="input-search"
+              type="search"
+              onChange={e => this.handleChange(e)}
+            />
+            <input id="input-submit" type="submit" value="search" />
+          </form>
+        </div>
         <div id="box-1">
           <div id="menu-1">
             <div className="menu-card">
@@ -89,7 +89,7 @@ export default class Search extends Component {
                 do not have to weigh more. With a menu generator you can adjust
                 your meals to your tastes and preferences.
               </p>
-              <Link to="/meal">Go!</Link>
+              <Link to="/menu">Go!</Link>
             </div>
           </div>
           <div id="img-3" />

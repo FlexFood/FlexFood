@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
+import ShowMenu from "../showMenu";
 import AuthService from "../../services/AuthService";
 import "./EditUser.css";
 export default class EditUser extends Component {
@@ -8,15 +9,44 @@ export default class EditUser extends Component {
     this.state = {
       user: null,
       healthLabels: [],
+      menus: [],
+      menu: null,
+      showMenu: false
     };
+
     this.authService = new AuthService();
 
   }
 
-  getUserMenus = () => {
+  componentWillMount() {
+    this.setInit()
+    this.setUserMenus()
+  }
+
+  setInit = () => {
+    this.setState({
+      ...this.state,
+      user: this.props.user,
+      healthLabels: this.props.user.healthLabels
+    });
+    console.log(this.state, "EL STATE EN SETINIT")
+  }
+
+
+  setUserMenus = () => {
+
     this.authService
       .getUserMenus()
       .then(menus => this.setState({ ...this.state, menus }));
+
+  };
+
+  handleMenuSelect = i => {
+    this.setState({
+      ...this.state,
+      menu: this.state.menus[i],
+      showMenu: true,
+    });
   };
 
   //GET PARA SACAR LOS MEALS DEL USER
@@ -50,20 +80,17 @@ export default class EditUser extends Component {
     }
   };
 
-//NO FUNCIONA NI EN WILL/DID MOUNT NI EL CONSTRUCTOR
-  render() {
-    if (!this.state.user && this.props && this.props.user) {
-      console.log(this.props.user, "Setteando por primera vez desde App");
-      this.setState({
-        ...this.state,
-        user: this.props.user,
-        healthLabels: this.props.user.healthLabels
-      });
-      this.getUserMenus();
-    }
 
-    return this.state.user ? (
+  render() {
+    
+    var menu = this.state.showMenu && this.state.menu.length != 0 ? (
+      <ShowMenu menu={this.state.menu} />
+    ) : (
+        ""
+      );
+    return (
       <div id="profile">
+        {menu}
         <div id="user-container">
           <div className="aux-container">
             <h2>{this.state.user.username}'s profile</h2>
@@ -75,6 +102,29 @@ export default class EditUser extends Component {
           <div className="aux-container">
             <h2>{this.state.user.username}'s menus</h2>
             <hr id="line-user" />
+            {this.state.menus.map((menuBox, index) => {
+                return (
+                  <div
+                    className="link-box"
+                    onClick={() => this.handleMenuSelect(index)}
+                    key={index}>
+                    <p>{index}-{menuBox.menuName}</p>
+                  </div>
+                )})}
+
+            {/* {this.state.menus.length !== 0 ?
+              (this.state.menus.map((menuBox, index) => {
+                return (
+                  <div
+                    className="link-box"
+                    onClick={(index) => this.handleMenuSelect(index)}
+                    key={index}>
+                    <p>{index}-{menuBox.menuName}</p>
+                  </div>
+                )
+              }))
+              : ''} */}
+
           </div>
         </div>
         <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
@@ -86,8 +136,8 @@ export default class EditUser extends Component {
           <input id="profile-btn" type="submit" value="Send" />
         </form>
       </div>
-    ) : (
-        <p>Loading...</p>
-      );
+    )// : (
+    //     <p>Loading...</p>
+    //   );
   }
 }

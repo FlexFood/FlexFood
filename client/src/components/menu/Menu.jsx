@@ -126,7 +126,7 @@ deleteIngredientSelected = event => {
         healthLabels={this.state.healthLabels}
         days={this.state.days}
         name={this.state.name}
-        userID={this.props.user._id}
+        userId={this.props.user._id}
         recipesLunch={this.state.recipesLunch}
         recipesDinner={this.state.recipesDinner}
       />

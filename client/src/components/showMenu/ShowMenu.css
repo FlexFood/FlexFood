@@ -1,0 +1,43 @@
+#save-menu {
+    margin: 15vh 0;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+  }
+  #table-menu td{
+    width: 11vw;
+  }
+  .title-box{
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(194, 194, 194);
+  }
+  .lunch-box{
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+  }
+  .dinner-box{
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+  }
+  #submit-save-menu{
+  width: 30vw;
+  }
+  #submit-save-menu{
+    text-align: center;
+    height: 4vh;
+    margin: 1vh 2.5vh;
+    background-color: rgb(194, 194, 194);
+    color: rgb(97, 97, 97);
+    transition: 1s;
+    border: none;
+    font-size: 14px;
+  }
+  
+  #submit-save-menu:hover {
+    color: black;
+    background-color: rgb(238, 238, 238);
+  }
