@@ -22,22 +22,7 @@ export default class MenuSave extends Component {
     this.recipesInit();
   }
 
-<<<<<<< HEAD
   //POST BACK PARA GUARDAR EN MONGO EL MENU
-=======
-  scrollToRecipe = () => {
-    window.scrollBy({
-      top: document.querySelector("body").clientHeight, // could be negative value
-      left: 0,
-      behavior: "smooth"
-    });
-  };
-
-componentDidMount(){
-  this.scrollToRecipe()
-}
-
->>>>>>> 5bb345e7614e62b39659297011c4655eeb1fb553
   handleFormSubmit = e => {
     e.preventDefault();
     console.log(this.props.userId,"Pulsando el Guardar receta ");
