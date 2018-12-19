@@ -22,6 +22,18 @@ export default class MenuSave extends Component {
     this.recipesInit();
   }
 
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+
+componentDidMount(){
+  this.scrollToRecipe()
+}
+
   handleFormSubmit = e => {
     e.preventDefault();
     console.log("Pulsando el Guardar receta ");

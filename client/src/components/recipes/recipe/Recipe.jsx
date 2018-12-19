@@ -3,6 +3,18 @@ import { Link } from "react-router-dom";
 import "./Recipe.css";
 
 export default class Recipe extends Component {
+
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+
+  componentDidMount(){
+    this.scrollToRecipe()
+  }
   render() {
     return (
       <div id="recipe">
