@@ -7,7 +7,6 @@ class AuthService {
       withCredentials: true
     })
   }
-
   signup = (user) => {
     const formData = new FormData();
     Object.keys(user).forEach(key => formData.append(key, user[key]));
