@@ -42,6 +42,3 @@ width: 15vw;
 #card-text hr{
   border: 0.5px solid rgb(214, 214, 214);
 }
-html{
-  scroll-behavior: smooth;
-}

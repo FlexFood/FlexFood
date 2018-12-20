@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-import EdamamService from "../../services/EdamamService";
+
+import { css } from 'react-emotion';
+import { PulseLoader } from 'react-spinners';
 import "./Search.css";
 
+import EdamamService from "../../services/EdamamService";
+
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 export default class Search extends Component {
-  constructor(){
+  constructor() {
     super()
     this.state = {
-      search: ""
+      search: "",
+      value: "search",
+      classNameLoading: "on",
+      loading: false
     }
     this.edamamService = new EdamamService();
   }
@@ -21,9 +34,11 @@ export default class Search extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const search = this.state.search;
+    if(search === "") return
+    this.loadingChange();
     this.edamamService.getByLabel(search).then(recipes => {
       console.log(recipes)
-      this.props.setRecipes(recipes)
+      this.props.setRecipes(recipes, search)
       this.setState({
         ...this.state,
         recipes: recipes.data,
@@ -31,9 +46,18 @@ export default class Search extends Component {
       });
     });
   };
-  
+
+  loadingChange = () => {
+    this.setState({
+      ...this.state,
+      classNameLoading: "off",
+      loading: true
+    });
+  }
 
   render() {
+
+
     if (this.state.redirectToRecipes) {
       return <Redirect to="/recipes" />;
     }
@@ -46,7 +70,18 @@ export default class Search extends Component {
             type="search"
             onChange={e => this.handleChange(e)}
           />
-          <input id="input-submit" type="submit" value="search" />
+          <input 
+          id="input-submit" 
+          //className={this.state.classNameLoading}
+          type="submit" 
+          value={this.state.value} />
+          <PulseLoader
+            className={override}
+            sizeUnit={"px"}
+            size={15}
+            color={'#5e5e5e'}
+            loading={this.state.loading}
+          />
         </form>
         <div id="box-1">
           <div id="menu-1">

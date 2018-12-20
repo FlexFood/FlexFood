@@ -1,35 +1,39 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AuthService from "./services/AuthService.js";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 
+//USER
+import AuthService from "./services/AuthService.js";
+
+
+import Userbar from "./components/userbar";
+import EditUser from "./components/editUser";
+import Signup from "./components/signup";
+import Login from "./components/login";
+import Navbar from "./components/navbar";
+import AdvancedSearch from "./components/advancedSearch";
+import Converter from "./components/converter"
+import Menu from "./components/menu";
+import Search from "./components/search";
 
 import Recipes from "./components/recipes";
-import Search from "./components/search";
-import AdvancedSearch from "./components/advancedSearch";
-import Navbar from "./components/navbar";
-import Userbar from "./components/userbar";
-import Login from "./components/login";
-import Signup from "./components/signup";
-import Menu from "./components/menu";
-import EditUser from "./components/editUser";
-import Converter from "./components/converter"
 
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
-      user: null,
-      recipes: null,
-      search: "",
-      redirectToRecipes: false,
       redirectToHome: false,
+      //APIS Q YA NO HAGO AQUI PROBAR A BORRRRRAR
       ingredientsSelected: [],
-      healthLabels: []
-      //advancedSearch: []
+      healthLabels: [],
+      //REDUX- USER componente independiente
+      //NO haría aquí la llamada a authService 
+      user: null,
+      //REDUX- RECIPES componente independiente
+      recipes: null,
+      redirectToRecipes: false,
     };
-
     this.authService = new AuthService();
     this.fetchUser();
   }
@@ -52,12 +56,22 @@ class App extends Component {
       );
   };
 
+  showModal = () => {
+    this.setState({ show: true });
+  }
+  
+  hideModal = () => {
+    this.setState({ show: false });
+  }
+
   //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
   //CUALQUIER RUTA
-  setRecipes = recipes => {
+  setRecipes = (recipes, recipesTitle) => {
     this.setState({
       ...this.state,
-      recipes: recipes,
+      recipes,
+      recipesTitle
+
       //         redirectToRecipes: true
     });
   }
@@ -108,17 +122,14 @@ class App extends Component {
           getUser={this.getUser}
         />
         <Navbar user={this.state.user} />
+
         <Switch>
           <Route
             exact
             path="/"
             render={() => (
-
               <Search
-              setRecipes={this.setRecipes}
-                // handleFormSubmit={this.handleFormSubmit}
-                // handleChange={this.handleChange}
-                // redirectToRecipes={this.state.redirectToRecipes}
+                setRecipes={this.setRecipes}
               />
             )}
           />
@@ -126,10 +137,17 @@ class App extends Component {
             exact
             path="/recipes"
             render={() => (
-              <Recipes
-                search={this.state.search}
-                recipes={this.state.recipes.data}
-              />
+              <ReactCSSTransitionGroup
+                transitionName="css-transition"
+                transitionEnterTimeout={400}
+                transitionLeaveTimeout={300}
+              >
+                <Recipes
+                  className="recipes-css-transition"
+                  recipesTitle={this.state.recipesTitle}
+                  recipes={this.state.recipes.data}
+                />
+              </ReactCSSTransitionGroup>
             )}
           />
 
@@ -159,11 +177,12 @@ class App extends Component {
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
           />
-          <Route
+          
+          {/* <Route
             exact
             path="/login"
             render={() => <Login getUser={this.getUser} />}
-          />
+          /> */}
 
           <Route
             exact
