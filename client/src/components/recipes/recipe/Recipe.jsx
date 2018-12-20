@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Recipe.css";
 
-export default class Recipe extends Component {
 
+export default class Recipe extends Component {
   scrollToRecipe = () => {
     window.scrollBy({
       top: document.querySelector("body").clientHeight, // could be negative value
