@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 
 //USER
@@ -15,6 +16,7 @@ import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
 import Menu from "./components/menu";
 import Search from "./components/search";
+
 import Recipes from "./components/recipes";
 
 class App extends Component {
@@ -53,6 +55,14 @@ class App extends Component {
         this.setState({ ...this.state, user: null, redirectToHome: true })
       );
   };
+
+  showModal = () => {
+    this.setState({ show: true });
+  }
+  
+  hideModal = () => {
+    this.setState({ show: false });
+  }
 
   //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
   //CUALQUIER RUTA
@@ -112,17 +122,14 @@ class App extends Component {
           getUser={this.getUser}
         />
         <Navbar user={this.state.user} />
+
         <Switch>
           <Route
             exact
             path="/"
             render={() => (
-
               <Search
                 setRecipes={this.setRecipes}
-              // handleFormSubmit={this.handleFormSubmit}
-              // handleChange={this.handleChange}
-              // redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />
@@ -130,10 +137,17 @@ class App extends Component {
             exact
             path="/recipes"
             render={() => (
-              <Recipes
-                recipesTitle={this.state.recipesTitle}
-                recipes={this.state.recipes.data}
-              />
+              <ReactCSSTransitionGroup
+                transitionName="css-transition"
+                transitionEnterTimeout={400}
+                transitionLeaveTimeout={300}
+              >
+                <Recipes
+                  className="recipes-css-transition"
+                  recipesTitle={this.state.recipesTitle}
+                  recipes={this.state.recipes.data}
+                />
+              </ReactCSSTransitionGroup>
             )}
           />
 
@@ -163,11 +177,12 @@ class App extends Component {
             path="/signup"
             render={() => <Signup getUser={this.getUser} />}
           />
-          <Route
+          
+          {/* <Route
             exact
             path="/login"
             render={() => <Login getUser={this.getUser} />}
-          />
+          /> */}
 
           <Route
             exact
