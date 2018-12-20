@@ -34,7 +34,7 @@ export default class Search extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     const search = this.state.search;
-    if(search === "") return
+    if (search === "") return
     this.loadingChange();
     this.edamamService.getByLabel(search).then(recipes => {
       console.log(recipes)
@@ -64,25 +64,27 @@ export default class Search extends Component {
 
     return (
       <div id="search">
-        <form onSubmit={this.handleFormSubmit}>
-          <input
-            id="input-search"
-            type="search"
-            onChange={e => this.handleChange(e)}
-          />
-          <input 
-          id="input-submit" 
-          //className={this.state.classNameLoading}
-          type="submit" 
-          value={this.state.value} />
-          <PulseLoader
-            className={override}
-            sizeUnit={"px"}
-            size={15}
-            color={'#5e5e5e'}
-            loading={this.state.loading}
-          />
-        </form>
+        <div id="main-view">
+          <form onSubmit={this.handleFormSubmit}>
+            <input
+              id="input-search"
+              type="search"
+              onChange={e => this.handleChange(e)}
+            />
+            <input
+              id="input-submit"
+              //className={this.state.classNameLoading}
+              type="submit"
+              value={this.state.value} />
+            <PulseLoader
+              className={override}
+              sizeUnit={"px"}
+              size={15}
+              color={'#5e5e5e'}
+              loading={this.state.loading}
+            />
+          </form>
+        </div>
         <div id="box-1">
           <div id="menu-1">
             <div className="menu-card">
@@ -124,7 +126,7 @@ export default class Search extends Component {
                 do not have to weigh more. With a menu generator you can adjust
                 your meals to your tastes and preferences.
               </p>
-              <Link to="/meal">Go!</Link>
+              <Link to="/menu">Go!</Link>
             </div>
           </div>
           <div id="img-3" />

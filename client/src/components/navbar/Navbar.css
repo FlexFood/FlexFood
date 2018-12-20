@@ -1,13 +1,17 @@
 #navbar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0;
   padding: 0 3vw;
-  /* background-color: white; */
-  background-image: url("../../images/navbar-background.jpg");
-  background-size: cover;
-  height: 8.9vh;
+  background-color: rgba(255, 255, 255, 0.85);
+  height: 8vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.13), 0 6px 20px 0 rgba(0, 0, 0, 0.13);
+  z-index: 1;
 }
 #navbar ul {
   display: flex;
@@ -25,7 +29,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Rock Salt", cursive;
+  font-family: "Cutive Mono", monospace;
   font-size: 4vh;
 }
 #navbar a {

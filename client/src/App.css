@@ -1,5 +1,11 @@
-body {
+*{
+  box-sizing: content-box;
+}
 
+body {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .recipes-css-transition {
