@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { Redirect, Link } from "react-router-dom";
+
 import { css } from 'react-emotion';
 import { PulseLoader } from 'react-spinners';
-import { Redirect, Link } from "react-router-dom";
-import EdamamService from "../../services/EdamamService";
 import "./Search.css";
+
+import EdamamService from "../../services/EdamamService";
+
 
 const override = css`
     display: block;
@@ -35,7 +38,7 @@ export default class Search extends Component {
     this.loadingChange();
     this.edamamService.getByLabel(search).then(recipes => {
       console.log(recipes)
-      this.props.setRecipes(recipes)
+      this.props.setRecipes(recipes, search)
       this.setState({
         ...this.state,
         recipes: recipes.data,

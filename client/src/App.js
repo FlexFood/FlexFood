@@ -1,35 +1,37 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AuthService from "./services/AuthService.js";
 import "./App.css";
 
+//USER
+import AuthService from "./services/AuthService.js";
 
-import Recipes from "./components/recipes";
-import Search from "./components/search";
-import AdvancedSearch from "./components/advancedSearch";
-import Navbar from "./components/navbar";
+
 import Userbar from "./components/userbar";
-import Login from "./components/login";
-import Signup from "./components/signup";
-import Menu from "./components/menu";
 import EditUser from "./components/editUser";
+import Signup from "./components/signup";
+import Login from "./components/login";
+import Navbar from "./components/navbar";
+import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
+import Menu from "./components/menu";
+import Search from "./components/search";
+import Recipes from "./components/recipes";
 
 class App extends Component {
   constructor() {
     super();
-
     this.state = {
-      user: null,
-      recipes: null,
-      search: "",
-      redirectToRecipes: false,
       redirectToHome: false,
+      //APIS Q YA NO HAGO AQUI PROBAR A BORRRRRAR
       ingredientsSelected: [],
-      healthLabels: []
-      //advancedSearch: []
+      healthLabels: [],
+      //REDUX- USER componente independiente
+      //NO haría aquí la llamada a authService 
+      user: null,
+      //REDUX- RECIPES componente independiente
+      recipes: null,
+      redirectToRecipes: false,
     };
-
     this.authService = new AuthService();
     this.fetchUser();
   }
@@ -54,10 +56,12 @@ class App extends Component {
 
   //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
   //CUALQUIER RUTA
-  setRecipes = recipes => {
+  setRecipes = (recipes, recipesTitle) => {
     this.setState({
       ...this.state,
-      recipes: recipes,
+      recipes,
+      recipesTitle
+
       //         redirectToRecipes: true
     });
   }
@@ -115,10 +119,10 @@ class App extends Component {
             render={() => (
 
               <Search
-              setRecipes={this.setRecipes}
-                // handleFormSubmit={this.handleFormSubmit}
-                // handleChange={this.handleChange}
-                // redirectToRecipes={this.state.redirectToRecipes}
+                setRecipes={this.setRecipes}
+              // handleFormSubmit={this.handleFormSubmit}
+              // handleChange={this.handleChange}
+              // redirectToRecipes={this.state.redirectToRecipes}
               />
             )}
           />
@@ -127,7 +131,7 @@ class App extends Component {
             path="/recipes"
             render={() => (
               <Recipes
-                search={this.state.search}
+                recipesTitle={this.state.recipesTitle}
                 recipes={this.state.recipes.data}
               />
             )}
