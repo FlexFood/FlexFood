@@ -18,8 +18,9 @@ export default class Signup extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+    this.props.close();
     const {username, password, photo} = this.state;
-
+console.log(username, password, photo,'LO Q LLEGA PARA LA LLAMADA A SIGNUP')
     this.authService.signup({username, password, photo})
     .then(user => {
       this.props.getUser(user)

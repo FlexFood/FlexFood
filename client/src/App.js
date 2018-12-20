@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+//import ReactDOM from "react-dom";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 
@@ -10,7 +11,8 @@ import AuthService from "./services/AuthService.js";
 import Userbar from "./components/userbar";
 import EditUser from "./components/editUser";
 import Signup from "./components/signup";
-import Login from "./components/login";
+//import Login from "./components/login";
+import Modal from "./components/modal";
 import Navbar from "./components/navbar";
 import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
@@ -56,13 +58,7 @@ class App extends Component {
       );
   };
 
-  showModal = () => {
-    this.setState({ show: true });
-  }
   
-  hideModal = () => {
-    this.setState({ show: false });
-  }
 
   //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
   //CUALQUIER RUTA
@@ -77,9 +73,6 @@ class App extends Component {
   };
 
   render() {
-    if (this.state && this.state.redirectToHome) {
-      return <Redirect exact to="/" />;
-    }
 
     return (
       <div className="App">
@@ -139,18 +132,6 @@ class App extends Component {
               );
             }}
           />
-          {/* <Route exact path="/menu" render={() => <Menu user={this.state.user}/>} /> */}
-          <Route
-            exact
-            path="/signup"
-            render={() => <Signup getUser={this.getUser} />}
-          />
-          
-          {/* <Route
-            exact
-            path="/login"
-            render={() => <Login getUser={this.getUser} />}
-          /> */}
 
           <Route
             exact
