@@ -21,7 +21,6 @@ export default class EditUser extends Component {
     this.setInit();
     this.setUserMenus();
   }
-
   setInit = () => {
     this.setState({
       ...this.state,
@@ -29,9 +28,7 @@ export default class EditUser extends Component {
       healthLabels: this.props.user.healthLabels
     });
   
-  }
-
-
+ }
   setUserMenus = () => {
     this.authService
       .getUserMenus()
@@ -60,6 +57,9 @@ export default class EditUser extends Component {
       this.setState({ ...this.state, [name]: array });
     }
   };
+
+
+
 
   scrollToMenu = () => {
     window.scrollBy({
@@ -108,21 +108,9 @@ export default class EditUser extends Component {
                   );
                 })}
               </div>
-              {/* {this.state.menus.length !== 0 ?
-              (this.state.menus.map((menuBox, index) => {
-                return (
-                  <div
-                    className="link-box"
-                    onClick={(index) => this.handleMenuSelect(index)}
-                    key={index}>
-                    <p>{index}-{menuBox.menuName}</p>
-                  </div>
-                )
-              }))
-              : ''} */}
             </div>
           </div>
-          <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
+          <form id="user-form" onSubmit={(e)=>this.props.handleFormHealthLabelsSubmit(e, this.state.healthLabels)}>
             <HealthLabels
               handleChange={this.handleChange}
               user={this.state.user}

@@ -23,12 +23,11 @@ export default class AdvancedSearch extends Component {
             healthLabels: [],
             redirectToRecipes: false
         }
-
         this.edamamService = new EdamamService()
-
     }
 
     //LÓGICA DEL --INGRSIENT-SELECTED--
+    //Ternario de search
 
     addIngredientSelected = inputLabel => {
         let ingredientsSelected = this.state.ingredientsSelected;
@@ -59,16 +58,16 @@ export default class AdvancedSearch extends Component {
         this.setState({ ...this.state, healthLabels });
     };
 
-    componentDidMount() {
-        this.userDefault();
-    }
+    // componentDidMount() {
+    //     this.userDefault();
+    // }
 
-    userDefault = healthLabels => {
-        if (this.props.user) healthLabels = this.props.user.healthLabels;
-        this.setState({
-            healthLabels
-        });
-    };
+    // userDefault = healthLabels => {
+    //     if (this.props.user) healthLabels = this.props.user.healthLabels;
+    //     this.setState({
+    //         healthLabels
+    //     });
+    // };
 
     //API
 

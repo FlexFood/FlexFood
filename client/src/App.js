@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-//import ReactDOM from "react-dom";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 
@@ -10,9 +9,6 @@ import AuthService from "./services/AuthService.js";
 
 import Userbar from "./components/userbar";
 import EditUser from "./components/editUser";
-//import Signup from "./components/signup";
-//import Login from "./components/login";
-//import Modal from "./components/modal";
 import Navbar from "./components/navbar";
 import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
@@ -71,6 +67,7 @@ class App extends Component {
   //ACTUALIZACIONES EDIT USER
   handleFormHealthLabelsSubmit = (e,healthLabels) => {
     e.preventDefault();
+    console.log('SUBMIT DEL EDITUSER', healthLabels)
     //const { healthLabels, dietLabels } = this.state;
     //this.setAppUserLabels(healthLabels);
     let dietLabels = [];

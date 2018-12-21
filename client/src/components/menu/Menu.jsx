@@ -20,56 +20,34 @@ export default class Menu extends Component {
     this.edamamService = new EdamamService();
   }
 
-  componentDidMount() {
-    this.userDefault();
-  }
+  // componentDidMount() {
+  //   this.userDefault();
+  // }
 
-  userDefault = healthLabels => {
-    healthLabels = this.props.user.healthLabels;
-    this.setState({
-      healthLabels
-    });
-  };
-
-  //LÓGICA DE --HEALTHLABEL--
-  //Cambiar por el ternario de Search
-
-  handleChange = e => {
-    let inputLabel = e.target.value;
-    let healthLabels = this.state.healthLabels;
-
-    if (!healthLabels.some(label => label === inputLabel)) {
-      console.log("No hay etiqueta, la añado");
-      healthLabels.push(inputLabel);
-    } else {
-      console.log("Hay etiqueta, la quito");
-      healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
-    }
-    this.setState({ ...this.state, healthLabels });
-  };
-
-
-  //LÓGICA DEL --INGRSIENT-SELECTED--
-
-  addIngredientSelected = inputLabel => {
-    let ingredientsSelected = this.state.ingredientsSelected;
-    if (!this.state.ingredientsSelected
-        .find(ingredient => ingredient === inputLabel))
-        ingredientsSelected.push(inputLabel);
-    this.setState({
-        ingredientsSelected
-    });
-};
-
-deleteIngredientSelected = event => {
-    var ingredientsSelected = this.state.ingredientsSelected;
-    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-    this.setState({
-        ingredientsSelected
-    });
-};
-
-
+  // userDefault = healthLabels => {
+  //   healthLabels = this.props.user.healthLabels;
+  //   this.setState({
+  //     healthLabels
+  //   });
+  // };
+    
+    //LÓGICA DE --HEALTHLABEL--
+    //Cambiar por el ternario de Search
+  
+    handleChange = e => {
+      let inputLabel = e.target.value;
+      let healthLabels = this.state.healthLabels;
+  
+      if (!healthLabels.some(label => label === inputLabel)) {
+        console.log("No hay etiqueta, la añado");
+        healthLabels.push(inputLabel);
+      } else {
+        console.log("Hay etiqueta, la quito");
+        healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
+      }
+      this.setState({ ...this.state, healthLabels });
+    };
+    
   //API
 
   handleFormMealSubmit = e => {
