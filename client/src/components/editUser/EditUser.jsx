@@ -16,11 +16,13 @@ export default class EditUser extends Component {
 
     this.authService = new AuthService();
 
+    // this.setInit()
+    // this.setUserMenus()
   }
 
   componentWillMount() {
-    this.setInit()
-    this.setUserMenus()
+      this.setInit()
+      this.setUserMenus()
   }
 
   setInit = () => {
@@ -29,7 +31,8 @@ export default class EditUser extends Component {
       user: this.props.user,
       healthLabels: this.props.user.healthLabels
     });
-    console.log(this.state, "EL STATE EN SETINIT")
+  
+    //console.log(this.state, "EL STATE EN SETINIT")
   }
 
 
@@ -46,22 +49,6 @@ export default class EditUser extends Component {
       ...this.state,
       menu: this.state.menus[i],
       showMenu: true,
-    });
-  };
-
-  //GET PARA SACAR LOS MEALS DEL USER
-  //LOGIN- ME ASEGURO DE Q ME CTUALICE 
-  //DESPUES DE HSBER GUARDARDO UNA
-
-
-  handleFormHealthLabelsSubmit = e => {
-    e.preventDefault();
-    const { healthLabels, dietLabels } = this.state;
-    this.authService.edit({ healthLabels, dietLabels }).then(user => {
-      this.props.getUser(user);
-      this.setState({ ...this.state, user: user.data }, () =>
-        console.log("estado", this.state, "user", user)
-      );
     });
   };
 
@@ -82,7 +69,7 @@ export default class EditUser extends Component {
 
 
   render() {
-    
+
     var menu = this.state.showMenu && this.state.menu.length != 0 ? (
       <ShowMenu menu={this.state.menu} />
     ) : (
@@ -103,35 +90,24 @@ export default class EditUser extends Component {
             <h2>{this.state.user.username}'s menus</h2>
             <hr id="line-user" />
             {this.state.menus.map((menuBox, index) => {
-                return (
-                  <div
-                    className="link-box"
-                    onClick={() => this.handleMenuSelect(index)}
-                    key={index}>
-                    <p>{index}-{menuBox.menuName}</p>
-                  </div>
-                )})}
-
-            {/* {this.state.menus.length !== 0 ?
-              (this.state.menus.map((menuBox, index) => {
-                return (
-                  <div
-                    className="link-box"
-                    onClick={(index) => this.handleMenuSelect(index)}
-                    key={index}>
-                    <p>{index}-{menuBox.menuName}</p>
-                  </div>
-                )
-              }))
-              : ''} */}
+              return (
+                <div
+                  className="link-box"
+                  onClick={() => this.handleMenuSelect(index)}
+                  key={index}>
+                  <p>{index}-{menuBox.menuName}</p>
+                </div>
+              )
+            })}
 
           </div>
         </div>
-        <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
+        <form id="user-form" 
+        onSubmit={(e)=>this.props.handleFormHealthLabelsSubmit(e,this.state.healthLabels)}>
           <HealthLabels
             handleChange={this.handleChange}
             user={this.state.user}
-            healthLabels={this.healthLabels}
+            healthLabels={this.state.healthLabels}
           />
           <input id="profile-btn" type="submit" value="Send" />
         </form>

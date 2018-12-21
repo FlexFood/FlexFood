@@ -34,7 +34,7 @@ export default class Userbar extends Component {
     :
     <React.Fragment>
       <li><Link to="" onClick={()=>this.showModal("Login")} >Login</Link></li>
-      <li><Link to="" onClick={this.showModal} >Signup</Link></li>
+      <li><Link to="" onClick={()=>this.showModal("SignUp")} >Signup</Link></li>
     </React.Fragment>
     
     return (
@@ -46,7 +46,7 @@ export default class Userbar extends Component {
               show={this.state.show}
               children= {this.state.children}
               close={this.hideModal}
-              getUser={this.props.getUser} />
+              setUser={this.props.setUser} />
           </ul>
           
       </div>

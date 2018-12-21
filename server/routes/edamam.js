@@ -4,8 +4,6 @@ const axios = require("axios");
 
 edamamRoutes.post("/recipes", (req, res) => {
   const { label } = req.body;
-// label = label.join(" ")
-// console.log(label)
   axios
     .get(
       `https://api.edamam.com/search?q=${label}&to=12&app_id=${
@@ -20,11 +18,9 @@ edamamRoutes.post("/recipes", (req, res) => {
 
 
 edamamRoutes.post("/recipesAdvanced", (req, res) => {
-
   const { ingredientsSelected, healthLabels } = req.body;
-  //Al menos llega uno lleno
-  let urlCommun = `https://api.edamam.com/search?` +
-    `app_id=${process.env.APP_ID}` +
+  let urlCommun = `https://api.edamam.com/search?to=12` +
+    `&app_id=${process.env.APP_ID}` +
     `&app_key=${process.env.APP_KEY}`
 
     if(ingredientsSelected!=="") {
@@ -34,10 +30,7 @@ edamamRoutes.post("/recipesAdvanced", (req, res) => {
       healthLabels.forEach(label => {
         urlCommun += `&health=${label}`
       })
-    }
-
-    console.log(urlCommun, 'url vompletaaaaaa')
-    
+    } 
   axios
     .get(urlCommun)
     .then(response => {

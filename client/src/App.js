@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 //import ReactDOM from "react-dom";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
@@ -10,9 +10,9 @@ import AuthService from "./services/AuthService.js";
 
 import Userbar from "./components/userbar";
 import EditUser from "./components/editUser";
-import Signup from "./components/signup";
+//import Signup from "./components/signup";
 //import Login from "./components/login";
-import Modal from "./components/modal";
+//import Modal from "./components/modal";
 import Navbar from "./components/navbar";
 import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
@@ -46,22 +46,10 @@ class App extends Component {
       .then(user => this.setState({ ...this.state, user }));
   };
 
-  getUser = user => {
+  setUser = user => {
     this.setState({ ...this.state, user });
   };
 
-  logout = () => {
-    this.authService
-      .logout()
-      .then(() =>
-        this.setState({ ...this.state, user: null, redirectToHome: true })
-      );
-  };
-
-  
-
-  //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
-  //CUALQUIER RUTA
   setRecipes = (recipes, recipesTitle) => {
     this.setState({
       ...this.state,
@@ -72,6 +60,33 @@ class App extends Component {
     });
   };
 
+  logout = () => {
+    this.authService
+      .logout()
+      .then(() =>
+        this.setState({ ...this.state, user: null, redirectToHome: true })
+      );
+  };
+
+  //ACTUALIZACIONES EDIT USER
+  handleFormHealthLabelsSubmit = (e,healthLabels) => {
+    e.preventDefault();
+    //const { healthLabels, dietLabels } = this.state;
+    //this.setAppUserLabels(healthLabels);
+    let dietLabels = [];
+    this.authService.edit({ healthLabels, dietLabels })
+    .then(user => {
+      this.setState({ ...this.state, user }, () =>
+        console.log("estado", this.state, "user", user)
+      );
+    });
+  };
+
+
+
+  //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
+  //CUALQUIER RUTA
+
   render() {
 
     return (
@@ -80,23 +95,16 @@ class App extends Component {
           className="navbar"
           user={this.state.user}
           logout={this.logout}
-          getUser={this.getUser}
+          setUser={this.setUser}
         />
         <Navbar user={this.state.user} />
 
         <Switch>
-          <Route
-            exact
-            path="/"
+          <Route exact path="/"
             render={() => (
-              <Search
-                setRecipes={this.setRecipes}
-              />
-            )}
+              <Search setRecipes={this.setRecipes} />)}
           />
-          <Route
-            exact
-            path="/recipes"
+          <Route exact path="/recipes"
             render={() => (
               <ReactCSSTransitionGroup
                 transitionName="css-transition"
@@ -111,41 +119,31 @@ class App extends Component {
               </ReactCSSTransitionGroup>
             )}
           />
-
-          <Route
-            exact
-            path="/advancedSearch"
+          <Route exact path="/advancedSearch"
             render={() => {
-              console.log(this.state.recipes, "Recetas en APP");
+              //console.log(this.state.recipes, "Recetas en APP");
               return (
                 <AdvancedSearch
-                  //handleFormAdvancedSubmit={this.handleFormAdvancedSubmit}
-                  //ingredientsSelected={this.state.ingredientsSelected}
-                  //deleteIngredient={this.deleteIngredient}
-                  //handleChangeChecked={this.handleChangeChecked}
-                  //addIngredient={this.addIngredient}
                   user={this.state.user}
                   setRecipes={this.setRecipes}
-                  //recipes={this.state.recipes}
-                  // redirectToRecipes={this.state.redirectToRecipes}
                 />
               );
             }}
           />
-
-          <Route
-            exact
-            path="/editUser"
-            render={() => (
-              <EditUser user={this.state.user} getUser={this.getUser} />
-            )}
-          />
-          <Route
-            exact
-            path="/menu"
+          <Route exact path="/converter"
+            render={() => <Converter />} />
+          <Route exact path="/menu"
             render={() => <Menu user={this.state.user} />}
           />
-          <Route exact path="/converter" render={() => <Converter />} />
+          <Route exact path="/editUser"
+            render={() => (
+              <EditUser
+                user={this.state.user}
+                handleFormHealthLabelsSubmit={this.handleFormHealthLabelsSubmit}
+                //setUser={this.setUser} 
+                />
+            )}
+          />
         </Switch>
       </div>
     );

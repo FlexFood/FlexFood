@@ -22,29 +22,21 @@ class EdamamService {
   };
 
   menuLunchSearch = objectSearch => {
-
-    ///console.log(objectSearch, 'MenuLunchSearch: en EdamamService')
     objectSearch.calories = [301,600];
-    //console.log(objectSearch, 'con calories')
-
-   //const menuSearchObj = {healthLabels:["peanut-free", "vegetarian"], days: 3, calories:[301,600]}
     return this.service.post("/menu", objectSearch)
     .then(response => {
-      //console.log(response)
        return response;
     })
   };
 
   menuDinnerSearch = objectSearch => {
     objectSearch.calories = [0,300];
-    //const menuSearchObj = {healthLabels:["peanut-free", "vegetarian"], days: 3, calories:[0,300]}
      return this.service.post("/menu", objectSearch)
      .then(response => {
-       console.log(response)
         return response;
      })
    };
-  
+ 
 }
 
 export default EdamamService;

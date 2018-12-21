@@ -23,7 +23,8 @@ export default class Login extends Component {
 
     this.authService.login({ username, password })
     .then(user => {
-      this.props.getUser(user);
+      console.log(this.props, "ANTES DEL FALLO")
+      this.props.setUser(user);
       this.setState({...this.state, redirect: true });
     });
   };
