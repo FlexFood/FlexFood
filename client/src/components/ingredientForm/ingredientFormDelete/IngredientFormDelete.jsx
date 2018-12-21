@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import IngredientBoxDelete from "./ingredientBoxDelete";
+import ingredients from '../ingredients.json';
 import "./IngredientFormDelete.css";
 
 export default class IngredientFormDelete extends Component {
@@ -11,11 +12,6 @@ export default class IngredientFormDelete extends Component {
       <h2>Selected ingredients:</h2>
       ) : (
         <h2>There are no selected ingredients</h2>
-    );
-
-    console.log(
-      ingredientsSelected,
-      "props-----ingredientsSelected en deleteForm"
     );
     return (
       <div className="ingredient-form-delete">
