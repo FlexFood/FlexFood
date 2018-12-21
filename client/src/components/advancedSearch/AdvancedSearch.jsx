@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-
 import './AdvancedSearch.css'
-
 import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
 import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
 import HealthLabels from "../healthLabels";
 //import AdvancedSearchForm from "./advancedSearchForm";
 //import ingredients from '../../ingredients.json';
-
 import EdamamService from "../../services/EdamamService";
+import { css } from "react-emotion";
+import { PulseLoader } from "react-spinners";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
+
 
 export default class AdvancedSearch extends Component {
     constructor() {
@@ -69,6 +76,13 @@ export default class AdvancedSearch extends Component {
     //     });
     // };
 
+    loadingChange = () => {
+        this.setState({
+          ...this.state,
+          loading: true
+        });
+      };
+
     //API
 
     handleFormSubmit = e => {
@@ -87,7 +101,7 @@ export default class AdvancedSearch extends Component {
             console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
             return;
         }
-
+        this.loadingChange();
         this.edamamService
             .advancedSearch({ ingredientsSelected, healthLabels })
             .then(recipes => {
@@ -99,6 +113,7 @@ export default class AdvancedSearch extends Component {
                     ...this.state,
                     recipes: recipes.data,
                     redirectToRecipes: true
+
                 });
             });
     };
@@ -107,6 +122,19 @@ export default class AdvancedSearch extends Component {
         if (this.state.redirectToRecipes) {
             return <Redirect to="/recipes" />
         }
+
+let search = "Search yours recipes!";
+
+        if(this.state.loading){
+            search = (   <PulseLoader
+              className={override}
+              sizeUnit={"px"}
+              size={10}
+              color={"#dbdbdb"}
+              loading={this.state.loading}
+            />)
+          }
+
         return (
             <form id="advancedSearch" onSubmit={this.handleFormSubmit}>
                 <div id="advenced-search-container" >
@@ -120,7 +148,7 @@ export default class AdvancedSearch extends Component {
                             deleteIngredientSelected={this.deleteIngredientSelected}
                             ingredientsSelected={this.state.ingredientsSelected}
                         />
-                        <input type="submit" value="Search yours recipes!!" id="submit-advanced" />
+                        <button type="submit" id="submit-advanced">{search}</button>
                     </section>
                     <section className="advanced-search-box">
                         <HealthLabels

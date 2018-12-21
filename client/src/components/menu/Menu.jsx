@@ -3,8 +3,16 @@ import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
 import MenuSave from "./menuSave";
 import "./Menu.css";
+import { css } from "react-emotion";
+import { PulseLoader } from "react-spinners";
 
 import EdamamService from "../../services/EdamamService";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 export default class Menu extends Component {
   constructor() {
@@ -20,20 +28,6 @@ export default class Menu extends Component {
     this.edamamService = new EdamamService();
   }
 
-  // componentDidMount() {
-  //   this.userDefault();
-  // }
-
-  // userDefault = healthLabels => {
-  //   healthLabels = this.props.user.healthLabels;
-  //   this.setState({
-  //     healthLabels
-  //   });
-  // };
-    
-    //LÓGICA DE --HEALTHLABEL--
-    //Cambiar por el ternario de Search
-  
     handleChange = e => {
       let inputLabel = e.target.value;
       let healthLabels = this.state.healthLabels;
@@ -48,13 +42,22 @@ export default class Menu extends Component {
       this.setState({ ...this.state, healthLabels });
     };
     
+
+
   //API
+
+  loadingChange = () => {
+    this.setState({
+      ...this.state,
+      loading: true
+    });
+  };
 
   handleFormMealSubmit = e => {
     e.preventDefault();
 
     let { days, healthLabels } = this.state;
-
+    this.loadingChange()
     this.edamamService
       .menuLunchSearch({ days, healthLabels })
       .then(recipesLunch => {
@@ -79,7 +82,8 @@ export default class Menu extends Component {
             this.setState({
               ...this.state,
               recipesDinner: recipes,
-              menuSave: true
+              menuSave: true,
+              loading: false
             });
           });
       });
@@ -95,6 +99,7 @@ export default class Menu extends Component {
   };
 
   render() {
+    
     var menuSave = this.state.menuSave ? (
       <MenuSave
         healthLabels={this.state.healthLabels}
@@ -107,6 +112,18 @@ export default class Menu extends Component {
     ) : (
       ""
     );
+
+    let search = "Search yours recipes!";
+
+    if(this.state.loading){
+        search = (   <PulseLoader
+          className={override}
+          sizeUnit={"px"}
+          size={10}
+          color={"#dbdbdb"}
+          loading={this.state.loading}
+        />)
+      }
 
     return (
       <div id="menu">
@@ -155,35 +172,12 @@ export default class Menu extends Component {
                 </option>
               </select>
             </div>
-            <input
+            <button
               type="submit"
               value="Search yours menu!!"
               id="submit-menu"
-            />
-            {/* <p>CaloriesForLunch</p> 
-            <div className="row">
-              <input type="range" min="0" max="10000" />
-              <input type="range" min="0" max="10000" />
-            </div>
-            <p>CaloriesForDinner</p> 
-            <div className="row">
-              <input type="range" min="0" max="10000" />
-              <input type="range" min="0" max="10000" />
-            </div>
-            <p>Time</p> 
-            <div className="row">
-              <input type="range" min="0" max="10000" />
-              <input type="range" min="0" max="10000" />
-            </div>*/}
+            >{search}</button>
           </div> 
-          {/* <div>
-            <h3>NOT included</h3>
-              <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
-              <IngredientFormDelete
-                        deleteIngredientSelected={this.deleteIngredientSelected}
-                        ingredientsSelected={this.state.ingredientsSelected}
-                    />
-          </div> */}
           <div className="container-menu">
             <HealthLabels
               handleChange={this.handleChange}

@@ -22,13 +22,13 @@ export default class Recipes extends Component {
       recipe: this.props.recipes[i]
     });
   };
-  componentWillMount(){
+  componentWillMount() {
     //console.log(this.props.search,"LAS PROPS Q LLEGAN RECIPES")
     if (this.props.recipesTitle)
-    this.setState({
-      ...this.state,
-      recipesTitle: this.props.recipesTitle
-    });
+      this.setState({
+        ...this.state,
+        recipesTitle: this.props.recipesTitle
+      });
   }
 
   scrollToRecipe = () => {
@@ -49,29 +49,31 @@ export default class Recipes extends Component {
     return (
       <div id="recipes">
         <h1>
-          Recipes <span>{this.state.recipesTitle}</span>
+          Recipes: <span>{this.state.recipesTitle}</span>
         </h1>
         <div id="recipes-container">
           {this.props.recipes &&
             this.props.recipes.map((recipe, i) => {
+              let time = `${recipe.recipe.totalTime} min`
+              if (recipe.recipe.totalTime === 0) time = "Not available"
+
               return (
                 <div
                   to="#recipe"
                   id="recipes-card"
                   key={i}
-                  onClick={() => {this.handleRecipeSelect(i);
-                    this.scrollToRecipe()}}
+                  onClick={() => {
+                    this.handleRecipeSelect(i);
+                    this.scrollToRecipe()
+                  }}
                 >
                   <img src={recipe.recipe.image} alt={recipe.recipe.label} />
                   <div id="card-text">
                     <h3>{recipe.recipe.label}</h3>
                     <hr />
                     <p>Yield: {recipe.recipe.yield}</p>
-                    {/* <ul>
-                      {recipe.recipe.healthLabels.map((ingredient, i) => {
-                        return <li key={i}>{ingredient}</li>;
-                      })}
-                    </ul> */}
+                    <p>Calories: {(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}</p>
+                    <p>Time: {time}</p>
                   </div>
                 </div>
               );

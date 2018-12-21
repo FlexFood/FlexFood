@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./MenuSave.css";
+import { Redirect } from "react-router-dom";
 
 import AuthService from "../../../services/AuthService";
 
@@ -40,7 +41,7 @@ export default class MenuSave extends Component {
       .then(menu => {
         console.log(menu, 'GURADADO EN YOUR PROFILE')
         // this.props.getUser(user)
-        // this.setState({ ...this.state, user: user.data }, () => console.log("estado", this.state, "user", user));
+         this.setState({ ...this.state, redirectToEditUser: true });
       });
 
     //7REDIRECT TO PROFILEEEE
@@ -59,6 +60,9 @@ export default class MenuSave extends Component {
   }
 
   render() {
+    if(this.state.redirectToEditUser){
+      return <Redirect to="/editUser" />
+    }
     console.log(this.state);
     return (
       <form id="save-menu" onSubmit={this.handleFormSubmit}>

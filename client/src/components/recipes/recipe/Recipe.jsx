@@ -23,14 +23,13 @@ export default class Recipe extends Component {
             src={this.props.recipe.recipe.image}
             alt={this.props.recipe.recipe.label}
           />
-          <Link 
+          <a 
             id="howtodo"
-            to={this.props.recipe.recipe.url}
+            href={this.props.recipe.recipe.url}
             target="_blank"
-            rel="noopener noreferrer"
           >
             How to make
-          </Link>
+          </a>
           <hr />
           <ul>
             {this.props.recipe.recipe.healthLabels.map((healthLabel, i) => {
