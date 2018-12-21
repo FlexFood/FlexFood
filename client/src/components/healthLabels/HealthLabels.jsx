@@ -8,6 +8,7 @@ export default class HealthLabels extends Component {
   }
 
   checkedLabelsInit = () => {
+    console.log("checkLabelInit")
     if(this.props.user)
     this.props.user.healthLabels.map(label => {
       label = `${label}`;
@@ -67,7 +68,7 @@ export default class HealthLabels extends Component {
               checked={this.state["vegan"]}
               onChange={e => {
                 this.props.handleChange(e);
-                this.checkedLabels();
+                this.checkedLabels(e);
               }}
             />
             Vegan
@@ -91,8 +92,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="high-fiber"
               checked={this.state["high-fiber"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["high-fiber"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             High-Fiber
           </label>
@@ -102,8 +105,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="high-protein"
               checked={this.state["high-protein"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["high-protein"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             High-Protein
           </label>
@@ -113,8 +118,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="low-carb"
               checked={this.state["low-carb"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["low-carb"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             Low-Carb
           </label>
@@ -124,8 +131,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="low-fat"
               checked={this.state["low-fat"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["low-fat"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             Low-Fat
           </label>
@@ -135,8 +144,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="low-sodium"
               checked={this.state["low-sodium"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["low-sodium"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             Low-Sodium
           </label>
@@ -172,8 +183,10 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="balanced"
               checked={this.state["balanced"]}
-              onChange={e => this.props.handleChange(e)}
-              // checked={this.state["balanced"]}
+              onChange={e => {
+                this.props.handleChange(e);
+                this.checkedLabels(e);
+              }}
             />
             Balanced
           </label>

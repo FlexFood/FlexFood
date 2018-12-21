@@ -18,12 +18,13 @@ export default class Login extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-
+    this.props.close();
     const { username, password } = this.state;
 
     this.authService.login({ username, password })
     .then(user => {
-      this.props.getUser(user);
+      console.log(this.props, "ANTES DEL FALLO")
+      this.props.setUser(user);
       this.setState({...this.state, redirect: true });
     });
   };

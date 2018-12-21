@@ -28,8 +28,9 @@ export default class EditUser extends Component {
       user: this.props.user,
       healthLabels: this.props.user.healthLabels
     });
-    console.log(this.state, "EL STATE EN SETINIT");
-  };
+  
+  }
+
 
   setUserMenus = () => {
     this.authService
@@ -42,21 +43,6 @@ export default class EditUser extends Component {
       ...this.state,
       menu: this.state.menus[i],
       showMenu: true
-    });
-  };
-
-  //GET PARA SACAR LOS MEALS DEL USER
-  //LOGIN- ME ASEGURO DE Q ME CTUALICE
-  //DESPUES DE HSBER GUARDARDO UNA
-
-  handleFormHealthLabelsSubmit = e => {
-    e.preventDefault();
-    const { healthLabels, dietLabels } = this.state;
-    this.authService.edit({ healthLabels, dietLabels }).then(user => {
-      this.props.getUser(user);
-      this.setState({ ...this.state, user: user.data }, () =>
-        console.log("estado", this.state, "user", user)
-      );
     });
   };
 
@@ -84,10 +70,10 @@ export default class EditUser extends Component {
   };
 
   render() {
-    var menu =
-      this.state.showMenu && this.state.menu.length != 0 ? (
-        <ShowMenu menu={this.state.menu} />
-      ) : (
+
+    var menu = this.state.showMenu && this.state.menu.length != 0 ? (
+      <ShowMenu menu={this.state.menu} />
+    ) : (
         ""
       );
     return (
