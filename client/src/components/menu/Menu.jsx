@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 
-//import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
-//import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
-import IngredientFormAdd from "../ingredientForm/ingredientFormAdd";
-import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
 import HealthLabels from "../healthLabels";
 import MenuSave from "./menuSave";
 import "./Menu.css";

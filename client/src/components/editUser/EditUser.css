@@ -1,32 +1,44 @@
 #profile {
+  width: 100vw;
+  padding: 0 7.5vw;
+  padding: 7vh 0 7.2vh 0;
+  background-color: rgb(224, 240, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#profile-aux {
   display: flex;
   justify-content: space-around;
-  padding: 4vh 3vw;
+  width: 90vw;
 }
 #user-container {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 25vw;
   padding: 2.5vh;
-  background-color: rgb(224, 224, 224);
 }
 
 #user-container img {
   margin-top: 5vh;
   height: 15vh;
   border-radius: 7.5vh;
-
 }
+
 #user-form {
   width: 25vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(224, 224, 224);
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 2vh;
 }
+
 #profile-btn {
   text-align: center;
   width: 22.6vw;
@@ -38,38 +50,71 @@
   border: none;
   font-size: 14px;
 }
+
 #profile-btn:hover {
   color: black;
   background-color: rgb(238, 238, 238);
 }
+
 #menu-user-container {
   width: 25vw;
   display: flex;
   align-items: center;
   /* justify-content: center; */
   flex-direction: column;
-  background-color: rgb(224, 224, 224);
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 2vh;
 }
+
 #user-container h2 {
   width: 25vw;
   color: rgb(97, 97, 97);
   margin: 0 2.5vh;
 }
+
 #line-user {
   width: 22.3vw;
   margin: 1vh auto;
   padding: 0;
   border: 0.5px solid rgb(179, 179, 179);
 }
+
 #menu-user-container h2 {
   width: 25vw;
   color: rgb(97, 97, 97);
   margin: 0 2.5vh;
 }
-.aux-container{
+
+.aux-container {
   width: 25vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+#menu-shower {
+  flex-direction: column;
+  align-items: center;
+}
+
+#menu-shower h2 {
+  padding: 2.5vh;
+}
+
+.link-box {
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  background-color: rgb(179, 179, 179);
+  cursor: pointer;
+  width: 21.5vw;
+  height: 5vh;
+  margin: 1vh;
+  color: rgb(94, 94, 94);
+  transition: 0.5s;
+}
+.link-box:hover {
+  background-color: rgb(94, 94, 94);
+  color: black;
 }

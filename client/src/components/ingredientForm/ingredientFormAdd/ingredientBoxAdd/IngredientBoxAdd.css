@@ -1,21 +1,24 @@
-#ingredient{
+.ingredient{
+  font-size: 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 4vh;
+  justify-content: flex-start;
+  height: 5vh;
   margin: 0.5vh 2vh;
-  background-color: rgb(194, 194, 194);
+  background-color: rgba(238, 238, 238,0.8);
   color: rgb(97, 97, 97);
   transition: 0.5s;
+  border: none;
+
 }
-#ingredient:hover {
+.ingredient:hover {
   color: black;
-  background-color: rgb(97, 97, 97);
+  background-color: rgb(190, 190, 190);
 }
-#ingredient p{
-  margin-left: 2vh;
+.ingredient p{
+margin: 1vh 1vh
 }
-#ingredient button{
+.ingredient button{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,10 +26,7 @@
   height: 3vh;
   background-color: rgb(238, 238, 238);
   color: rgb(97, 97, 97);
-  transition: 0.5s;
-  border: none;
 }
-#ingredient button:hover {
-  color: black;
-  background-color: rgb(194, 194, 194);
+.divisor{
+margin: 1vh 0vh
 }

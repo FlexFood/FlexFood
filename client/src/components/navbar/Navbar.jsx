@@ -17,7 +17,7 @@ export default class Navbar extends Component {
         <div id="navbar">
           <div id="label-composition">
             <Link to="/">
-              <h1>RecipesForUse</h1>
+              <h1 id="logo">RecipesForUse</h1>
             </Link>
           </div>
           <ul>

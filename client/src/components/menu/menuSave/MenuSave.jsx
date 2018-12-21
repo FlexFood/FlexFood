@@ -46,6 +46,18 @@ export default class MenuSave extends Component {
     //7REDIRECT TO PROFILEEEE
   };
 
+  scrollToRecipe = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+
+  componentDidMount(){
+    this.scrollToRecipe()
+  }
+
   render() {
     console.log(this.state);
     return (

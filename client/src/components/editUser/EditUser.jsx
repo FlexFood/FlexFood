@@ -15,12 +15,11 @@ export default class EditUser extends Component {
     };
 
     this.authService = new AuthService();
-
   }
 
   componentWillMount() {
-    this.setInit()
-    this.setUserMenus()
+    this.setInit();
+    this.setUserMenus();
   }
 
   setInit = () => {
@@ -29,30 +28,26 @@ export default class EditUser extends Component {
       user: this.props.user,
       healthLabels: this.props.user.healthLabels
     });
-    console.log(this.state, "EL STATE EN SETINIT")
-  }
-
+    console.log(this.state, "EL STATE EN SETINIT");
+  };
 
   setUserMenus = () => {
-
     this.authService
       .getUserMenus()
       .then(menus => this.setState({ ...this.state, menus }));
-
   };
 
   handleMenuSelect = i => {
     this.setState({
       ...this.state,
       menu: this.state.menus[i],
-      showMenu: true,
+      showMenu: true
     });
   };
 
   //GET PARA SACAR LOS MEALS DEL USER
-  //LOGIN- ME ASEGURO DE Q ME CTUALICE 
+  //LOGIN- ME ASEGURO DE Q ME CTUALICE
   //DESPUES DE HSBER GUARDARDO UNA
-
 
   handleFormHealthLabelsSubmit = e => {
     e.preventDefault();
@@ -80,39 +75,54 @@ export default class EditUser extends Component {
     }
   };
 
+  scrollToMenu = () => {
+    window.scrollBy({
+      top: document.querySelector("body").clientHeight, // could be negative value
+      left: 0,
+      behavior: "smooth"
+    });
+  };
 
   render() {
-    
-    var menu = this.state.showMenu && this.state.menu.length != 0 ? (
-      <ShowMenu menu={this.state.menu} />
-    ) : (
+    var menu =
+      this.state.showMenu && this.state.menu.length != 0 ? (
+        <ShowMenu menu={this.state.menu} />
+      ) : (
         ""
       );
     return (
       <div id="profile">
-        {menu}
-        <div id="user-container">
-          <div className="aux-container">
-            <h2>{this.state.user.username}'s profile</h2>
-            <hr id="line-user" />
-            <img src={this.state.user.pictureUrl} alt="userImg" />
+        <div id="profile-aux">
+          <div id="user-container">
+            <div className="aux-container">
+              <h2>{this.state.user.username}'s profile</h2>
+              <hr id="line-user" />
+              <img src={this.state.user.pictureUrl} alt="userImg" />
+            </div>
           </div>
-        </div>
-        <div id="menu-user-container">
-          <div className="aux-container">
-            <h2>{this.state.user.username}'s menus</h2>
-            <hr id="line-user" />
-            {this.state.menus.map((menuBox, index) => {
-                return (
-                  <div
-                    className="link-box"
-                    onClick={() => this.handleMenuSelect(index)}
-                    key={index}>
-                    <p>{index}-{menuBox.menuName}</p>
-                  </div>
-                )})}
-
-            {/* {this.state.menus.length !== 0 ?
+          <div id="menu-user-container">
+            <div className="aux-container">
+              <h2>{this.state.user.username}'s menus</h2>
+              <hr id="line-user" />
+              <div id="menu-shower">
+                {this.state.menus.map((menuBox, index) => {
+                  return (
+                    <div
+                      className="link-box"
+                      onClick={() => {
+                        this.handleMenuSelect(index);
+                        this.scrollToMenu();
+                      }}
+                      key={index}
+                    >
+                      <p className="menu-lines">
+                        {index + 1} | {menuBox.menuName}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* {this.state.menus.length !== 0 ?
               (this.state.menus.map((menuBox, index) => {
                 return (
                   <div
@@ -124,19 +134,20 @@ export default class EditUser extends Component {
                 )
               }))
               : ''} */}
-
+            </div>
           </div>
+          <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
+            <HealthLabels
+              handleChange={this.handleChange}
+              user={this.state.user}
+              healthLabels={this.healthLabels}
+            />
+            <input id="profile-btn" type="submit" value="Send" />
+          </form>
         </div>
-        <form id="user-form" onSubmit={this.handleFormHealthLabelsSubmit}>
-          <HealthLabels
-            handleChange={this.handleChange}
-            user={this.state.user}
-            healthLabels={this.healthLabels}
-          />
-          <input id="profile-btn" type="submit" value="Send" />
-        </form>
+        {menu}
       </div>
-    )// : (
+    ); // : (
     //     <p>Loading...</p>
     //   );
   }

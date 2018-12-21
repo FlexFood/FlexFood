@@ -122,13 +122,16 @@
 .menu-card h2 {
   margin: 0;
 }
-.on {
+/* .on {
   display:block;
 }
 
 .off{
   display:none;
-}
+  /* text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+} */
 span{
   color: rgb(236, 65, 65);
 }

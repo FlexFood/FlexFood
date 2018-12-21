@@ -23,15 +23,25 @@ export default class ShowMenu extends Component {
     });
     };
 
+    scrollToMenu = () => {
+        window.scrollBy({
+          top: document.querySelector("body").clientHeight, // could be negative value
+          left: 0,
+          behavior: "smooth"
+        });
+      };
+
     componentWillMount() {
         this.recipesInit();
     }
 
     componentWillReceiveProps() {
         this.recipesInit();
-
     }
 
+    componentDidMount(){
+        this.scrollToMenu();
+    }
 
     render() {
         if(this.state.menu && this.state.menu.length !== 0)
@@ -77,7 +87,6 @@ export default class ShowMenu extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <input id="submit-save-menu" type="submit" value="Save your menu" />
             </form>
         );}
         else{

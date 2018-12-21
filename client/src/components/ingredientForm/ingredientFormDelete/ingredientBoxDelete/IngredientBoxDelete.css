@@ -1,0 +1,9 @@
+#delete-ingredient{
+  justify-content: space-between;
+}
+#aux-delete{
+  display: flex;
+}
+.rubis-btn{
+  border-style: none;
+}
