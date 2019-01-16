@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
-
-//USER
 import AuthService from "./services/AuthService.js";
 
 
@@ -14,7 +12,6 @@ import AdvancedSearch from "./components/advancedSearch";
 import Converter from "./components/converter"
 import Menu from "./components/menu";
 import Search from "./components/search";
-
 import Recipes from "./components/recipes";
 
 class App extends Component {
@@ -135,9 +132,7 @@ class App extends Component {
           <Route exact path="/editUser"
             render={() => (
               <EditUser
-                user={this.state.user}
                 handleFormHealthLabelsSubmit={this.handleFormHealthLabelsSubmit}
-                //setUser={this.setUser} 
                 />
             )}
           />

@@ -7,33 +7,21 @@ export default class EditUser extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
-      healthLabels: [],
-      menus: [],
-      menu: null,
       showMenu: false
     };
 
     this.authService = new AuthService();
+    this.fetchUser()
+
   }
 
-  componentWillMount() {
-    this.setInit();
-    this.setUserMenus();
-  }
-  setInit = () => {
-    this.setState({
-      ...this.state,
-      user: this.props.user,
-      healthLabels: this.props.user.healthLabels
-    });
-  
- }
-  setUserMenus = () => {
+
+  fetchUser = () => {
     this.authService
-      .getUserMenus()
-      .then(menus => this.setState({ ...this.state, menus }));
+      .loggedin()
+      .then(user => this.setState({ ...this.state, user }));
   };
+
 
   handleMenuSelect = i => {
     this.setState({
@@ -58,9 +46,6 @@ export default class EditUser extends Component {
     }
   };
 
-
-
-
   scrollToMenu = () => {
     window.scrollBy({
       top: document.querySelector("body").clientHeight, // could be negative value
@@ -76,7 +61,8 @@ export default class EditUser extends Component {
     ) : (
         ""
       );
-    return (
+
+    return this.state.user ? (
       <div id="profile">
         <div id="profile-aux">
           <div id="user-container">
@@ -91,7 +77,7 @@ export default class EditUser extends Component {
               <h2>{this.state.user.username}'s menus</h2>
               <hr id="line-user" />
               <div id="menu-shower">
-                {this.state.menus.map((menuBox, index) => {
+                {this.state.user.menus.map((menuBox, index) => {
                   return (
                     <div
                       className="link-box"
@@ -121,8 +107,8 @@ export default class EditUser extends Component {
         </div>
         {menu}
       </div>
-    ); // : (
-    //     <p>Loading...</p>
-    //   );
+     ) : (
+        <p>Loading...</p>
+      );
   }
 }
