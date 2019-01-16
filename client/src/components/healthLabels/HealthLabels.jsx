@@ -8,37 +8,26 @@ export default class HealthLabels extends Component {
   }
 
   checkedLabelsInit = () => {
-    console.log("checkLabelInit")
-    if(this.props.user)
     this.props.user.healthLabels.map(label => {
-      label = `${label}`;
-      this.setState({ ...this.state, [label]: "checked" });
-    });
-  };
-
-  //LO HE CAMBIADO PARA MEAL Y ESTAÄ
-  //SIN COMPROBAR EN ADVANCEDSEARCH
-
-  checkedLabels = e => {
-    console.log(e);
-    let inputLabel = e.target.value;
-    let healthLabels = this.state;
-
-    console.log(Object.keys(healthLabels), "Array q mapeo con las keys");
-    Object.keys(healthLabels).map(label => {
-      console.log(label, "propiedad la quita y la pone");
-      if (label === inputLabel) {
-        console.log("hay eiqueta en el componente healthhhhalbel");
-        delete healthLabels[inputLabel];
-      } else {
-        label = `${label}`;
-        this.setState({ ...this.state, [label]: "checked" });
-      }
+      this.setState({ ...this.state, [label]: true });
     });
   };
 
   componentWillMount() {
     this.checkedLabelsInit();
+  }
+
+  checkedLabels = e => {
+    let label = e.target.value;
+    if(this.state[label]){
+      this.setState({...this.state, [label]:false})
+    } else {
+      this.setState({...this.state, [label]: true})
+    }
+  }
+  
+  componentDidUpdate(){
+    this.props.handleChange(this.state);
   }
 
   render() {
@@ -54,7 +43,6 @@ export default class HealthLabels extends Component {
               value="vegetarian"
               checked={this.state["vegetarian"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -67,7 +55,6 @@ export default class HealthLabels extends Component {
               value="vegan"
               checked={this.state["vegan"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -80,7 +67,6 @@ export default class HealthLabels extends Component {
               value="paleo"
               checked={this.state["paleo"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -93,7 +79,6 @@ export default class HealthLabels extends Component {
               value="high-fiber"
               checked={this.state["high-fiber"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -106,7 +91,6 @@ export default class HealthLabels extends Component {
               value="high-protein"
               checked={this.state["high-protein"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -119,7 +103,6 @@ export default class HealthLabels extends Component {
               value="low-carb"
               checked={this.state["low-carb"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -132,7 +115,6 @@ export default class HealthLabels extends Component {
               value="low-fat"
               checked={this.state["low-fat"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -145,7 +127,6 @@ export default class HealthLabels extends Component {
               value="low-sodium"
               checked={this.state["low-sodium"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -158,7 +139,6 @@ export default class HealthLabels extends Component {
               value="low-sugar"
               checked={this.state["low-sugar"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -170,7 +150,6 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="alcohol-free"
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
               checked={this.state["alcohol-free"]}
@@ -184,7 +163,6 @@ export default class HealthLabels extends Component {
               value="balanced"
               checked={this.state["balanced"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -202,7 +180,6 @@ export default class HealthLabels extends Component {
               value="gluten-free"
               checked={this.state["gluten-free"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -214,7 +191,6 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="dairy-free"
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
               checked={this.state["dairy-free"]}
@@ -227,7 +203,6 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="egg-free"
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
               checked={this.state["egg-free"]}
@@ -241,7 +216,6 @@ export default class HealthLabels extends Component {
               value="soy-free"
               checked={this.state["soy-free"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -254,7 +228,6 @@ export default class HealthLabels extends Component {
               value="fish-free"
               checked={this.state["fish-free"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -266,7 +239,6 @@ export default class HealthLabels extends Component {
               name="healthLabels"
               value="crustacean-free"
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
               checked={this.state["crustacean-free"]}
@@ -280,7 +252,6 @@ export default class HealthLabels extends Component {
               value="tree-nut-free"
               checked={this.state["tree-nut-free"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -293,7 +264,6 @@ export default class HealthLabels extends Component {
               value="peanut-free"
               checked={this.state["peanut-free"]}
               onChange={e => {
-                this.props.handleChange(e);
                 this.checkedLabels(e);
               }}
             />
@@ -306,73 +276,3 @@ export default class HealthLabels extends Component {
     );
   }
 }
-
-
-{/* <label>
-<input
-  type="checkbox"
-  name="healthLabels"
-  value="kosher"
-  checked={this.state["kosher"]}
-  onChange={e => {
-    this.props.handleChange(e);
-    this.checkedLabels(e);
-  }}
-/>
-Kosher
-</label>
-<label>
-<input
-  type="checkbox"
-  name="healthLabels"
-  value="low-potassium"
-  checked={this.state["low-potassium"]}
-  onChange={e => {
-    this.props.handleChange(e);
-    this.checkedLabels(e);
-  }}
-/>
-Bajo en potasio
-</label>
-
-
-<label>
-<input
-  type="checkbox"
-  name="healthLabels"
-  value="pescatarian"
-  checked={this.state["pescatarian"]}
-  onChange={e => {
-    this.props.handleChange(e);
-    this.checkedLabels(e);
-  }}
-/>
-Pescateriano
-</label>
-<label>
-<input
-  type="checkbox"
-  name="healthLabels"
-  value="pork-free"
-  checked={this.state["pork-free"]}
-  onChange={e => {
-    this.props.handleChange(e);
-    this.checkedLabels(e);
-  }}
-/>
-Sin cerdo
-</label>
-
-<label>
-<input
-  type="checkbox"
-  name="healthLabels"
-  value="sugar-conscisious"
-  checked={this.state["sugar-conscisious"]}
-  onChange={e => {
-    this.props.handleChange(e);
-    this.checkedLabels(e);
-  }}
-/>
-Muy bajo contenido en azucar
-</label> */}

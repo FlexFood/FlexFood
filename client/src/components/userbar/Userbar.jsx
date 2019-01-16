@@ -13,6 +13,7 @@ export default class Userbar extends Component {
     };
 
     this.authService = new AuthService();
+    this.fetchUser()
   }
 
   fetchUser = () => {

@@ -3,6 +3,7 @@ import HealthLabels from "../healthLabels";
 import ShowMenu from "../showMenu";
 import AuthService from "../../services/AuthService";
 import "./EditUser.css";
+
 export default class EditUser extends Component {
   constructor() {
     super();
@@ -28,18 +29,22 @@ export default class EditUser extends Component {
     });
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    let array = [...this.state[name]];
+  handleChange = obj => {
+    console.log(obj)
+  }
 
-    if (e.target.checked) {
-      array.push(value);
-      this.setState({ ...this.state, [name]: array });
-    } else {
-      array.splice(array.indexOf(value), 1);
-      this.setState({ ...this.state, [name]: array });
-    }
-  };
+  // handleChange = e => {
+  //   const { name, value } = e.target;
+  //   let array = [...this.state[name]];
+
+  //   if (e.target.checked) {
+  //     array.push(value);
+  //     this.setState({ ...this.state, [name]: array });
+  //   } else {
+  //     array.splice(array.indexOf(value), 1);
+  //     this.setState({ ...this.state, [name]: array });
+  //   }
+  // };
 
   scrollToMenu = () => {
     window.scrollBy({
@@ -95,7 +100,6 @@ export default class EditUser extends Component {
             <HealthLabels
               handleChange={this.handleChange}
               user={this.state.user}
-              healthLabels={this.healthLabels}
             />
             <input id="profile-btn" type="submit" value="Send" />
           </form>
