@@ -13,6 +13,8 @@ export default class EditUser extends Component {
 
     this.authService = new AuthService();
     this.fetchUser();
+    this.fetchMenus();
+
     this.healthLabels = [];
   }
 
@@ -20,6 +22,12 @@ export default class EditUser extends Component {
     this.authService
       .loggedin()
       .then(user => this.setState({ ...this.state, user }));
+  };
+
+  fetchMenus = () => {
+    this.authService
+      .getUserMenus()
+      .then(menus => this.setState({ ...this.state, menus }));
   };
 
   handleMenuSelect = i => {
@@ -63,7 +71,7 @@ export default class EditUser extends Component {
         ""
       );
 
-    return this.state.user ? (
+    return this.state.user && this.state.menus ? (
       <div id="profile">
         <div id="profile-aux">
           <div id="user-container">
@@ -78,7 +86,7 @@ export default class EditUser extends Component {
               <h2>{this.state.user.username}'s menus</h2>
               <hr id="line-user" />
               <div id="menu-shower">
-                {/* {this.state.user.menus.map((menuBox, index) => {
+                {this.state.menus.map((menuBox, index) => {
                   return (
                     <div
                       className="link-box"
@@ -93,14 +101,14 @@ export default class EditUser extends Component {
                       </p>
                     </div>
                   );
-                })} */}
+                })}
               </div>
             </div>
           </div>
           <form
             id="user-form"
             onSubmit={e =>
-              this.handleFormHealthLabelsSubmit(e, this.state.healthLabels)
+              this.handleHealthLabelsSubmit(e)
             }
           >
             <HealthLabels

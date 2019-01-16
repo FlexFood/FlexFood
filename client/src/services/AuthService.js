@@ -50,7 +50,6 @@ class AuthService {
   getUserMenus = () => {
     return this.service.get('/menus')
       .then(response => {
-        console.log("Llega al front ASIIIIN", response)
         return response.data
       })
   };
