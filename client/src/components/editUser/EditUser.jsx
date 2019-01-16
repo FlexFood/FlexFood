@@ -41,7 +41,7 @@ export default class EditUser extends Component {
 
   handleHealthLabelsSubmit = (e) => {
     e.preventDefault();
-    this.authService.edit(this.healthLabels)
+    this.authService.edit({healthLabels: this.healthLabels})
     .then(user => {
       this.setState({ ...this.state, user })
     })

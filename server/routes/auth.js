@@ -86,7 +86,7 @@ authRoutes.get("/loggedin", (req, res) => {
 });
 
 authRoutes.post("/edit", (req, res) => {
-  let update = { healthLabels, dietLabels } = req.body
+  let update = { healthLabels } = req.body
 
   User.findByIdAndUpdate(req.user._id, update, { new: true })
     .then(user => {
