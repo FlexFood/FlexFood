@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
-
 import { css } from "react-emotion";
 import { PulseLoader } from "react-spinners";
 import "./Search.css";
-
 import EdamamService from "../../services/EdamamService";
 
 const override = css`
@@ -17,8 +15,6 @@ export default class Search extends Component {
   constructor() {
     super();
     this.state = {
-      search: "",
-      // classNameLoading: "on",
       loading: false
     };
     this.edamamService = new EdamamService();
@@ -33,9 +29,8 @@ export default class Search extends Component {
     e.preventDefault();
     const search = this.state.search;
     if (search === "") return;
-    this.loadingChange();
+    this.loadingPoints();
     this.edamamService.getByLabel(search).then(recipes => {
-      console.log(recipes);
       this.props.setRecipes(recipes, search);
       this.setState({
         ...this.state,
@@ -45,7 +40,7 @@ export default class Search extends Component {
     });
   };
 
-  loadingChange = () => {
+  loadingPoints = () => {
     this.setState({
       ...this.state,
       classNameLoading: "off",
@@ -54,11 +49,11 @@ export default class Search extends Component {
   };
 
   render() {
-    let searchToogle = "search";
-
     if (this.state.redirectToRecipes) {
       return <Redirect to="/recipes" />;
     }
+    
+    let searchToogle = "search";
     if(this.state.loading){
       searchToogle = (   <PulseLoader
         className={override}

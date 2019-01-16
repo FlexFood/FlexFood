@@ -3,8 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 import AuthService from "./services/AuthService.js";
-
-
 import Userbar from "./components/userbar";
 import EditUser from "./components/editUser";
 import Navbar from "./components/navbar";
@@ -19,14 +17,6 @@ class App extends Component {
     super();
     this.state = {
       redirectToHome: false,
-      //APIS Q YA NO HAGO AQUI PROBAR A BORRRRRAR
-      ingredientsSelected: [],
-      healthLabels: [],
-      //REDUX- USER componente independiente
-      //NO haría aquí la llamada a authService 
-      user: null,
-      //REDUX- RECIPES componente independiente
-      recipes: null,
       redirectToRecipes: false,
     };
     this.authService = new AuthService();
@@ -48,8 +38,6 @@ class App extends Component {
       ...this.state,
       recipes,
       recipesTitle
-
-      //         redirectToRecipes: true
     });
   };
 
@@ -61,23 +49,7 @@ class App extends Component {
       );
   };
 
-  //ACTUALIZACIONES EDIT USER
-  handleFormHealthLabelsSubmit = (e,healthLabels) => {
-    e.preventDefault();
-    console.log('SUBMIT DEL EDITUSER', healthLabels)
-    //const { healthLabels, dietLabels } = this.state;
-    //this.setAppUserLabels(healthLabels);
-    let dietLabels = [];
-    this.authService.edit({ healthLabels, dietLabels })
-    .then(user => {
-      this.setState({ ...this.state, user }, () =>
-        console.log("estado", this.state, "user", user)
-      );
-    });
-  };
-
   render() {
-
     return (
       <div className="App">
         <Userbar
@@ -87,7 +59,6 @@ class App extends Component {
           setUser={this.setUser}
         />
         <Navbar user={this.state.user} />
-
         <Switch>
           <Route exact path="/"
             render={() => (
@@ -110,7 +81,6 @@ class App extends Component {
           />
           <Route exact path="/advancedSearch"
             render={() => {
-              //console.log(this.state.recipes, "Recetas en APP");
               return (
                 <AdvancedSearch
                   user={this.state.user}
