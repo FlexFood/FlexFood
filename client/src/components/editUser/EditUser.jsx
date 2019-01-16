@@ -12,16 +12,13 @@ export default class EditUser extends Component {
 
     this.authService = new AuthService();
     this.fetchUser()
-
   }
-
 
   fetchUser = () => {
     this.authService
       .loggedin()
       .then(user => this.setState({ ...this.state, user }));
   };
-
 
   handleMenuSelect = i => {
     this.setState({
@@ -31,12 +28,10 @@ export default class EditUser extends Component {
     });
   };
 
-  //CHECKED HEALTHLABELS
   handleChange = e => {
     const { name, value } = e.target;
     let array = [...this.state[name]];
 
-    console.log(array);
     if (e.target.checked) {
       array.push(value);
       this.setState({ ...this.state, [name]: array });
@@ -77,7 +72,7 @@ export default class EditUser extends Component {
               <h2>{this.state.user.username}'s menus</h2>
               <hr id="line-user" />
               <div id="menu-shower">
-                {this.state.user.menus.map((menuBox, index) => {
+                {/* {this.state.user.menus.map((menuBox, index) => {
                   return (
                     <div
                       className="link-box"
@@ -92,7 +87,7 @@ export default class EditUser extends Component {
                       </p>
                     </div>
                   );
-                })}
+                })} */}
               </div>
             </div>
           </div>
