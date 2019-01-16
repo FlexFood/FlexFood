@@ -12,7 +12,8 @@ export default class EditUser extends Component {
     };
 
     this.authService = new AuthService();
-    this.fetchUser()
+    this.fetchUser();
+    this.healthLabels = [];
   }
 
   fetchUser = () => {
@@ -29,22 +30,22 @@ export default class EditUser extends Component {
     });
   };
 
-  handleChange = obj => {
-    console.log(obj)
+  getHealthLabels = obj => {
+    this.healthLabels = []
+    Object.entries(obj).map(label => {
+      if (label[1] === true) {
+        this.healthLabels.push(label[0]);
+      }
+    });
+  };
+
+  handleHealthLabelsSubmit = (e) => {
+    e.preventDefault();
+    this.authService.edit(this.healthLabels)
+    .then(user => {
+      this.setState({ ...this.state, user })
+    })
   }
-
-  // handleChange = e => {
-  //   const { name, value } = e.target;
-  //   let array = [...this.state[name]];
-
-  //   if (e.target.checked) {
-  //     array.push(value);
-  //     this.setState({ ...this.state, [name]: array });
-  //   } else {
-  //     array.splice(array.indexOf(value), 1);
-  //     this.setState({ ...this.state, [name]: array });
-  //   }
-  // };
 
   scrollToMenu = () => {
     window.scrollBy({
@@ -55,10 +56,10 @@ export default class EditUser extends Component {
   };
 
   render() {
-
-    var menu = this.state.showMenu && this.state.menu.length != 0 ? (
-      <ShowMenu menu={this.state.menu} />
-    ) : (
+    var menu =
+      this.state.showMenu && this.state.menu.length != 0 ? (
+        <ShowMenu menu={this.state.menu} />
+      ) : (
         ""
       );
 
@@ -96,9 +97,14 @@ export default class EditUser extends Component {
               </div>
             </div>
           </div>
-          <form id="user-form" onSubmit={(e)=>this.props.handleFormHealthLabelsSubmit(e, this.state.healthLabels)}>
+          <form
+            id="user-form"
+            onSubmit={e =>
+              this.handleFormHealthLabelsSubmit(e, this.state.healthLabels)
+            }
+          >
             <HealthLabels
-              handleChange={this.handleChange}
+              getHealthLabels={this.getHealthLabels}
               user={this.state.user}
             />
             <input id="profile-btn" type="submit" value="Send" />
@@ -106,8 +112,8 @@ export default class EditUser extends Component {
         </div>
         {menu}
       </div>
-     ) : (
-        <p>Loading...</p>
-      );
+    ) : (
+      <p>Loading...</p>
+    );
   }
 }

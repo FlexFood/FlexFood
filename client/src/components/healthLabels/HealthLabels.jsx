@@ -27,7 +27,7 @@ export default class HealthLabels extends Component {
   }
   
   componentDidUpdate(){
-    this.props.handleChange(this.state);
+    this.props.getHealthLabels(this.state);
   }
 
   render() {

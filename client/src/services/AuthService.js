@@ -7,6 +7,7 @@ class AuthService {
       withCredentials: true
     })
   }
+  
   signup = (user) => {
     const formData = new FormData();
     Object.keys(user).forEach(key => formData.append(key, user[key]));
@@ -40,7 +41,6 @@ class AuthService {
   }
 
   saveMenu = (menu) => {
-    
     return this.service.post('/menu', menu,{ headers: {
       "Content-Type": "application/json"
     }})

@@ -76,11 +76,6 @@ class App extends Component {
     });
   };
 
-
-
-  //PARA ACTUALIZAR RECIPES Y PODER REDIRIGIRLA DESDE
-  //CUALQUIER RUTA
-
   render() {
 
     return (
