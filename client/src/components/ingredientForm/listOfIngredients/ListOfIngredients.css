@@ -1,3 +1,8 @@
+.ingredient-form-delete h2{
+  color: rgb(97, 97, 97);
+  margin: 0 0 1vh 2.2vh;
+  
+}
 #delete-ingredient{
   justify-content: space-between;
 }

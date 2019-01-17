@@ -17,6 +17,10 @@ export default class HealthLabels extends Component {
     this.checkedLabelsInit();
   }
 
+  componentDidMount() {
+    this.props.getHealthLabels(this.state);
+  }
+
   checkedLabels = e => {
     let label = e.target.value;
     if(this.state[label]){

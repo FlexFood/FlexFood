@@ -5,7 +5,7 @@ import EdamamService from "../../services/EdamamService";
 import AuthService from "../../services/AuthService";
 import HealthLabels from "../healthLabels";
 import AddIngredient from "../ingredientForm/addIngredient";
-import IngredientFormDelete from "../ingredientForm/ingredientFormDelete";
+import ListOfIngredients from "../ingredientForm/listOfIngredients";
 import { css } from "react-emotion";
 import { PulseLoader } from "react-spinners";
 
@@ -49,19 +49,38 @@ export default class AdvancedSearch extends Component {
     let ingredientsSelected = this.state.ingredientsSelected;
     if (
       !this.state.ingredientsSelected.find(
-        ingredient => ingredient === ingredientToAdd.name
+        ingredient => ingredient.name === ingredientToAdd.name
       )
     ) {
-      ingredientsSelected.push(ingredientToAdd.name);
+      ingredientsSelected.push(ingredientToAdd);
       this.setState({ ...this.state, ingredientsSelected });
     }
   };
 
-  deleteIngredientSelected = event => {
+  deleteIngredient = e => {
     var ingredientsSelected = this.state.ingredientsSelected;
-    ingredientsSelected.splice(ingredientsSelected.indexOf(event), 1);
-    this.setState({
-      ingredientsSelected
+    ingredientsSelected.splice(ingredientsSelected.indexOf(e), 1);
+    this.setState({ ingredientsSelected });
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    let searchConditions = {
+      ingredientsSelected: this.state.ingredientsSelected.map(ingredient => {
+        return ingredient.name;
+      }),
+      healtLabels: this.healthLabels
+    };
+
+    if (Object.values( searchConditions ).every(element => !element.length)) {
+        return;
+    }
+    this.loadingChange();
+    console.log(searchConditions)
+    this.edamamService.advancedSearch( searchConditions )
+    .then(recipes => {
+      this.props.setRecipes(recipes);
+      this.setState({ ...this.state, redirectToRecipes: true });
     });
   };
 
@@ -70,37 +89,6 @@ export default class AdvancedSearch extends Component {
       ...this.state,
       loading: true
     });
-  };
-
-  handleFormSubmit = e => {
-    e.preventDefault();
-    console.log("Pasa por handleFormAdvSubm en App");
-    console.log(this.state);
-
-    let { ingredientsSelected, healthLabels } = this.state;
-
-    if (
-      Object.values({ ingredientsSelected, healthLabels }).every(
-        element => !element.length
-      )
-    ) {
-      console.log("No pudesn estar todos vacios!!!!!!!!!!!!!");
-      return;
-    }
-    this.loadingChange();
-    this.edamamService
-      .advancedSearch({ ingredientsSelected, healthLabels: this.healthLabels })
-      .then(recipes => {
-        console.log("Respuesta en front");
-        console.log(recipes);
-
-        this.props.setRecipes(recipes);
-        this.setState({
-          ...this.state,
-          recipes: recipes.data,
-          redirectToRecipes: true
-        });
-      });
   };
 
   render() {
@@ -129,8 +117,8 @@ export default class AdvancedSearch extends Component {
             <AddIngredient addIngredient={this.addIngredient} />
           </section>
           <section className="advanced-search-box" id="box-submit">
-            <IngredientFormDelete
-              deleteIngredientSelected={this.deleteIngredientSelected}
+            <ListOfIngredients
+              deleteIngredient={this.deleteIngredient}
               ingredientsSelected={this.state.ingredientsSelected}
             />
             <button type="submit" id="submit-advanced">
