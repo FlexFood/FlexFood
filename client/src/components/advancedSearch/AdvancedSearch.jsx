@@ -20,13 +20,12 @@ export default class AdvancedSearch extends Component {
     super();
     this.state = {
       ingredientsSelected: [],
-      value: { min: 2, max: 10 },
       redirectToRecipes: false
     };
+
     this.authService = new AuthService();
     this.edamamService = new EdamamService();
     this.fetchUser();
-
     this.healthLabels = [];
   }
 
@@ -69,14 +68,12 @@ export default class AdvancedSearch extends Component {
       ingredientsSelected: this.state.ingredientsSelected.map(ingredient => {
         return ingredient.name;
       }),
-      healtLabels: this.healthLabels
+      healthLabels: this.healthLabels
     };
-
     if (Object.values( searchConditions ).every(element => !element.length)) {
         return;
     }
     this.loadingChange();
-    console.log(searchConditions)
     this.edamamService.advancedSearch( searchConditions )
     .then(recipes => {
       this.props.setRecipes(recipes);
@@ -96,10 +93,9 @@ export default class AdvancedSearch extends Component {
       return <Redirect to="/recipes" />;
     }
 
-    let search = "Search yours recipes!";
-
+    let buttonMessage = "Search yours recipes!";
     if (this.state.loading) {
-      search = (
+        buttonMessage = (
         <PulseLoader
           className={override}
           sizeUnit={"px"}
@@ -122,7 +118,7 @@ export default class AdvancedSearch extends Component {
               ingredientsSelected={this.state.ingredientsSelected}
             />
             <button type="submit" id="submit-advanced">
-              {search}
+              {buttonMessage}
             </button>
           </section>
           <section className="advanced-search-box">

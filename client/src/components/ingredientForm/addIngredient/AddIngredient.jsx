@@ -17,7 +17,7 @@ export default class AddIngredient extends Component {
         return ingredient.name.indexOf(e.target.value.toLowerCase()) === 0;
       }
     );
-    this.setState({ listOfIngredients, search: e.target.value });
+    this.setState({ ...this.state, listOfIngredients });
   };
 
   render() {
