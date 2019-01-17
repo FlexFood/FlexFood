@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import "./App.css";
 import AuthService from "./services/AuthService.js";
 import Userbar from "./components/userbar";
@@ -20,18 +19,7 @@ class App extends Component {
       redirectToRecipes: false,
     };
     this.authService = new AuthService();
-    this.fetchUser();
   }
-
-  fetchUser = () => {
-    this.authService
-      .loggedin()
-      .then(user => this.setState({ ...this.state, user }));
-  };
-
-  setUser = user => {
-    this.setState({ ...this.state, user });
-  };
 
   setRecipes = (recipes, recipesTitle) => {
     this.setState({
@@ -39,14 +27,6 @@ class App extends Component {
       recipes,
       recipesTitle
     });
-  };
-
-  logout = () => {
-    this.authService
-      .logout()
-      .then(() =>
-        this.setState({ ...this.state, user: null, redirectToHome: true })
-      );
   };
 
   render() {
@@ -66,17 +46,11 @@ class App extends Component {
           />
           <Route exact path="/recipes"
             render={() => (
-              <ReactCSSTransitionGroup
-                transitionName="css-transition"
-                transitionEnterTimeout={400}
-                transitionLeaveTimeout={300}
-              >
                 <Recipes
                   className="recipes-css-transition"
                   recipesTitle={this.state.recipesTitle}
                   recipes={this.state.recipes.data}
                 />
-              </ReactCSSTransitionGroup>
             )}
           />
           <Route exact path="/advancedSearch"
