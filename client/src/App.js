@@ -6,7 +6,7 @@ import Userbar from "./components/userbar";
 import EditUser from "./components/editUser";
 import Navbar from "./components/navbar";
 import AdvancedSearch from "./components/advancedSearch";
-import Converter from "./components/converter"
+import Converter from "./components/converter";
 import Menu from "./components/menu";
 import Search from "./components/search";
 import Recipes from "./components/recipes";
@@ -16,17 +16,13 @@ class App extends Component {
     super();
     this.state = {
       redirectToHome: false,
-      redirectToRecipes: false,
+      redirectToRecipes: false
     };
     this.authService = new AuthService();
   }
 
   setRecipes = (recipes, recipesTitle) => {
-    this.setState({
-      ...this.state,
-      recipes,
-      recipesTitle
-    });
+    this.setState({ ...this.state, recipes, recipesTitle });
   };
 
   render() {
@@ -40,20 +36,25 @@ class App extends Component {
         />
         <Navbar user={this.state.user} />
         <Switch>
-          <Route exact path="/"
-            render={() => (
-              <Search setRecipes={this.setRecipes} />)}
+          <Route
+            exact
+            path="/"
+            render={() => <Search setRecipes={this.setRecipes} />}
           />
-          <Route exact path="/recipes"
+          <Route
+            exact
+            path="/recipes"
             render={() => (
-                <Recipes
-                  className="recipes-css-transition"
-                  recipesTitle={this.state.recipesTitle}
-                  recipes={this.state.recipes.data}
-                />
+              <Recipes
+                className="recipes-css-transition"
+                recipesTitle={this.state.recipesTitle}
+                recipes={this.state.recipes.data}
+              />
             )}
           />
-          <Route exact path="/advancedSearch"
+          <Route
+            exact
+            path="/advancedSearch"
             render={() => {
               return (
                 <AdvancedSearch
@@ -63,16 +64,19 @@ class App extends Component {
               );
             }}
           />
-          <Route exact path="/converter"
-            render={() => <Converter />} />
-          <Route exact path="/menu"
+          <Route exact path="/converter" render={() => <Converter />} />
+          <Route
+            exact
+            path="/menu"
             render={() => <Menu user={this.state.user} />}
           />
-          <Route exact path="/editUser"
+          <Route
+            exact
+            path="/editUser"
             render={() => (
               <EditUser
                 handleFormHealthLabelsSubmit={this.handleFormHealthLabelsSubmit}
-                />
+              />
             )}
           />
         </Switch>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./MenuSave.css";
 import { Redirect } from "react-router-dom";
-
 import AuthService from "../../../services/AuthService";
 
 export default class MenuSave extends Component {
@@ -23,14 +22,11 @@ export default class MenuSave extends Component {
     this.recipesInit();
   }
 
-  //POST BACK PARA GUARDAR EN MONGO EL MENU
   handleFormSubmit = e => {
     e.preventDefault();
-    console.log(this.props.userId,"Pulsando el Guardar receta ");
     const { recipesDinner, recipesLunch } = this.state;
-
     let menu = {
-      owner: this.props.userId, //GuardarObjectID mirar en pizarra
+      owner: this.props.userId,
       menuName: this.props.name,
       numberOfDays: this.props.days,
       recipesDinner,
@@ -39,17 +35,13 @@ export default class MenuSave extends Component {
    menu = JSON.stringify(menu)
     this.authService.saveMenu(menu)
       .then(menu => {
-        console.log(menu, 'GURADADO EN YOUR PROFILE')
-        // this.props.getUser(user)
          this.setState({ ...this.state, redirectToEditUser: true });
       });
-
-    //7REDIRECT TO PROFILEEEE
   };
 
   scrollToRecipe = () => {
     window.scrollBy({
-      top: document.querySelector("body").clientHeight, // could be negative value
+      top: document.querySelector("body").clientHeight,
       left: 0,
       behavior: "smooth"
     });
@@ -63,7 +55,12 @@ export default class MenuSave extends Component {
     if(this.state.redirectToEditUser){
       return <Redirect to="/editUser" />
     }
-    console.log(this.state);
+
+    let saveButtonComponent = "";
+    if(this.props.showSaveButton){
+      saveButtonComponent = <input id="submit-save-menu" type="submit" value="Save your menu" />
+    }
+    
     return (
       <form id="save-menu" onSubmit={this.handleFormSubmit}>
         <table id="table-menu">
@@ -103,7 +100,7 @@ export default class MenuSave extends Component {
             </tr>
           </tbody>
         </table>
-        <input id="submit-save-menu" type="submit" value="Save your menu" />
+     {saveButtonComponent}
       </form>
     );
   }

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-
 import HealthLabels from "../healthLabels";
 import MenuSave from "./menuSave";
 import "./Menu.css";
 import { css } from "react-emotion";
 import { PulseLoader } from "react-spinners";
-
+import AuthService from "../../services/AuthService";
 import EdamamService from "../../services/EdamamService";
 
 const override = css`
@@ -18,33 +17,71 @@ export default class Menu extends Component {
   constructor() {
     super();
     this.state = {
-      name: Date.now(),
-      //API
+      name: new Date().toLocaleDateString(),
       days: 5,
-      ingredientsSelected: [],  //ingredientForm component
-      healthLabels: [], //labelInitUser // Por defecto lo del user
-      menuSave: false
+      menuSave: false,
+      showSaveButton: true
     };
     this.edamamService = new EdamamService();
+    this.authService = new AuthService();
+    this.fetchUser();
+    this.healthLabels = [];
   }
 
-    handleChange = e => {
-      let inputLabel = e.target.value;
-      let healthLabels = this.state.healthLabels;
-  
-      if (!healthLabels.some(label => label === inputLabel)) {
-        console.log("No hay etiqueta, la añado");
-        healthLabels.push(inputLabel);
-      } else {
-        console.log("Hay etiqueta, la quito");
-        healthLabels.splice(healthLabels.indexOf(inputLabel), 1);
+  fetchUser = () => {
+    this.authService
+      .loggedin()
+      .then(user => this.setState({ ...this.state, user }));
+  };
+
+  getHealthLabels = obj => {
+    this.healthLabels = [];
+    Object.entries(obj).map(label => {
+      if (label[1] === true) {
+        this.healthLabels.push(label[0]);
       }
-      this.setState({ ...this.state, healthLabels });
+    });
+  };
+
+  handleChangeName = e => {
+    const { value } = e.target;
+    this.setState({ ...this.state, name: value });
+  };
+
+  handleChangeDays = e => {
+    const { value } = e.target;
+    this.setState({ ...this.state, days: value });
+  };
+
+  handleFormMealSubmit = e => {
+    e.preventDefault();
+    let searchConditions = {
+      days: this.state.days,
+      healthLabels: this.healthLabels
     };
-    
-
-
-  //API
+    this.loadingChange();
+    this.edamamService.menuLunchSearch(searchConditions).then(recipesLunch => {
+      let recipes = recipesLunch.data.map(recipe => {
+        delete recipe.recipe["totalNutrients"];
+        return { ...recipe };
+      });
+      this.setState({ ...this.state, recipesLunch: recipes });
+      this.edamamService
+        .menuDinnerSearch(searchConditions)
+        .then(recipesDinner => {
+          let recipes = recipesDinner.data.map(recipe => {
+            delete recipe.recipe["totalNutrients"];
+            return { ...recipe };
+          });
+          this.setState({
+            ...this.state,
+            recipesDinner: recipes,
+            menuSave: true,
+            loading: false
+          });
+        });
+    });
+  };
 
   loadingChange = () => {
     this.setState({
@@ -53,79 +90,34 @@ export default class Menu extends Component {
     });
   };
 
-  handleFormMealSubmit = e => {
-    e.preventDefault();
-
-    let { days, healthLabels } = this.state;
-    this.loadingChange()
-    this.edamamService
-      .menuLunchSearch({ days, healthLabels })
-      .then(recipesLunch => {
-        let recipes = recipesLunch.data.map(recipe => {
-          console.log(recipe)
-          delete recipe.recipe['totalNutrients']
-          return ({...recipe})
-        })
-        console.log(recipesLunch, "recipes for LUNCH");
-        this.setState({
-          ...this.state,
-          recipesLunch: recipes
-        });
-        this.edamamService
-          .menuDinnerSearch({ days, healthLabels })
-          .then(recipesDinner => {
-            let recipes = recipesDinner.data.map(recipe => {
-              console.log(recipe)
-              delete recipe.recipe['totalNutrients']
-              return ({...recipe})
-            })
-            this.setState({
-              ...this.state,
-              recipesDinner: recipes,
-              menuSave: true,
-              loading: false
-            });
-          });
-      });
-  };
-
-  handleChangeName = e => {
-    const { value } = e.target;
-    this.setState({ ...this.state, name: value });
-  };
-  handleChangeDays = e => {
-    const { value } = e.target;
-    this.setState({ ...this.state, days: value });
-  };
-
   render() {
-    
     var menuSave = this.state.menuSave ? (
       <MenuSave
-        healthLabels={this.state.healthLabels}
-        days={this.state.days}
-        name={this.state.name}
-        userId={this.props.user._id}
-        recipesLunch={this.state.recipesLunch}
-        recipesDinner={this.state.recipesDinner}
+      days={this.state.days}
+      name={this.state.name}
+      userId={this.state.user._id}
+      recipesLunch={this.state.recipesLunch}
+      recipesDinner={this.state.recipesDinner}
+      showSaveButton={this.state.showSaveButton}
       />
     ) : (
       ""
     );
 
     let search = "Search yours recipes!";
-
-    if(this.state.loading){
-        search = (   <PulseLoader
+    if (this.state.loading) {
+      search = (
+        <PulseLoader
           className={override}
           sizeUnit={"px"}
           size={10}
           color={"#dbdbdb"}
           loading={this.state.loading}
-        />)
-      }
+        />
+      );
+    }
 
-    return (
+    return this.state.user ? (
       <div id="menu">
         <form id="form-menu" onSubmit={this.handleFormMealSubmit}>
           <div className="container-menu">
@@ -141,11 +133,7 @@ export default class Menu extends Component {
                 onChange={e => this.handleChangeName(e)}
               />
               <label className="labels-menu">Number of days</label>
-              <select
-                id="days-menu"
-                // placeholder="Menu's days [1-7]"
-                onChange={e => this.handleChangeDays(e)}
-              >
+              <select id="days-menu" onChange={e => this.handleChangeDays(e)}>
                 <option type="text" value="">
                   How many days?
                 </option>
@@ -172,22 +160,22 @@ export default class Menu extends Component {
                 </option>
               </select>
             </div>
-            <button
-              type="submit"
-              value="Search yours menu!!"
-              id="submit-menu"
-            >{search}</button>
-          </div> 
+            <button type="submit" value="Search yours menu!!" id="submit-menu">
+              {search}
+            </button>
+          </div>
           <div className="container-menu">
             <HealthLabels
-              handleChange={this.handleChange}
-              user={this.props.user}
+              getHealthLabels={this.getHealthLabels}
+              user={this.state.user}
             />
-            {/* <IngredientFormAdd addIngredientSelected={this.addIngredientSelected} />
-            <IngredientFormDelete delteIngredientSelected={this.deleteIngredientSelected} /> */}
           </div>
         </form>
         {menuSave}
+      </div>
+    ) : (
+      <div>
+        <p>Loading...</p>
       </div>
     );
   }

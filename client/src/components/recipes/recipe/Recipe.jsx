@@ -1,20 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./Recipe.css";
 
-
 export default class Recipe extends Component {
-  scrollToRecipe = () => {
-    window.scrollBy({
-      top: document.querySelector("body").clientHeight, // could be negative value
-      left: 0,
-      behavior: "smooth"
-    });
-  };
-
-  componentDidMount(){
-    this.scrollToRecipe()
+  componentDidMount() {
+    this.props.scrollToRecipe();
   }
+
   render() {
     return (
       <div id="recipe">
@@ -23,11 +14,7 @@ export default class Recipe extends Component {
             src={this.props.recipe.recipe.image}
             alt={this.props.recipe.recipe.label}
           />
-          <a 
-            id="howtodo"
-            href={this.props.recipe.recipe.url}
-            target="_blank"
-          >
+          <a id="howtodo" href={this.props.recipe.recipe.url} target="_blank">
             How to make
           </a>
           <hr />
