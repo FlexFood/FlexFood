@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./MenuSave.css";
+import "./SaveMenu.css";
 import { Redirect } from "react-router-dom";
 import AuthService from "../../../services/AuthService";
 
-export default class MenuSave extends Component {
+export default class SaveMenu extends Component {
   constructor() {
     super();
     this.state = {};

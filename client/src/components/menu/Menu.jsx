@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
-import MenuSave from "./menuSave";
+import SaveMenu from "./saveMenu";
 import "./Menu.css";
 import { css } from "react-emotion";
 import { PulseLoader } from "react-spinners";
@@ -19,7 +19,7 @@ export default class Menu extends Component {
     this.state = {
       name: new Date().toLocaleDateString(),
       days: 5,
-      menuSave: false,
+      showSaveMenu: false,
       showSaveButton: true
     };
     this.edamamService = new EdamamService();
@@ -76,7 +76,7 @@ export default class Menu extends Component {
           this.setState({
             ...this.state,
             recipesDinner: recipes,
-            menuSave: true,
+            showSaveMenu: true,
             loading: false
           });
         });
@@ -91,8 +91,8 @@ export default class Menu extends Component {
   };
 
   render() {
-    var menuSave = this.state.menuSave ? (
-      <MenuSave
+    var SaveMenuComponent = this.state.showSaveMenu ? (
+      <SaveMenu
       days={this.state.days}
       name={this.state.name}
       userId={this.state.user._id}
@@ -171,7 +171,7 @@ export default class Menu extends Component {
             />
           </div>
         </form>
-        {menuSave}
+        {SaveMenuComponent}
       </div>
     ) : (
       <div>

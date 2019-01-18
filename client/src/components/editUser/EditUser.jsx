@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HealthLabels from "../healthLabels";
-import ShowMenu from "../showMenu";
+import ShowMenu from "./showMenu";
 import AuthService from "../../services/AuthService";
 import "./EditUser.css";
 
@@ -10,11 +10,9 @@ export default class EditUser extends Component {
     this.state = {
       showMenu: false
     };
-
     this.authService = new AuthService();
     this.fetchUser();
     this.fetchMenus();
-
     this.healthLabels = [];
   }
 

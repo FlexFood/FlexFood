@@ -5,20 +5,14 @@ export default class Converter extends Component {
   constructor() {
     super();
     this.state = {
-      originNumber: "",
-      finalNumber: "",
-      recipe: [],
-      qty: "",
-      ingredient: ""
+      recipe: []
     };
   }
 
   handleFormSubmit = e => {
     e.preventDefault();
     let { qty, ingredient } = this.state;
-
     qty = qty / this.state.originNumber;
-
     this.state.recipe.push({ qty, ingredient });
     this.setState({ qty: "", ingredient: "" });
   };
@@ -80,13 +74,15 @@ export default class Converter extends Component {
                   value={this.state.ingredient}
                 />
                 <hr className="line" />
-
-                <input id="add-converter-btn" type="submit" value="Add ingredient" />
+                <input
+                  id="add-converter-btn"
+                  type="submit"
+                  value="Add ingredient"
+                />
               </form>
             </div>
             <button onClick={this.resetCnverter}>Clear</button>
           </div>
-
           <div className="block-converter">
             <h2>Original recipe</h2>
             <hr className="line" />
@@ -101,7 +97,9 @@ export default class Converter extends Component {
                 {this.state.recipe.map(line => {
                   return (
                     <tr>
-                      <td className="qty-column">{(line.qty * this.state.originNumber).toFixed(1)}</td>
+                      <td className="qty-column">
+                        {(line.qty * this.state.originNumber).toFixed(1)}
+                      </td>
                       <td>{line.ingredient}</td>
                     </tr>
                   );
@@ -123,7 +121,9 @@ export default class Converter extends Component {
                 {this.state.recipe.map(line => {
                   return (
                     <tr>
-                      <td className="qty-column">{(line.qty * this.state.finalNumber).toFixed(1)}</td>
+                      <td className="qty-column">
+                        {(line.qty * this.state.finalNumber).toFixed(1)}
+                      </td>
                       <td>{line.ingredient}</td>
                     </tr>
                   );
