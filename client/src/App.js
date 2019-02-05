@@ -21,6 +21,12 @@ class App extends Component {
     this.authService = new AuthService();
   }
 
+  fetchAppUser = () => {
+    this.authService
+      .loggedin()
+      .then(user => this.setState({ ...this.state, user }));
+  };
+
   setRecipes = (recipes, recipesTitle) => {
     this.setState({ ...this.state, recipes, recipesTitle });
   };
@@ -30,9 +36,7 @@ class App extends Component {
       <div className="App">
         <Userbar
           className="navbar"
-          user={this.state.user}
-          logout={this.logout}
-          setUser={this.setUser}
+          fetchAppUser={this.fetchAppUser}
         />
         <Navbar user={this.state.user} />
         <Switch>
@@ -46,7 +50,6 @@ class App extends Component {
             path="/recipes"
             render={() => (
               <Recipes
-                className="recipes-css-transition"
                 recipesTitle={this.state.recipesTitle}
                 recipes={this.state.recipes.data}
               />
@@ -56,29 +59,12 @@ class App extends Component {
             exact
             path="/advancedSearch"
             render={() => {
-              return (
-                <AdvancedSearch
-                  user={this.state.user}
-                  setRecipes={this.setRecipes}
-                />
-              );
+              return <AdvancedSearch setRecipes={this.setRecipes} />;
             }}
           />
           <Route exact path="/converter" render={() => <Converter />} />
-          <Route
-            exact
-            path="/menu"
-            render={() => <Menu user={this.state.user} />}
-          />
-          <Route
-            exact
-            path="/editUser"
-            render={() => (
-              <EditUser
-                handleFormHealthLabelsSubmit={this.handleFormHealthLabelsSubmit}
-              />
-            )}
-          />
+          <Route exact path="/menu" render={() => <Menu />} />
+          <Route exact path="/editUser" render={() => <EditUser />} />
         </Switch>
       </div>
     );

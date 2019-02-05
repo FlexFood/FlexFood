@@ -11,19 +11,21 @@ export default class Userbar extends Component {
       showSignup: false,
       showLogin: false
     };
-
     this.authService = new AuthService();
-    this.fetchUser()
+    this.fetchUserbarUser();
   }
 
-  fetchUser = () => {
+  fetchUserbarUser = () => {
     this.authService
       .loggedin()
       .then(user => this.setState({ ...this.state, user }));
   };
 
   logOut = () => {
-    this.authService.logout();
+    this.authService.logout()
+    .then(user => {
+      this.setState({ ...this.state, user: null });
+    })
   };
 
   signupToggle = () => {
@@ -56,16 +58,17 @@ export default class Userbar extends Component {
     return (
       <div>
         <Login
-          showLogin={this.state.showLogin}
           loginToggle={this.loginToggle}
-          fetchUser={this.fetchUser}
+          showLogin={this.state.showLogin}
+          fetchAppUser={this.props.fetchAppUser}
+          fetchUserbarUser={this.fetchUserbarUser}
         />
         <Signup
-          showSignup={this.state.showSignup}
           signupToggle={this.signupToggle}
-          fetchUser={this.fetchUser}
+          showSignup={this.state.showSignup}
+          fetchAppUser={this.props.fetchAppUser}
+          fetchUserbarUser={this.fetchUserbarUser}
         />
-
         {userbarLinksToggle}
       </div>
     );

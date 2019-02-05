@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import "./AdvancedSearch.css";
+import "./AdvancedSearch.scss";
 import EdamamService from "../../services/EdamamService";
 import AuthService from "../../services/AuthService";
 import HealthLabels from "../healthLabels";

@@ -24,7 +24,6 @@ export default class Recipe extends Component {
             })}
           </ul>
         </div>
-
         <div id="ingrdient-table">
           <h1>{this.props.recipe.recipe.label}</h1>
           <hr />

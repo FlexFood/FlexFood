@@ -32,7 +32,8 @@ class AuthService {
 
   logout = () => {
     return this.service.get('/logout')
-      .then(response => response.data);
+      .then(response => response.data
+        );
   }
 
   edit = (update) => {

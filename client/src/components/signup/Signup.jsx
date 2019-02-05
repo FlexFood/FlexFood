@@ -5,7 +5,6 @@ export default class Signup extends Component {
   constructor() {
     super();
     this.state = {};
-
     this.authService = new AuthService();
   }
 
@@ -13,7 +12,8 @@ export default class Signup extends Component {
     e.preventDefault();
     const { username, password, photo } = this.state;
     this.authService.signup({ username, password, photo }).then(user => {
-      this.props.fetchUser();
+      this.props.fetchUserbarUser();
+      this.props.fetchAppUser();
       this.props.signupToggle();
     });
   };
@@ -42,21 +42,18 @@ export default class Signup extends Component {
             name="username"
             onChange={e => this.handleChange(e)}
           />
-
           <label>Password</label>
           <input
             type="password"
             name="password"
             onChange={e => this.handleChange(e)}
           />
-
           <label>Photo</label>
           <input
             type="file"
             name="photo"
             onChange={e => this.handleChange(e)}
           />
-
           <input type="submit" value="Signup" />
         </form>
       </div>

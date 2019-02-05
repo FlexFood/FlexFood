@@ -6,7 +6,6 @@ export default class Login extends Component {
   constructor() {
     super();
     this.state = {};
-
     this.authService = new AuthService();
   }
 
@@ -14,7 +13,8 @@ export default class Login extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     this.authService.login({ username, password }).then(user => {
-      this.props.fetchUser();
+      this.props.fetchUserbarUser();
+      this.props.fetchAppUser();
       this.props.loginToggle();
     });
   };
@@ -39,14 +39,12 @@ export default class Login extends Component {
             name="username"
             onChange={e => this.handleChange(e)}
           />
-
           <label>Password</label>
           <input
             type="password"
             name="password"
             onChange={e => this.handleChange(e)}
           />
-
           <input type="submit" value="Login" />
         </form>
       </div>
